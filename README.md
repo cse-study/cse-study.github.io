@@ -1,3 +1,3 @@
-# weekly-ai
+# weekly-tech
 
 - "Stay hungry, stay foolish."
