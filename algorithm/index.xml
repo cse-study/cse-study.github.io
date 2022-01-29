@@ -1,13 +1,14 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Mains on CS Study Group</title>
-    <link>https://cse-study.github.io/main/</link>
-    <description>Recent content in Mains on CS Study Group</description>
+    <title>Algorithms on CS Study Group</title>
+    <link>https://cse-study.github.io/algorithm/</link>
+    <description>Recent content in Algorithms on CS Study Group</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2019 Notepadium.</copyright>
+    <lastBuildDate>Sat, 29 Jan 2022 00:00:00 +0000</lastBuildDate>
     
-        <atom:link href="https://cse-study.github.io/main/index.xml" rel="self" type="application/rss+xml" />
+        <atom:link href="https://cse-study.github.io/algorithm/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
