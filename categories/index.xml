@@ -268,7 +268,17 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://cse-study.github.io/notice/</guid>
-      <description>&lt;p&gt;공지 페이지 입니다.&lt;/p&gt;
+      <description>&lt;p&gt;스터디의 진행방식을 소개합니다.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Shortcuts</title>
+      <link>https://cse-study.github.io/shortcuts/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/shortcuts/</guid>
+      <description>&lt;p&gt;자료들을 모아두는 공간입니다.&lt;/p&gt;
 </description>
     </item>
     
