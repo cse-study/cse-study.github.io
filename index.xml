@@ -6,10 +6,58 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2019 Notepadium.</copyright>
-    <lastBuildDate>Sat, 05 Feb 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 14 Feb 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://cse-study.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>GT Sophy</title>
+      <link>https://cse-study.github.io/ai/2022-02/20220214-gt-sophy/</link>
+      <pubDate>Mon, 14 Feb 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/ai/2022-02/20220214-gt-sophy/</guid>
+      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;img src=&#34;https://media.springernature.com/w200/springer-static/cover-hires/journal/41586/602/7896&#34; alt=&#34;Volume 602 Issue 7896&#34; style=&#34;zoom:100%; display: block; margin-left: auto; margin-right: auto;&#34; /&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;2022년 2월 소니 AI가 개발한 자동차 경주 AI가 네이처 표지를 장식했음. 게임 이름은 그란 투스리모 스포츠임.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;인공지능 이름은 GT Sophy. Model free, off-policy deepRL을 이용했음. Distributional SAC과 비슷하지만 value backup 과 target functions가 다른 QR-SAC을 이용했다고 함.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;게임의 리얼리즘 때문에 생각보다 어려웠다고 함. 또한 규정화되어 있지 않은 스포츠맨십을 지키며 너무 공격적이지도 소극적이지도 않게 플레이 하기 위한 보상 체계를 만드는 것이 힘들었다고 함.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;학습 방법: PS4에서 실행되는 GT인스턴스를 제어하는 rollout worker에게 트레이닝 시나리오를 배포하면 각 agent는 가장 최근 policy의 사본을 실행시키고 action을 전송함. 비동기적으로 다음 프레임을 계산해 새로운 상태를 알아냄. State, action, reward 튜플을 ERB에 저장함. 트레이너는 policy를 업데이트하기 위해 ERB를 샘플링함.&lt;/p&gt;
+&lt;img src=&#34;https://cse-study.github.io/assets/img/image-20220214181447986.png&#34; alt=&#34;image-20220214181447986&#34; style=&#34;zoom:30%; display: block; margin-left: auto; margin-right: auto;&#34; /&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;comments&#34;&gt;Comments&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;강화학습을 이용해 게임에 적용시키는 경우가 점점 늘어나는 것 같음. 적용시키기 좋고, 흥미로우며 이슈도 되기 때문이라 생각함. 개인적으로도 해 보고 싶다는 생각이 들었음.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;AI vs 사람 구도의 실험에서는 AI와 사람 간 공평성을 위한 적절한 방법들이 고려되어야 함. 예를 들어 알파스타의 경우 평균 APM에 제한을 두었지만 중요한 교전 상황에 압도적인 순간 APM을 보이며 승리했음. 사람의 경우 APM이 모두 의미 있는 동작을 뜻하지 않으므로 실제 차이는 더 컸었다 해석할 수 있음. 해당 실험에서도 여러 사항을 고려하여 제약을 두었음. 논문의 Fairness versus humans에서 찾아볼 수 있음.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;개발진들이 이런 연구를 하는 이유는 사람과 싸워 이기는 AI를 만들기 위함이 아니라 사람을 더 잘 이해하고, 더 재미있으며 흥미로운 탐험과 새로운 경험을 사용자에게 제공하기 위함이라 함.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;연구의 의미를 항상 생각하는 것이 중요함을 다시 한 번 느꼈음. 새로운 방법과 좋은 성능 자체도 의미있지만 이들이 앞으로의 연구와 우리의 삶에 어떤 긍정적인 역할을 할지 깊게 생각한다면 더 좋을 것 같다는 생각을 했음.&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.nature.com/articles/s41586-021-04357-7&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://www.nature.com/articles/s41586-021-04357-7&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://youtu.be/l948hMaTPuo&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://youtu.be/l948hMaTPuo&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>AlphaCode</title>
@@ -43,157 +91,26 @@
     </item>
     
     <item>
-      <title>테스트 파일 입니다.</title>
-      <link>https://cse-study.github.io/algorithm/2022-01/test-file/</link>
-      <pubDate>Sat, 29 Jan 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://cse-study.github.io/algorithm/2022-01/test-file/</guid>
-      <description>&lt;p&gt;This article offers a sample of basic Markdown syntax that can be used in Hugo content files, also it shows whether basic HTML elements are decorated with CSS in a Hugo theme.&lt;/p&gt;
-&lt;h2 id=&#34;headings&#34;&gt;Headings&lt;/h2&gt;
-&lt;p&gt;The following HTML &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;—&lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt; elements represent six levels of section headings. &lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt; is the highest section level while &lt;code&gt;&amp;lt;h6&amp;gt;&lt;/code&gt; is the lowest.&lt;/p&gt;
-&lt;h1 id=&#34;h1&#34;&gt;H1&lt;/h1&gt;
-&lt;h2 id=&#34;h2&#34;&gt;H2&lt;/h2&gt;
-&lt;h3 id=&#34;h3&#34;&gt;H3&lt;/h3&gt;
-&lt;h4 id=&#34;h4&#34;&gt;H4&lt;/h4&gt;
-&lt;h5 id=&#34;h5&#34;&gt;H5&lt;/h5&gt;
-&lt;h6 id=&#34;h6&#34;&gt;H6&lt;/h6&gt;
-&lt;h2 id=&#34;paragraph&#34;&gt;Paragraph&lt;/h2&gt;
-&lt;p&gt;Xerum, quo qui aut unt expliquam qui dolut labo. Aque venitatiusda cum, voluptionse latur sitiae dolessi aut parist aut dollo enim qui voluptate ma dolestendit peritin re plis aut quas inctum laceat est volestemque commosa as cus endigna tectur, offic to cor sequas etum rerum idem sintibus eiur? Quianimin porecus evelectur, cum que nis nust voloribus ratem aut omnimi, sitatur? Quiatem. Nam, omnis sum am facea corem alique molestrunt et eos evelece arcillit ut aut eos eos nus, sin conecerem erum fuga. Ri oditatquam, ad quibus unda veliamenimin cusam et facea ipsamus es exerum sitate dolores editium rerore eost, temped molorro ratiae volorro te reribus dolorer sperchicium faceata tiustia prat.&lt;/p&gt;
-&lt;p&gt;Itatur? Quiatae cullecum rem ent aut odis in re eossequodi nonsequ idebis ne sapicia is sinveli squiatum, core et que aut hariosam ex eat.&lt;/p&gt;
-&lt;h2 id=&#34;tables&#34;&gt;Tables&lt;/h2&gt;
-&lt;p&gt;Tables aren&amp;rsquo;t part of the core Markdown spec, but Hugo supports supports them out-of-the-box.&lt;/p&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Name&lt;/th&gt;
-&lt;th&gt;Age&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;Bob&lt;/td&gt;
-&lt;td&gt;27&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Alice&lt;/td&gt;
-&lt;td&gt;23&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h4 id=&#34;inline-markdown-within-tables&#34;&gt;Inline Markdown within tables&lt;/h4&gt;
-&lt;table&gt;
-&lt;thead&gt;
-&lt;tr&gt;
-&lt;th&gt;Italics&lt;/th&gt;
-&lt;th&gt;Bold&lt;/th&gt;
-&lt;th&gt;Code&lt;/th&gt;
-&lt;/tr&gt;
-&lt;/thead&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td&gt;&lt;em&gt;italics&lt;/em&gt;&lt;/td&gt;
-&lt;td&gt;&lt;strong&gt;bold&lt;/strong&gt;&lt;/td&gt;
-&lt;td&gt;&lt;code&gt;code&lt;/code&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;/table&gt;
-&lt;h2 id=&#34;code-blocks&#34;&gt;Code Blocks&lt;/h2&gt;
-&lt;h4 id=&#34;code-block-with-backticks&#34;&gt;Code block with backticks&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;!doctype html&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;html&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;lang&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;meta&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;charset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Example HTML5 Document&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Test&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;html&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;h4 id=&#34;code-block-indented-with-four-spaces&#34;&gt;Code block indented with four spaces&lt;/h4&gt;
-&lt;pre&gt;&lt;code&gt;&amp;lt;!doctype html&amp;gt;
-&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
-&amp;lt;head&amp;gt;
-  &amp;lt;meta charset=&amp;quot;utf-8&amp;quot;&amp;gt;
-  &amp;lt;title&amp;gt;Example HTML5 Document&amp;lt;/title&amp;gt;
-&amp;lt;/head&amp;gt;
-&amp;lt;body&amp;gt;
-  &amp;lt;p&amp;gt;Test&amp;lt;/p&amp;gt;
-&amp;lt;/body&amp;gt;
-&amp;lt;/html&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-&lt;h4 id=&#34;code-block-with-hugos-internal-highlight-shortcode&#34;&gt;Code block with Hugo&amp;rsquo;s internal highlight shortcode&lt;/h4&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-html&#34; data-lang=&#34;html&#34;&gt;&lt;span class=&#34;cp&#34;&gt;&amp;lt;!doctype html&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;html&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;lang&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;en&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;meta&lt;/span&gt; &lt;span class=&#34;na&#34;&gt;charset&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;utf-8&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Example HTML5 Document&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;title&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;head&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-  &lt;span class=&#34;p&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;Test&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;p&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;body&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;
-&lt;span class=&#34;p&#34;&gt;&amp;lt;/&lt;/span&gt;&lt;span class=&#34;nt&#34;&gt;html&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;&amp;gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;
-&lt;h2 id=&#34;list-types&#34;&gt;List Types&lt;/h2&gt;
-&lt;h4 id=&#34;ordered-list&#34;&gt;Ordered List&lt;/h4&gt;
-&lt;ol&gt;
-&lt;li&gt;First item&lt;/li&gt;
-&lt;li&gt;Second item&lt;/li&gt;
-&lt;li&gt;Third item&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h4 id=&#34;unordered-list&#34;&gt;Unordered List&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;List item&lt;/li&gt;
-&lt;li&gt;Another item&lt;/li&gt;
-&lt;li&gt;And another item&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;nested-list&#34;&gt;Nested list&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;Fruit
-&lt;ul&gt;
-&lt;li&gt;Apple&lt;/li&gt;
-&lt;li&gt;Orange&lt;/li&gt;
-&lt;li&gt;Banana&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;Dairy
-&lt;ul&gt;
-&lt;li&gt;Milk&lt;/li&gt;
-&lt;li&gt;Cheese&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>Hello &amp;#128075;</title>
-      <link>https://cse-study.github.io/home/</link>
+      <title></title>
+      <link>https://cse-study.github.io/help/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://cse-study.github.io/home/</guid>
-      <description>&lt;p&gt;메인 페이지 입니다.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Notice</title>
-      <link>https://cse-study.github.io/notice/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://cse-study.github.io/notice/</guid>
-      <description>&lt;h3 id=&#34;-weekly-ai-스터디&#34;&gt;📚 Weekly AI 스터디&lt;/h3&gt;
+      <guid>https://cse-study.github.io/help/</guid>
+      <description>&lt;h3 id=&#34;shortcuts&#34;&gt;Shortcuts&lt;/h3&gt;
+&lt;blockquote&gt;
+&lt;p&gt;스터디에 도움이되는 자료들을 모아두는 공간입니다. 좋은 자료가 있다면 아래에 계속 추가해주세요 🙌&lt;/p&gt;
+&lt;/blockquote&gt;
 &lt;ul&gt;
-&lt;li&gt;AI 관련 소식, 기술 블로그 글, 유튜브 영상 등 관심있는 자료를 보고 &lt;mark&gt;간단히 요약&lt;/mark&gt;합니다. 느낀점, 한줄평을 추가해주셔도 좋습니다.&lt;/li&gt;
-&lt;li&gt;게시글은 &lt;mark&gt;매주 1인당 1개씩 작성&lt;/mark&gt;합니다. 최신 AI 기술을 파악하는 것이 목적이므로 2년 이내의 자료만 허용합니다.&lt;/li&gt;
-&lt;li&gt;어떤 자료를 참고하였는지 다른 사람들도 확인할 수 있도록 &lt;mark&gt;참고한 자료의 링크를 reference&lt;/mark&gt; 달아주시면 좋습니다.&lt;/li&gt;
-&lt;li&gt;유명하거나, 임팩트있는 기술이 아니어도 상관 없으며, 각자 관심있는 분야의 AI 소식을 매 주 받아들이면서 서로의 시야가 넓어지는 것이 스터디의 주요 목표입니다.&lt;/li&gt;
-&lt;li&gt;서로의 게시글에서 궁금한 점이 있다면 적극적으로 코멘트 해주세요!&lt;/li&gt;
-&lt;li&gt;항상 저작권 문제를 고려하며 게시글을 작성해주시면 감사하겠습니다.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://papers.labml.ai/papers/daily/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;DAILY PAPERS&lt;/a&gt;
+: 최신 인기있는 AI 논문을 찾아주는 웹 사이트입니다.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/c/YannicKilcher/videos&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;YannicKilcher youtube&lt;/a&gt;
+: 최신 AI 기술을 요약하여 설명해주는 유튜브 채널입니다.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.reddit.com/r/MachineLearning/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Reddit, ML 카테고리&lt;/a&gt;
+: AI 관련 소식을 공유하는 커뮤니티입니다.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://paperswithcode.com/newsletter&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Papers with Code, 뉴스레터&lt;/a&gt;
+: 최신 인기있는 AI 자료들을 공유해주는 뉴스레터입니다.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;-algorithm-스터디&#34;&gt;📚 Algorithm 스터디&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;아직 작성하지 않았습니다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h3 id=&#34;-게시글-작성-방법&#34;&gt;📝 게시글 작성 방법&lt;/h3&gt;
+&lt;h3 id=&#34;how-to-post&#34;&gt;How to post&lt;/h3&gt;
 &lt;p&gt;&lt;img  src=&#34;https://cse-study.github.io/assets/img/notice1.png&#34;
         alt=&#34;img&#34;/&gt;&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;+++
@@ -215,35 +132,32 @@
 &lt;li&gt;각 스터디의 github repository에 마크다운 파일을 push하여 블로그에 포스팅을 업로드 할 수 있습니다.&lt;/li&gt;
 &lt;li&gt;💡 &lt;code&gt;Notice&lt;/code&gt;: 자동화가 아직 적용되지 않았습니다. 배포까지의 자세한 과정은 관리자에게 문의해주세요!&lt;/li&gt;
 &lt;/ul&gt;
-&lt;h3 id=&#34;-이미지-업로드-방법&#34;&gt;📝 이미지 업로드 방법&lt;/h3&gt;
-&lt;h4 id=&#34;프로필-이미지&#34;&gt;프로필 이미지&lt;/h4&gt;
+&lt;h3 id=&#34;image-upload&#34;&gt;Image upload&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;아직 작성하지 않았습니다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;게시글-이미지&#34;&gt;게시글 이미지&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;아직 작성하지 않았습니다.&lt;/li&gt;
+&lt;li&gt;프로필 이미지 업로드 방법은 다음과 같습니다. (아직 작성하지 않았습니다.)&lt;/li&gt;
+&lt;li&gt;게시글 이미지 업로드 방법은 다음과 같습니다. (아직 작성하지 않았습니다.)&lt;/li&gt;
 &lt;/ul&gt;</description>
     </item>
     
     <item>
-      <title>Shortcuts</title>
-      <link>https://cse-study.github.io/shortcuts/</link>
+      <title>Hello 👋</title>
+      <link>https://cse-study.github.io/home/</link>
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
-      <guid>https://cse-study.github.io/shortcuts/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;스터디에 도움이되는 자료들을 모아두는 공간입니다. 좋은 자료가 있다면 아래에 계속 추가해주세요 🙌&lt;/p&gt;
-&lt;/blockquote&gt;
+      <guid>https://cse-study.github.io/home/</guid>
+      <description>&lt;p&gt;안녕하세요, 방문해주셔서 감사합니다. 저희는 이 곳에서 CS 관련 스터디를 진행하고 있습니다. 현재는 알고리즘/코테 스터디와, 간단한 AI 스터디를 진행하고 있습니다!&lt;/p&gt;
+&lt;h3 id=&#34;weekly-ai&#34;&gt;Weekly AI&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://papers.labml.ai/papers/daily/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;DAILY PAPERS&lt;/a&gt;
-: 최신 인기있는 AI 논문을 찾아주는 웹 사이트입니다.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/c/YannicKilcher/videos&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;YannicKilcher youtube&lt;/a&gt;
-: 최신 AI 기술을 요약하여 설명해주는 유튜브 채널입니다.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.reddit.com/r/MachineLearning/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Reddit, ML 카테고리&lt;/a&gt;
-: AI 관련 소식을 공유하는 커뮤니티입니다.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://paperswithcode.com/newsletter&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Papers with Code, 뉴스레터&lt;/a&gt;
-: 최신 인기있는 AI 자료들을 공유해주는 뉴스레터입니다.&lt;/li&gt;
+&lt;li&gt;AI 관련 소식, 기술 블로그 글, 유튜브 영상 등 관심있는 자료를 보고 &lt;mark&gt;간단히 요약&lt;/mark&gt;합니다. 느낀점, 한줄평을 추가해주셔도 좋습니다.&lt;/li&gt;
+&lt;li&gt;게시글은 &lt;mark&gt;매주 1인당 1개씩 작성&lt;/mark&gt;합니다. 최신 AI 기술을 파악하는 것이 목적이므로 2년 이내의 자료만 허용합니다.&lt;/li&gt;
+&lt;li&gt;어떤 자료를 참고하였는지 다른 사람들도 확인할 수 있도록 &lt;mark&gt;참고한 자료의 링크를 reference&lt;/mark&gt; 달아주시면 좋습니다.&lt;/li&gt;
+&lt;li&gt;유명하거나, 임팩트있는 기술이 아니어도 상관 없으며, 각자 관심있는 분야의 AI 소식을 매 주 받아들이면서 서로의 시야가 넓어지는 것이 스터디의 주요 목표입니다.&lt;/li&gt;
+&lt;li&gt;서로의 게시글에서 궁금한 점이 있다면 적극적으로 코멘트 해주세요!&lt;/li&gt;
+&lt;li&gt;항상 저작권 문제를 고려하며 게시글을 작성해주시면 감사하겠습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;algorithm&#34;&gt;Algorithm&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;아직 작성하지 않았습니다.&lt;/li&gt;
 &lt;/ul&gt;</description>
     </item>
     

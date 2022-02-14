@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.92.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>GT Sophy&nbsp;&ndash;&nbsp;CS Study Group</title><link rel="stylesheet" href="/css/core.min.8ea708522f75bfcc8135986b9fdcb802f298c946aff4776dc7b9f03a02ba7f8767f76ca0e6523502305c2790e06cfb8f.css" integrity="sha384-jqcIUi91v8yBNZhrn9y4AvKYyUav9Hdtx7nwOgK6f4dn92yg5lI1AjBcJ5DgbPuP"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="GT Sophy" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/home"><img class="site logo" src="/assets/img/logo.png" /><span class="site name">CS Study Group</span></a>
+        </span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav"><a class="nav item-main" href="/ai/"><span class="iconfont icon-ai"></span>Weekly AI</a>
+        <a class="nav item-main" href="/algorithm/"><span class="iconfont icon-algo"></span>Algorithm</a>
+        <a class="nav item-secondary" href="/help/"><span class="iconfont icon-algo"></span>Help</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">GT Sophy</h1><p class="article date">Monday, February 14, 2022</p></section><section class="article author">
+    <div class='author-wrapper'>
+        <div class='author-left'><img class="avatar" src="/assets/img/jiun.jpeg" alt></div>
+        <div class='author-right'><p class="name">Jiun Jeong</p><a class="item-email" href="mailto:jiun@unist.ac.kr" target="_blank" rel="noopener noreferrer">jiun@unist.ac.kr</a></div>
+    </div>
+</section><article class="article markdown-body"><h3 id="summary">Summary</h3>
+<img src="https://media.springernature.com/w200/springer-static/cover-hires/journal/41586/602/7896" alt="Volume 602 Issue 7896" style="zoom:100%; display: block; margin-left: auto; margin-right: auto;" />
+<ul>
+<li>
+<p>2022년 2월 소니 AI가 개발한 자동차 경주 AI가 네이처 표지를 장식했음. 게임 이름은 그란 투스리모 스포츠임.</p>
+</li>
+<li>
+<p>인공지능 이름은 GT Sophy. Model free, off-policy deepRL을 이용했음. Distributional SAC과 비슷하지만 value backup 과 target functions가 다른 QR-SAC을 이용했다고 함.</p>
+</li>
+<li>
+<p>게임의 리얼리즘 때문에 생각보다 어려웠다고 함. 또한 규정화되어 있지 않은 스포츠맨십을 지키며 너무 공격적이지도 소극적이지도 않게 플레이 하기 위한 보상 체계를 만드는 것이 힘들었다고 함.</p>
+</li>
+<li>
+<p>학습 방법: PS4에서 실행되는 GT인스턴스를 제어하는 rollout worker에게 트레이닝 시나리오를 배포하면 각 agent는 가장 최근 policy의 사본을 실행시키고 action을 전송함. 비동기적으로 다음 프레임을 계산해 새로운 상태를 알아냄. State, action, reward 튜플을 ERB에 저장함. 트레이너는 policy를 업데이트하기 위해 ERB를 샘플링함.</p>
+<img src="/assets/img/image-20220214181447986.png" alt="image-20220214181447986" style="zoom:30%; display: block; margin-left: auto; margin-right: auto;" />
+</li>
+</ul>
+<h3 id="comments">Comments</h3>
+<ul>
+<li>
+<p>강화학습을 이용해 게임에 적용시키는 경우가 점점 늘어나는 것 같음. 적용시키기 좋고, 흥미로우며 이슈도 되기 때문이라 생각함. 개인적으로도 해 보고 싶다는 생각이 들었음.</p>
+</li>
+<li>
+<p>AI vs 사람 구도의 실험에서는 AI와 사람 간 공평성을 위한 적절한 방법들이 고려되어야 함. 예를 들어 알파스타의 경우 평균 APM에 제한을 두었지만 중요한 교전 상황에 압도적인 순간 APM을 보이며 승리했음. 사람의 경우 APM이 모두 의미 있는 동작을 뜻하지 않으므로 실제 차이는 더 컸었다 해석할 수 있음. 해당 실험에서도 여러 사항을 고려하여 제약을 두었음. 논문의 Fairness versus humans에서 찾아볼 수 있음.</p>
+</li>
+<li>
+<p>개발진들이 이런 연구를 하는 이유는 사람과 싸워 이기는 AI를 만들기 위함이 아니라 사람을 더 잘 이해하고, 더 재미있으며 흥미로운 탐험과 새로운 경험을 사용자에게 제공하기 위함이라 함.</p>
+</li>
+<li>
+<p>연구의 의미를 항상 생각하는 것이 중요함을 다시 한 번 느꼈음. 새로운 방법과 좋은 성능 자체도 의미있지만 이들이 앞으로의 연구와 우리의 삶에 어떤 긍정적인 역할을 할지 깊게 생각한다면 더 좋을 것 같다는 생각을 했음.</p>
+</li>
+</ul>
+<h3 id="references">References</h3>
+<ul>
+<li><a href="https://www.nature.com/articles/s41586-021-04357-7"target="_blank" rel="noopener noreferrer">https://www.nature.com/articles/s41586-021-04357-7</a>
+</li>
+<li><a href="https://youtu.be/l948hMaTPuo"target="_blank" rel="noopener noreferrer">https://youtu.be/l948hMaTPuo</a>
+</li>
+</ul>
+</article>
+<section class="article discussion">
+    <script src="https://utteranc.es/client.js" repo="cse-study/cse-study.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async>
+    </script>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/ai/2022-02/220205-alphacode/"><span class="iconfont icon-article"></span>AlphaCode</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Notepadium.</p>
+    <p class="powerby"><span>Powered&nbsp;by&nbsp;</span><a href="https://gohugo.io" 
+        target="_blank" rel="noopener noreferrer">Hugo</a><span>&nbsp;&amp;&nbsp;</span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank" rel="noopener noreferrer">Notepadium</a></p></div>
+</section><script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-e/4/LvThKH1gwzXhdbY2AsjR3rm7LHWyhIG5C0jiRfn8AN2eTN5ILeztWw0H9jmN" crossorigin="anonymous"></script>
+        <script
+            type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script><script src="/js/hljs.min.72e76ccf211868d08e31d7ca45c02501991bd760f28809c52045fa79fb7b7428664bb54ae875b46031ebc760c77b9562.js" integrity="sha384-cudszyEYaNCOMdfKRcAlAZkb12DyiAnFIEX6eft7dChmS7VK6HW0YDHrx2DHe5Vi"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>
