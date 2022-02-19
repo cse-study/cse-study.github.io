@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.92.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Data2Vec&nbsp;&ndash;&nbsp;CS Study Group</title><link rel="stylesheet" href="/css/core.min.8ea708522f75bfcc8135986b9fdcb802f298c946aff4776dc7b9f03a02ba7f8767f76ca0e6523502305c2790e06cfb8f.css" integrity="sha384-jqcIUi91v8yBNZhrn9y4AvKYyUav9Hdtx7nwOgK6f4dn92yg5lI1AjBcJ5DgbPuP"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Data2Vec" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/home"><img class="site logo" src="/assets/img/logo.png" /><span class="site name">CS Study Group</span></a>
+        </span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav"><a class="nav item-main" href="/ai/"><span class="iconfont icon-ai"></span>Weekly AI</a>
+        <a class="nav item-main" href="/algorithm/"><span class="iconfont icon-algo"></span>Algorithm</a>
+        <a class="nav item-secondary" href="/help/"><span class="iconfont icon-algo"></span>Help</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Data2Vec</h1><p class="article date">Friday, February 18, 2022</p></section><section class="article author">
+    <div class='author-wrapper'>
+        <div class='author-left'><img class="avatar" src="/assets/img/yuho.jpg" alt></div>
+        <div class='author-right'><p class="name">Yuho Jeong</p><a class="item-email" href="mailto:yuho8437@unist.ac.kr" target="_blank" rel="noopener noreferrer">yuho8437@unist.ac.kr</a></div>
+    </div>
+</section><article class="article markdown-body"><p>2022년 1월에 Meta AI에서 발표한 <strong>Data2vec</strong> 블로그 포스팅을 읽고 내용을 공유합니다.</p>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>현재의 self-supervised learning 연구들은 image, speech, text 등 각기 다른 modality마다 학습 방법에 차이가 크다.</li>
+<li>따라서 Meta AI는 multiple modality(e.b. image, speech, text)에서 작동하는 data2vec을 개발하였으며, data2vec은 기존 computer vision, speech 분야의 알고리즘 성능을 넘었고, NLP 분야에서는 견줄만큼의 성능을 기록하였다.</li>
+<li>Data2vec은 기존에 self-supervised learning에서 자주 사용되던 contrastive learning이나, reconstructing the input example 방식을 사용하지는 않는다.</li>
+<li>Data2vec은 input data에 대한 own representation을 맞추도록 학습시킨다.</li>
+</ul>
+<ol>
+<li>Teacher network에 데이터를 넣어 출력된 representation을 target으로 설정한다.</li>
+<li>Student network에는 데이터에 일부 masking을 가해서 넣어 representation을 얻어내고, 이 representation이 teacher의 target representation과 동일해지도록 모델을 학습시킨다.</li>
+<li>Teacher와 student는 동일한 네트워크이지만 weight 값이 살짝 다르다. (<a href="https://yuhodots.github.io/deeplearning/21-04-04/"target="_blank" rel="noopener noreferrer">BYOL</a>
+ 처럼 exponentialmoving average 사용)</li>
+</ol>
+<h3 id="comments">Comments</h3>
+<ul>
+<li>Self-supervised learning 중에서도 BYOL의 아이디어를 차용하여 multi-modal learning 알고리즘을 고안한 것이 재미있었음</li>
+<li>하나의 backbone으로 image, speech, text 관련 task에 모두 적용 가능하다는 것이, 현재까지의 multi-modal 연구 중에 가장 자연스러운 방법이라는 생각이 들며 future work들이 기대됨</li>
+<li>Label이 필요없고, multi-modality에서 작동하고, single-purpose algorithms보다 잘하는 AI 모델. 이것이 앞으로의 AI의 주요 방향성이 되지 않을까 싶음</li>
+</ul>
+<h3 id="references">References</h3>
+<ul>
+<li>Data2vec블로그 포스팅: <a href="https://ai.facebook.com/blog/the-first-high-performance-self-supervised-algorithm-that-works-for-speech-vision-and-text/"target="_blank" rel="noopener noreferrer">The first high-performance self-supervised algorithm that works for speech, vision, and text</a>
+</li>
+<li>Data2vec paper: <a href="https://ai.facebook.com/research/data2vec-a-general-framework-for-self-supervised-learning-in-speech-vision-and-language"target="_blank" rel="noopener noreferrer">Data2vec: A General Framework for Self-supervised Learning in Speech, Vision and Language</a>
+</li>
+<li>Data2vec code: <a href="https://github.com/pytorch/fairseq/tree/main/examples/data2vec"target="_blank" rel="noopener noreferrer">https://github.com/pytorch/fairseq/tree/main/examples/data2vec</a>
+</li>
+</ul></article>
+<section class="article discussion">
+    <script src="https://utteranc.es/client.js" repo="cse-study/cse-study.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async>
+    </script>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/ai/2022-02/20220214-gt-sophy/"><span class="iconfont icon-article"></span>GT Sophy</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Notepadium.</p>
+    <p class="powerby"><span>Powered&nbsp;by&nbsp;</span><a href="https://gohugo.io" 
+        target="_blank" rel="noopener noreferrer">Hugo</a><span>&nbsp;&amp;&nbsp;</span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank" rel="noopener noreferrer">Notepadium</a></p></div>
+</section><script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-e/4/LvThKH1gwzXhdbY2AsjR3rm7LHWyhIG5C0jiRfn8AN2eTN5ILeztWw0H9jmN" crossorigin="anonymous"></script>
+        <script
+            type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script><script src="/js/hljs.min.72e76ccf211868d08e31d7ca45c02501991bd760f28809c52045fa79fb7b7428664bb54ae875b46031ebc760c77b9562.js" integrity="sha384-cudszyEYaNCOMdfKRcAlAZkb12DyiAnFIEX6eft7dChmS7VK6HW0YDHrx2DHe5Vi"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>
