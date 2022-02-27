@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.92.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Magnetic control of tokamak plasmas&nbsp;&ndash;&nbsp;CS Study Group</title><link rel="stylesheet" href="/css/core.min.8ea708522f75bfcc8135986b9fdcb802f298c946aff4776dc7b9f03a02ba7f8767f76ca0e6523502305c2790e06cfb8f.css" integrity="sha384-jqcIUi91v8yBNZhrn9y4AvKYyUav9Hdtx7nwOgK6f4dn92yg5lI1AjBcJ5DgbPuP"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Magnetic control of tokamak plasmas" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/home"><img class="site logo" src="/assets/img/logo.png" /><span class="site name">CS Study Group</span></a>
+        </span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav"><a class="nav item-main" href="/ai/"><span class="iconfont icon-ai"></span>Weekly AI</a>
+        <a class="nav item-main" href="/algorithm/"><span class="iconfont icon-algo"></span>Algorithm</a>
+        <a class="nav item-secondary" href="/help/"><span class="iconfont icon-algo"></span>Help</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Magnetic control of tokamak plasmas</h1><p class="article date">Sunday, February 27, 2022</p></section><section class="article author">
+    <div class='author-wrapper'>
+        <div class='author-left'><img class="avatar" src="/assets/img/jiun.jpeg" alt></div>
+        <div class='author-right'><p class="name">Jiun Jeong</p><a class="item-email" href="mailto:jiun@unist.ac.kr" target="_blank" rel="noopener noreferrer">jiun@unist.ac.kr</a></div>
+    </div>
+</section><article class="article markdown-body"><h3 id="summary">Summary</h3>
+<ul>
+<li>딥마인드와 스위스 로잔연방공대 플라즈마 센터가 심층 강화학습을 이용해 토카막에서의 플라즈마 제어를 성공적으로 수행했다. 이는 네이처 2022.2월 호에 게재되었다.</li>
+<li>플라즈마 제어를 위한 코일 전류의 조절은 선형화된 모델을 기반으로 한다. 하지만 이는 복잡한 실시간 계산이 필요하며 목표 플라즈마 구성이 변경될 때마다 상당한 공학적, 설계적 노력을 기울여야 한다. 따라서 비선형 컨트롤러를 생성하고 제어를 용이하게 하기 위해 심층 강화학습을 도입하였다.</li>
+<li>실험 목표는 시간 변화에 따른 원하는 제어 값 등으로 설정했다. Extended Table 4에서 찾아볼 수 있다. 학습은 토카막 시뮬레이터와의 상호 작용을 통해 이루어지며 제어 정책은 하드웨어에서 실시간으로 직접 실행된다(제로 샷).</li>
+<li>하지만 지속적으로 변하는 플라즈마 상태를 계산해야 하기 때문에 시뮬레이터에서 공급되는 데이터 속도는 일반적인 강화학습 환경에 비해 매우 느리다. 이 문제는 maximum a posteriori policy optimization(MPO)를 적용하여 극복했다고 한다.</li>
+<li>플라즈마 제어를 위한 모델에서 중요한 점은 정해진 시간 안에 빠르게 실행이 가능해야 한다는 것이다. 해당 실험에서 쓰인 TCV의 경우 50us라는 시간이 사용 가능했다. 이를 맞추기 위해 불필요한 것들을 제외하고, tfcompile 등을 이용한 바이너리 컴파일 등 여러 방면으로 최적화를 하였다.</li>
+<li>결과적으로 19개 자기 코일로 이루어진 토카막을 한 번에 제어할 수 있는 간결한 제어 환경을 구축하였고 원하는 플라즈마 모양을 시간에 따라 잘 제어할 수 있었다.</li>
+</ul>
+<h3 id="comments">Comments</h3>
+<ul>
+<li>단순히 시뮬레이팅이나 이론으로 끝나는 것이 아닌 실제 환경에 적용하여 좋은 결과를 냈다는 점이 유의미하다고 생각한다.</li>
+<li>완전히 새로운 알고리즘을 제안했다기 보다는 실제 적용을 위해 많은 엔지니어링적 노력을 한 것 같다. 제한된 시간 안에 작동하도록 한 것과 제로 샷으로 좋은 성과를 얻은 것이 특히 더 대단해 보인다.</li>
+<li>MPO에 대해 공부해 봐야겠다..</li>
+</ul>
+<h3 id="references">References</h3>
+<ul>
+<li><a href="https://www.nature.com/articles/s41586-021-04301-9"target="_blank" rel="noopener noreferrer">https://www.nature.com/articles/s41586-021-04301-9</a>
+</li>
+</ul>
+</article>
+<section class="article discussion">
+    <script src="https://utteranc.es/client.js" repo="cse-study/cse-study.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async>
+    </script>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/ai/2022-02/220227-openai-embeddings/"><span class="iconfont icon-article"></span>OpenAI Embeddings API</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Notepadium.</p>
+    <p class="powerby"><span>Powered&nbsp;by&nbsp;</span><a href="https://gohugo.io" 
+        target="_blank" rel="noopener noreferrer">Hugo</a><span>&nbsp;&amp;&nbsp;</span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank" rel="noopener noreferrer">Notepadium</a></p></div>
+</section><script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-e/4/LvThKH1gwzXhdbY2AsjR3rm7LHWyhIG5C0jiRfn8AN2eTN5ILeztWw0H9jmN" crossorigin="anonymous"></script>
+        <script
+            type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script><script src="/js/hljs.min.72e76ccf211868d08e31d7ca45c02501991bd760f28809c52045fa79fb7b7428664bb54ae875b46031ebc760c77b9562.js" integrity="sha384-cudszyEYaNCOMdfKRcAlAZkb12DyiAnFIEX6eft7dChmS7VK6HW0YDHrx2DHe5Vi"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>
