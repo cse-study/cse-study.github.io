@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.92.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>OpenAI Embeddings API&nbsp;&ndash;&nbsp;CS Study Group</title><link rel="stylesheet" href="/css/core.min.8ea708522f75bfcc8135986b9fdcb802f298c946aff4776dc7b9f03a02ba7f8767f76ca0e6523502305c2790e06cfb8f.css" integrity="sha384-jqcIUi91v8yBNZhrn9y4AvKYyUav9Hdtx7nwOgK6f4dn92yg5lI1AjBcJ5DgbPuP"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="OpenAI Embeddings API" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/home"><img class="site logo" src="/assets/img/logo.png" /><span class="site name">CS Study Group</span></a>
+        </span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav"><a class="nav item-main" href="/ai/"><span class="iconfont icon-ai"></span>Weekly AI</a>
+        <a class="nav item-main" href="/algorithm/"><span class="iconfont icon-algo"></span>Algorithm</a>
+        <a class="nav item-secondary" href="/help/"><span class="iconfont icon-algo"></span>Help</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">OpenAI Embeddings API</h1><p class="article date">Sunday, February 27, 2022</p></section><section class="article author">
+    <div class='author-wrapper'>
+        <div class='author-left'><img class="avatar" src="/assets/img/yuho.jpg" alt></div>
+        <div class='author-right'><p class="name">Yuho Jeong</p><a class="item-email" href="mailto:yuho8437@unist.ac.kr" target="_blank" rel="noopener noreferrer">yuho8437@unist.ac.kr</a></div>
+    </div>
+</section><article class="article markdown-body"><p>2022년 1월에 OpenAI에서 발표한 &ldquo;Text and Code Embeddings by Contrastive Pre-Training&rdquo; 논문의 관련 자료들을 읽고 내용을 공유합니다.</p>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>
+<p>OpenAI에서 GPT-3의 text (or code) embedding 결과를 쉽게 얻을 수 있도록 돕는 Embeddings API라는 툴을 공개함</p>
+</li>
+<li>
+<p>입력 text(or code)와 엔진 이름을 입력하면, 해당 입력의 vector representation(embedding)을 얻을 수 있음</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="kn">import</span> <span class="nn">openai</span>
+<span class="n">response</span> <span class="o">=</span> <span class="n">openai</span><span class="o">.</span><span class="n">Embedding</span><span class="o">.</span><span class="n">create</span><span class="p">(</span>
+    <span class="nb">input</span><span class="o">=</span><span class="s2">&#34;canine companions say&#34;</span><span class="p">,</span>
+    <span class="n">engine</span><span class="o">=</span><span class="s2">&#34;text-similarity-davinci-001&#34;</span><span class="p">)</span>
+</code></pre></div></li>
+<li>
+<p>관련하여 3가지 대표적인 use-cases(: Text Similarity, Text Search, Code Search)를 제공함.</p>
+</li>
+<li>
+<p>편의를 위해 <code>delicious beans</code>과 같이 N개의 단어 조합으로 이루어진 Embeddings API 입력 text를 &lsquo;쿼리&rsquo;라고 칭하겠음. Text similarity는 두 개의 쿼리에 대해 API를 사용하여 유사도를 구하는 작업이고, Text Search는 주어진 쿼리에 대해 가장 유사도가 높은 도큐먼트를 데이터 셋 내에서 찾아내는 (쿼리와 도큐먼트 사이의 유사도를 구하는) 작업이고, Code Search는 주어진 쿼리에 대해 가장 유사도가 높은 함수(혹은 코드)를 데이터 셋 내에서 찾아내는 작업이라고 생각하면 됨.</p>
+</li>
+<li>
+<p><a href="https://medium.com/@nils_reimers/openai-gpt-3-text-embeddings-really-a-new-state-of-the-art-in-dense-text-embeddings-6571fe3ec9d9"target="_blank" rel="noopener noreferrer">링크</a>
+에 따르면, Embeddings API는 논문에서 말하는 것 처럼 성능이 현재 다른 모델들 대비 그렇게 좋은 것은 아니고, 모델과 feature dimension이 매우 커서 cost가 너무 높고, 토큰당 가격도 너무나 비싸다고 말하고 있음. (Davinci 모델의 경우 12288 dimensions을 사용하고 토큰당 0.6달러이기 때문에, 일반 유저가 사용하는 것은 거의 불가능하지 싶음)</p>
+</li>
+</ul>
+<h3 id="references">References</h3>
+<ul>
+<li>OpenAI Blogs, <a href="https://openai.com/blog/introducing-text-and-code-embeddings/"target="_blank" rel="noopener noreferrer">&ldquo;Introducing Text and Code Embeddings in the OpenAI API&rdquo;.</a>
+</li>
+<li>Yannic Kilcher YouTube, <a href="https://www.youtube.com/watch?v=5skIqoO3ku0"target="_blank" rel="noopener noreferrer">&ldquo;OpenAI Embeddings (and Controversy?!)&rdquo;.</a>
+</li>
+<li>OpenAI Embeddings API: <a href="https://beta.openai.com/docs/guides/embeddings"target="_blank" rel="noopener noreferrer">https://beta.openai.com/docs/guides/embeddings</a>
+</li>
+<li>Nils Reimers, <a href="https://medium.com/@nils_reimers/openai-gpt-3-text-embeddings-really-a-new-state-of-the-art-in-dense-text-embeddings-6571fe3ec9d9"target="_blank" rel="noopener noreferrer">&ldquo;OpenAI GPT-3 Text Embeddings - Really a new state-of-the-art in dense text embeddings?&quot;</a>
+</li>
+</ul></article>
+<section class="article discussion">
+    <script src="https://utteranc.es/client.js" repo="cse-study/cse-study.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async>
+    </script>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/ai/2022-02/220218-data2vec/"><span class="iconfont icon-article"></span>Data2Vec</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Notepadium.</p>
+    <p class="powerby"><span>Powered&nbsp;by&nbsp;</span><a href="https://gohugo.io" 
+        target="_blank" rel="noopener noreferrer">Hugo</a><span>&nbsp;&amp;&nbsp;</span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank" rel="noopener noreferrer">Notepadium</a></p></div>
+</section><script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-e/4/LvThKH1gwzXhdbY2AsjR3rm7LHWyhIG5C0jiRfn8AN2eTN5ILeztWw0H9jmN" crossorigin="anonymous"></script>
+        <script
+            type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script><script src="/js/hljs.min.72e76ccf211868d08e31d7ca45c02501991bd760f28809c52045fa79fb7b7428664bb54ae875b46031ebc760c77b9562.js" integrity="sha384-cudszyEYaNCOMdfKRcAlAZkb12DyiAnFIEX6eft7dChmS7VK6HW0YDHrx2DHe5Vi"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>
