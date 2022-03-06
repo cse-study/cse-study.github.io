@@ -11,6 +11,85 @@
     
     
     <item>
+      <title>POMO: Policy Optimization with Multiple Optima for Reinforcement Learning</title>
+      <link>https://cse-study.github.io/ai/2022-03/220306-pomo/</link>
+      <pubDate>Sun, 06 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/ai/2022-03/220306-pomo/</guid>
+      <description>&lt;p&gt;Samsung SDS Techtonic의 &amp;ldquo;POMO: 강화학습을 이용한 조합 최적화(NeurIPS 2020)&amp;rdquo; 발표를 보고 이를 정리합니다.&lt;/p&gt;
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;조합 최적화(Combinatorial Optimization): 주어진 아이템들의 최적 순서 또는 매핑을 찾는 문제 (ex. 생산 설비 운영 최적화, 자원 할당 최적화, 운송 경로 최적화 등)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;대표적인 예시는 &amp;lsquo;외판원 문제&amp;rsquo;(Traveling Salesman Problem, TSP): 모든 도시를 여행하기 위한 경로 최적화하는 문제&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Naive approach로는 Trial &amp;amp; Error 후에 가장 최적인 경로를 확인하는 것. 하지만 이 방법은 너무 오래 걸림. 최적의 해를 찾기보다는, 최적에 가까운 해를 빠른 시간에 찾아내는 방법(Heuristic)이 현실적&lt;/li&gt;
+&lt;li&gt;개선된 휴리스틱 방법(체계적인 trial &amp;amp; error)은, 만들어져 있는 조합에서 조금씩 변형을 가해 다시 시도해보는 것. 하지만 좋은 변형/조합 방법은 문제마다 다르기 때문에 전문가의 수작업 중요&lt;/li&gt;
+&lt;li&gt;AI로 푸는 방법은, 실전 문제를 풀기 전 비슷한 케이스를 반복해 학습한 후에 실전에서는 one-shot 솔루션 제공. 속도 매우 빠르고 데이터에서 스스로 전략 학습 가능&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;강화학습에서 baseline 결정의 난제&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Baseline에 대한 설명은 &lt;a href=&#34;https://dnddnjs.gitbooks.io/rl/content/actor-critic_policy_gradient.html&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;링크&lt;/a&gt;
+ 참고하면 좋을듯&lt;/li&gt;
+&lt;li&gt;인공지능이 반복해 풀어 얻는 솔루션은 보통 비슷하고 크게 다르지 않음. 따라서 학습 공간 안에서의 local optimum에 수렴한다는 문제 발생&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Local optima 문제 해결 아이디어&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;같은 문제를 다른 문제인 것 처럼 여러가지 방법으로 포장하여, 인공지능이 각각을 다른 방법으로 풀도록 유도. 이것이 POMO의 전략임&lt;/li&gt;
+&lt;li&gt;즉, POMO는 multiple optima를 사용한 강화학습 방법임&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Multiple optima&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;5-node TSP(외판원 문제)를 예로 들면, geometry 상 optima는 하나인데, 이를 sequence로 표현하거나 search tree 형태로 표현하면 optima가 5개로 늘어남. 표현을 어떻게 하느냐에 따라서 optima 수가 달라질 수 있음&lt;/li&gt;
+&lt;li&gt;기존 방식들은 이 5개 중 하나를 잘 찾도록 하는 알고리즘들이었다면, POMO는 어떻게 하면 이 5개를 다 잘 찾아낼 수 있을까를 고민하였음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;POMO baseline 결정법&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;서로 다른 시작점으로부터 문제를 풀도록 한 후 결과를 종합하여 baseline 결정&lt;/li&gt;
+&lt;li&gt;Instance augmentation: 문제를 대칭/회전 변환하여 (인공지능이 보기에) 새로운 문제를 만듦. 좌표만 바꿨을 뿐이지만 인공지능이 풀 때는 완전히 다른 계산이 필요함&lt;/li&gt;
+&lt;/ol&gt;
+&lt;ul&gt;
+&lt;li&gt;모든 조합 최적화 문제가 multiple optima를 가지는 것은 아닌데, 거의 대부분이 문제에서 multiple optima를 찾을 수 있음. 그래서 multiple optima를 이용하면 강화학습 할 때 큰 효과를 얻을 수 있다는 것이 논문의 핵심&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;조합 최적화 관련 실제 문제들&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;생산 설비 최적화(Job shop, Flow shop problem): 20종의 핸드폰 제작 스케쥴, 3단계 제작, 어떤 순서로 제작해야 할까?&lt;/li&gt;
+&lt;li&gt;자원 할당 최적화(Resource management problem): 20개의 프로그램을 컴퓨터(클라우드)에서 처리. 프로그램들은 공유된 자원(CPU, GPU, memory)를 할당받아 사용, 어떤 순서로 할당해야 할까?&lt;/li&gt;
+&lt;li&gt;운송 경로 최적화(capacitated vehicle routing problem): 100개의 지점. 각 지점 당 지정된 할당량 배송. 트럭의 적재 한계량 존재. 어떤 경로/순서로 배송해야 할까?&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;comments&#34;&gt;Comments&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;조합최적화 문제를 강화학습으로 풀려는 시도들이 최근 많이 있음&lt;/li&gt;
+&lt;li&gt;강화학습을 처음 공부할 때는 강화학습이 풀 수 있는 실제 세상의 문제가 많이 있을지 의문이었는데, 실제 세상에서 적용할 수 있지만 아직 사람들이 가치를 발견하지 못한 경우가 많겠다는 생각이 들었음&lt;/li&gt;
+&lt;li&gt;조합 최적화를 들어보긴 했지만 실제로 어떤 내용인지는 영상을 통해 처음으로 접했음. 내용이 흥미로워서 기초부터 주요 논문까지 쭉 순서대로 제대로 공부해보고 싶다는 생각이 들었음&lt;/li&gt;
+&lt;li&gt;2021 발표도 있는 듯 하여 다음 주에는 해당 발표를 보거나, 조합최적화를 기초부터 살펴보는 포스팅을 올릴 계획&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=Dyp9lQpVgCs&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;[Techtonic 2020] Track 1. POMO: 강화학습을 이용한 조합 최적화(NeurIPS 2020) - 권영대 프로&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=hAirBRQSFm0&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;[Techtonic 2021] AI를 사용해 기업의 조합최적화 작업을 처리할 수 있을까? (NeurIPS 2021) - 권영대 프로&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://proceedings.neurips.cc/paper/2020/hash/f231f2107df69eab0a3862d50018a9b2-Abstract.html&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;POMO: Policy Optimization with Multiple Optima for Reinforcement Learning&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
       <title>ChemAI</title>
       <link>https://cse-study.github.io/ai/2022-03/20220305-chemai/</link>
       <pubDate>Sat, 05 Mar 2022 00:00:00 +0000</pubDate>

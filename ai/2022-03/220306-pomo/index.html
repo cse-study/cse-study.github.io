@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.92.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>POMO: Policy Optimization with Multiple Optima for Reinforcement Learning&nbsp;&ndash;&nbsp;CS Study Group</title><link rel="stylesheet" href="/css/core.min.8ea708522f75bfcc8135986b9fdcb802f298c946aff4776dc7b9f03a02ba7f8767f76ca0e6523502305c2790e06cfb8f.css" integrity="sha384-jqcIUi91v8yBNZhrn9y4AvKYyUav9Hdtx7nwOgK6f4dn92yg5lI1AjBcJ5DgbPuP"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="POMO: Policy Optimization with Multiple Optima for Reinforcement Learning" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/home"><img class="site logo" src="/assets/img/logo.png" /><span class="site name">CS Study Group</span></a>
+        </span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav"><a class="nav item-main" href="/ai/"><span class="iconfont icon-ai"></span>Weekly AI</a>
+        <a class="nav item-main" href="/algorithm/"><span class="iconfont icon-algo"></span>Algorithm</a>
+        <a class="nav item-secondary" href="/help/"><span class="iconfont icon-algo"></span>Help</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">POMO: Policy Optimization with Multiple Optima for Reinforcement Learning</h1><p class="article date">Sunday, March 6, 2022</p></section><section class="article author">
+    <div class='author-wrapper'>
+        <div class='author-left'><img class="avatar" src="/assets/img/yuho.jpg" alt></div>
+        <div class='author-right'><p class="name">Yuho Jeong</p><a class="item-email" href="mailto:yuho8437@unist.ac.kr" target="_blank" rel="noopener noreferrer">yuho8437@unist.ac.kr</a></div>
+    </div>
+</section><article class="article markdown-body"><p>Samsung SDS Techtonic의 &ldquo;POMO: 강화학습을 이용한 조합 최적화(NeurIPS 2020)&rdquo; 발표를 보고 이를 정리합니다.</p>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>
+<p>조합 최적화(Combinatorial Optimization): 주어진 아이템들의 최적 순서 또는 매핑을 찾는 문제 (ex. 생산 설비 운영 최적화, 자원 할당 최적화, 운송 경로 최적화 등)</p>
+</li>
+<li>
+<p>대표적인 예시는 &lsquo;외판원 문제&rsquo;(Traveling Salesman Problem, TSP): 모든 도시를 여행하기 위한 경로 최적화하는 문제</p>
+<ul>
+<li>Naive approach로는 Trial &amp; Error 후에 가장 최적인 경로를 확인하는 것. 하지만 이 방법은 너무 오래 걸림. 최적의 해를 찾기보다는, 최적에 가까운 해를 빠른 시간에 찾아내는 방법(Heuristic)이 현실적</li>
+<li>개선된 휴리스틱 방법(체계적인 trial &amp; error)은, 만들어져 있는 조합에서 조금씩 변형을 가해 다시 시도해보는 것. 하지만 좋은 변형/조합 방법은 문제마다 다르기 때문에 전문가의 수작업 중요</li>
+<li>AI로 푸는 방법은, 실전 문제를 풀기 전 비슷한 케이스를 반복해 학습한 후에 실전에서는 one-shot 솔루션 제공. 속도 매우 빠르고 데이터에서 스스로 전략 학습 가능</li>
+</ul>
+</li>
+<li>
+<p>강화학습에서 baseline 결정의 난제</p>
+<ul>
+<li>Baseline에 대한 설명은 <a href="https://dnddnjs.gitbooks.io/rl/content/actor-critic_policy_gradient.html"target="_blank" rel="noopener noreferrer">링크</a>
+ 참고하면 좋을듯</li>
+<li>인공지능이 반복해 풀어 얻는 솔루션은 보통 비슷하고 크게 다르지 않음. 따라서 학습 공간 안에서의 local optimum에 수렴한다는 문제 발생</li>
+</ul>
+</li>
+<li>
+<p>Local optima 문제 해결 아이디어</p>
+<ul>
+<li>같은 문제를 다른 문제인 것 처럼 여러가지 방법으로 포장하여, 인공지능이 각각을 다른 방법으로 풀도록 유도. 이것이 POMO의 전략임</li>
+<li>즉, POMO는 multiple optima를 사용한 강화학습 방법임</li>
+</ul>
+</li>
+<li>
+<p>Multiple optima</p>
+<ul>
+<li>5-node TSP(외판원 문제)를 예로 들면, geometry 상 optima는 하나인데, 이를 sequence로 표현하거나 search tree 형태로 표현하면 optima가 5개로 늘어남. 표현을 어떻게 하느냐에 따라서 optima 수가 달라질 수 있음</li>
+<li>기존 방식들은 이 5개 중 하나를 잘 찾도록 하는 알고리즘들이었다면, POMO는 어떻게 하면 이 5개를 다 잘 찾아낼 수 있을까를 고민하였음</li>
+</ul>
+</li>
+<li>
+<p>POMO baseline 결정법</p>
+<ol>
+<li>서로 다른 시작점으로부터 문제를 풀도록 한 후 결과를 종합하여 baseline 결정</li>
+<li>Instance augmentation: 문제를 대칭/회전 변환하여 (인공지능이 보기에) 새로운 문제를 만듦. 좌표만 바꿨을 뿐이지만 인공지능이 풀 때는 완전히 다른 계산이 필요함</li>
+</ol>
+<ul>
+<li>모든 조합 최적화 문제가 multiple optima를 가지는 것은 아닌데, 거의 대부분이 문제에서 multiple optima를 찾을 수 있음. 그래서 multiple optima를 이용하면 강화학습 할 때 큰 효과를 얻을 수 있다는 것이 논문의 핵심</li>
+</ul>
+</li>
+<li>
+<p>조합 최적화 관련 실제 문제들</p>
+<ul>
+<li>생산 설비 최적화(Job shop, Flow shop problem): 20종의 핸드폰 제작 스케쥴, 3단계 제작, 어떤 순서로 제작해야 할까?</li>
+<li>자원 할당 최적화(Resource management problem): 20개의 프로그램을 컴퓨터(클라우드)에서 처리. 프로그램들은 공유된 자원(CPU, GPU, memory)를 할당받아 사용, 어떤 순서로 할당해야 할까?</li>
+<li>운송 경로 최적화(capacitated vehicle routing problem): 100개의 지점. 각 지점 당 지정된 할당량 배송. 트럭의 적재 한계량 존재. 어떤 경로/순서로 배송해야 할까?</li>
+</ul>
+</li>
+</ul>
+<h3 id="comments">Comments</h3>
+<ul>
+<li>조합최적화 문제를 강화학습으로 풀려는 시도들이 최근 많이 있음</li>
+<li>강화학습을 처음 공부할 때는 강화학습이 풀 수 있는 실제 세상의 문제가 많이 있을지 의문이었는데, 실제 세상에서 적용할 수 있지만 아직 사람들이 가치를 발견하지 못한 경우가 많겠다는 생각이 들었음</li>
+<li>조합 최적화를 들어보긴 했지만 실제로 어떤 내용인지는 영상을 통해 처음으로 접했음. 내용이 흥미로워서 기초부터 주요 논문까지 쭉 순서대로 제대로 공부해보고 싶다는 생각이 들었음</li>
+<li>2021 발표도 있는 듯 하여 다음 주에는 해당 발표를 보거나, 조합최적화를 기초부터 살펴보는 포스팅을 올릴 계획</li>
+</ul>
+<h3 id="references">References</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=Dyp9lQpVgCs"target="_blank" rel="noopener noreferrer">[Techtonic 2020] Track 1. POMO: 강화학습을 이용한 조합 최적화(NeurIPS 2020) - 권영대 프로</a>
+</li>
+<li><a href="https://www.youtube.com/watch?v=hAirBRQSFm0"target="_blank" rel="noopener noreferrer">[Techtonic 2021] AI를 사용해 기업의 조합최적화 작업을 처리할 수 있을까? (NeurIPS 2021) - 권영대 프로</a>
+</li>
+<li><a href="https://proceedings.neurips.cc/paper/2020/hash/f231f2107df69eab0a3862d50018a9b2-Abstract.html"target="_blank" rel="noopener noreferrer">POMO: Policy Optimization with Multiple Optima for Reinforcement Learning</a>
+</li>
+</ul></article>
+<section class="article discussion">
+    <script src="https://utteranc.es/client.js" repo="cse-study/cse-study.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async>
+    </script>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/ai/2022-03/20220305-chemai/"><span class="iconfont icon-article"></span>ChemAI</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Notepadium.</p>
+    <p class="powerby"><span>Powered&nbsp;by&nbsp;</span><a href="https://gohugo.io" 
+        target="_blank" rel="noopener noreferrer">Hugo</a><span>&nbsp;&amp;&nbsp;</span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank" rel="noopener noreferrer">Notepadium</a></p></div>
+</section><script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-e/4/LvThKH1gwzXhdbY2AsjR3rm7LHWyhIG5C0jiRfn8AN2eTN5ILeztWw0H9jmN" crossorigin="anonymous"></script>
+        <script
+            type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script><script src="/js/hljs.min.72e76ccf211868d08e31d7ca45c02501991bd760f28809c52045fa79fb7b7428664bb54ae875b46031ebc760c77b9562.js" integrity="sha384-cudszyEYaNCOMdfKRcAlAZkb12DyiAnFIEX6eft7dChmS7VK6HW0YDHrx2DHe5Vi"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>
