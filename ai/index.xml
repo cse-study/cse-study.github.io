@@ -6,10 +6,94 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2019 Notepadium.</copyright>
-    <lastBuildDate>Sun, 06 Mar 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 10 Mar 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://cse-study.github.io/ai/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Matrix Encoding Networks for Neural Combinatorial Optimization</title>
+      <link>https://cse-study.github.io/ai/2022-03/220310-matnet/</link>
+      <pubDate>Thu, 10 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/ai/2022-03/220310-matnet/</guid>
+      <description>&lt;p&gt;Samsung SDS Techtonic의 MatNet(NeurIPS 2021) 발표를 보고 이를 정리합니다.&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://cse-study.github.io/ai/2022-03/220306-pomo/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;이전 포스팅&lt;/a&gt;
+도 참고 하시면 좋습니다.&lt;/p&gt;
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;조합 최적화: 운송 경로 최적화, 설비 운영 최적화, 자원 할당 최적화 등, 굉장히 많은 경우의 수에 대해서 가장 좋은 결과를 내는 경우를 찾는 문제&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;도시간 이동 소요시간 최적화 문제, 혹은 외판원 문제(TSP)같은 조합최적화 문제를 데이터로 만들면 행렬의 형태가 됨. 그리고 이 행렬의 크기는 데이터에 따라 계속해서 변경될 수 있음(도시가 더 추가되는 경우). 또 다른 문제로는 &amp;lsquo;승객이 기다리는 시간의 합이 최소가 되도록 택시를 배차&amp;rsquo;하는 문제도 있음. 이 문제에서 아래와 같이 별표(*)친 내용을 찾으면 최적이라고 가정해보겠음&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;&lt;/th&gt;
+&lt;th&gt;승객 1&lt;/th&gt;
+&lt;th&gt;승객 2&lt;/th&gt;
+&lt;th&gt;승객 3&lt;/th&gt;
+&lt;th&gt;승객 4&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;택시 1&lt;/td&gt;
+&lt;td&gt;40&lt;/td&gt;
+&lt;td&gt;45 (*)&lt;/td&gt;
+&lt;td&gt;70&lt;/td&gt;
+&lt;td&gt;90&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;택시 2&lt;/td&gt;
+&lt;td&gt;50&lt;/td&gt;
+&lt;td&gt;60&lt;/td&gt;
+&lt;td&gt;10 (*)&lt;/td&gt;
+&lt;td&gt;80&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;택시 3&lt;/td&gt;
+&lt;td&gt;20&lt;/td&gt;
+&lt;td&gt;65&lt;/td&gt;
+&lt;td&gt;95&lt;/td&gt;
+&lt;td&gt;5 (*)&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;택시 4&lt;/td&gt;
+&lt;td&gt;30 (*)&lt;/td&gt;
+&lt;td&gt;85&lt;/td&gt;
+&lt;td&gt;15&lt;/td&gt;
+&lt;td&gt;25&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;행의 정보(택시1)를 보고 최적(40)을 확인해보고, 해당 최적 데이터(40)의 열에 대해서 다시 최적(20)을 확인해보고, 또 해당 최적 데이터(20)의 행에 대해서 최적(5)을 확인해보고&amp;hellip; 를 반복하면, 전체적인 최적을 파악할 수 있다는 아이디어에서 시작함&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;이 아이디어를 기반으로, 각 행과 열 데이터를 임베딩 벡터로 만든 뒤에 해당 임베딩 벡터들을 서로 반복해서 곱해주는 방식으로 네트워크를 구성함. query/key가 등장하는 것으로 보아 아마 attention 기반의 구조를 사용하지 않았을까 싶음.&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;최종적으로는 각 row, 각 column 마다의 대표 임베딩 벡터가 출력됨(택시의 임베딩이 각각 출력, 승객의 임베딩이 각각 출력). 그리고 목적 row의 임베딩을 column의 임베딩들과 비교함으로써 최적이 무엇일지를 판단하는 방식임(택시1 임베딩과 승객1, 2, 3, 4의 임베딩을 비교한 결과를 기반으로, 택시 1과 승객 사이의 최적 선택)&lt;/p&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;그러면 학습을 어떻게 이루어지는가?: 영상에서는 시간이 없어 따로 소개하고 있지 않음 🥲&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;comments&#34;&gt;Comments&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;동영상만 보고는 제대로 이해할 수 없었음.. 매우매우 대략적인 내용만 파악할 수 있었음. 따라서 조합최적화의 기초 공부를 하고 관련 논문들을 읽어볼 계획&lt;/li&gt;
+&lt;li&gt;예전에 연구할 때 매트릭스를 인코딩한다는 개념에 대해 생각해본 적이 있어서 많이 찾아봤는데, 그 당시에는 관련 논문을 하나도 찾지 못해서 아이디어를 버려뒀음. 따라서 이런 방식이 있다는 것이 반가웠고 추후 매트릭스 인코딩이 필요한 경우가 생긴다면 해당 방식을 참고해보면 좋겠다는 생각이 들었음.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=hAirBRQSFm0&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;[Techtonic 2021] AI를 사용해 기업의 조합최적화 작업을 처리할 수 있을까? (NeurIPS 2021) - 권영대 프로&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;Kwon, Yeong-Dae, et al. &amp;ldquo;Matrix encoding networks for neural combinatorial optimization.&amp;rdquo; &lt;em&gt;Advances in Neural Information Processing Systems&lt;/em&gt; 34 (2021).&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
     
     <item>
       <title>POMO: Policy Optimization with Multiple Optima for Reinforcement Learning</title>
@@ -385,6 +469,17 @@
 &lt;li&gt;개인 목표는 알고리즘/코딩 테스트 관련 주간 목표를 개별적으로 설정하고 수행합니다(e.g. 알고리즘 글 포스팅, 코딩 인터뷰 문/답, 추가 알고리즘 사이트 문제 풀이, 등). 개인 목표의 결과물이 글의 형태라면 블로그 Algorithm 카테고리에 포스팅 해주시면 좋습니다.&lt;/li&gt;
 &lt;li&gt;더욱 자세한 내용은 &lt;a href=&#34;https://github.com/cse-study/algorithm-code&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;링크&lt;/a&gt;
 를 참고해주세요.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;contributors&#34;&gt;Contributors&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;🚀 &lt;a href=&#34;https://github.com/yuhodots&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;yuhodots&lt;/a&gt;
+: 갓생을 꿈꾸는 대학원생입니다.&lt;/li&gt;
+&lt;li&gt;🐢 &lt;a href=&#34;https://github.com/jiun0&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;jiun0&lt;/a&gt;
+: Bandit 알고리즘과 추천 시스템을 연구하고 있는 대학원생입니다. 코딩조아.&lt;/li&gt;
+&lt;li&gt;🙂 &lt;a href=&#34;https://github.com/bwmelon97&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;bwmelon97&lt;/a&gt;
+: 졸업을 앞둔 복학생입니다. 원거리 딜러(AD carry)를 전문으로 하고 있습니다.&lt;/li&gt;
+&lt;li&gt;👻 &lt;a href=&#34;https://github.com/minjae-lulu&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;minjae-lulu&lt;/a&gt;
+: 동형암호를 공부하고 있는 학생입니다.&lt;/li&gt;
 &lt;/ul&gt;</description>
     </item>
     

@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.92.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Matrix Encoding Networks for Neural Combinatorial Optimization&nbsp;&ndash;&nbsp;CS Study Group</title><link rel="stylesheet" href="/css/core.min.8ea708522f75bfcc8135986b9fdcb802f298c946aff4776dc7b9f03a02ba7f8767f76ca0e6523502305c2790e06cfb8f.css" integrity="sha384-jqcIUi91v8yBNZhrn9y4AvKYyUav9Hdtx7nwOgK6f4dn92yg5lI1AjBcJ5DgbPuP"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Matrix Encoding Networks for Neural Combinatorial Optimization" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/home"><img class="site logo" src="/assets/img/logo.png" /><span class="site name">CS Study Group</span></a>
+        </span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav"><a class="nav item-main" href="/ai/"><span class="iconfont icon-ai"></span>Weekly AI</a>
+        <a class="nav item-main" href="/algorithm/"><span class="iconfont icon-algo"></span>Algorithm</a>
+        <a class="nav item-secondary" href="/help/"><span class="iconfont icon-algo"></span>Help</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Matrix Encoding Networks for Neural Combinatorial Optimization</h1><p class="article date">Thursday, March 10, 2022</p></section><section class="article author">
+    <div class='author-wrapper'>
+        <div class='author-left'><img class="avatar" src="/assets/img/yuho.jpg" alt></div>
+        <div class='author-right'><p class="name">Yuho Jeong</p><a class="item-email" href="mailto:yuho8437@unist.ac.kr" target="_blank" rel="noopener noreferrer">yuho8437@unist.ac.kr</a></div>
+    </div>
+</section><article class="article markdown-body"><p>Samsung SDS Techtonic의 MatNet(NeurIPS 2021) 발표를 보고 이를 정리합니다.</p>
+<p><a href="https://cse-study.github.io/ai/2022-03/220306-pomo/"target="_blank" rel="noopener noreferrer">이전 포스팅</a>
+도 참고 하시면 좋습니다.</p>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>
+<p>조합 최적화: 운송 경로 최적화, 설비 운영 최적화, 자원 할당 최적화 등, 굉장히 많은 경우의 수에 대해서 가장 좋은 결과를 내는 경우를 찾는 문제</p>
+</li>
+<li>
+<p>도시간 이동 소요시간 최적화 문제, 혹은 외판원 문제(TSP)같은 조합최적화 문제를 데이터로 만들면 행렬의 형태가 됨. 그리고 이 행렬의 크기는 데이터에 따라 계속해서 변경될 수 있음(도시가 더 추가되는 경우). 또 다른 문제로는 &lsquo;승객이 기다리는 시간의 합이 최소가 되도록 택시를 배차&rsquo;하는 문제도 있음. 이 문제에서 아래와 같이 별표(*)친 내용을 찾으면 최적이라고 가정해보겠음</p>
+<table>
+<thead>
+<tr>
+<th></th>
+<th>승객 1</th>
+<th>승객 2</th>
+<th>승객 3</th>
+<th>승객 4</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>택시 1</td>
+<td>40</td>
+<td>45 (*)</td>
+<td>70</td>
+<td>90</td>
+</tr>
+<tr>
+<td>택시 2</td>
+<td>50</td>
+<td>60</td>
+<td>10 (*)</td>
+<td>80</td>
+</tr>
+<tr>
+<td>택시 3</td>
+<td>20</td>
+<td>65</td>
+<td>95</td>
+<td>5 (*)</td>
+</tr>
+<tr>
+<td>택시 4</td>
+<td>30 (*)</td>
+<td>85</td>
+<td>15</td>
+<td>25</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p>행의 정보(택시1)를 보고 최적(40)을 확인해보고, 해당 최적 데이터(40)의 열에 대해서 다시 최적(20)을 확인해보고, 또 해당 최적 데이터(20)의 행에 대해서 최적(5)을 확인해보고&hellip; 를 반복하면, 전체적인 최적을 파악할 수 있다는 아이디어에서 시작함</p>
+</li>
+<li>
+<p>이 아이디어를 기반으로, 각 행과 열 데이터를 임베딩 벡터로 만든 뒤에 해당 임베딩 벡터들을 서로 반복해서 곱해주는 방식으로 네트워크를 구성함. query/key가 등장하는 것으로 보아 아마 attention 기반의 구조를 사용하지 않았을까 싶음.</p>
+</li>
+<li>
+<p>최종적으로는 각 row, 각 column 마다의 대표 임베딩 벡터가 출력됨(택시의 임베딩이 각각 출력, 승객의 임베딩이 각각 출력). 그리고 목적 row의 임베딩을 column의 임베딩들과 비교함으로써 최적이 무엇일지를 판단하는 방식임(택시1 임베딩과 승객1, 2, 3, 4의 임베딩을 비교한 결과를 기반으로, 택시 1과 승객 사이의 최적 선택)</p>
+</li>
+<li>
+<p>그러면 학습을 어떻게 이루어지는가?: 영상에서는 시간이 없어 따로 소개하고 있지 않음 🥲</p>
+</li>
+</ul>
+<h3 id="comments">Comments</h3>
+<ul>
+<li>동영상만 보고는 제대로 이해할 수 없었음.. 매우매우 대략적인 내용만 파악할 수 있었음. 따라서 조합최적화의 기초 공부를 하고 관련 논문들을 읽어볼 계획</li>
+<li>예전에 연구할 때 매트릭스를 인코딩한다는 개념에 대해 생각해본 적이 있어서 많이 찾아봤는데, 그 당시에는 관련 논문을 하나도 찾지 못해서 아이디어를 버려뒀음. 따라서 이런 방식이 있다는 것이 반가웠고 추후 매트릭스 인코딩이 필요한 경우가 생긴다면 해당 방식을 참고해보면 좋겠다는 생각이 들었음.</li>
+</ul>
+<h3 id="references">References</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=hAirBRQSFm0"target="_blank" rel="noopener noreferrer">[Techtonic 2021] AI를 사용해 기업의 조합최적화 작업을 처리할 수 있을까? (NeurIPS 2021) - 권영대 프로</a>
+</li>
+<li>Kwon, Yeong-Dae, et al. &ldquo;Matrix encoding networks for neural combinatorial optimization.&rdquo; <em>Advances in Neural Information Processing Systems</em> 34 (2021).</li>
+</ul></article>
+<section class="article discussion">
+    <script src="https://utteranc.es/client.js" repo="cse-study/cse-study.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async>
+    </script>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/ai/2022-03/220306-pomo/"><span class="iconfont icon-article"></span>POMO: Policy Optimization with Multiple Optima for Reinforcement Learning</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Notepadium.</p>
+    <p class="powerby"><span>Powered&nbsp;by&nbsp;</span><a href="https://gohugo.io" 
+        target="_blank" rel="noopener noreferrer">Hugo</a><span>&nbsp;&amp;&nbsp;</span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank" rel="noopener noreferrer">Notepadium</a></p></div>
+</section><script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-e/4/LvThKH1gwzXhdbY2AsjR3rm7LHWyhIG5C0jiRfn8AN2eTN5ILeztWw0H9jmN" crossorigin="anonymous"></script>
+        <script
+            type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script><script src="/js/hljs.min.72e76ccf211868d08e31d7ca45c02501991bd760f28809c52045fa79fb7b7428664bb54ae875b46031ebc760c77b9562.js" integrity="sha384-cudszyEYaNCOMdfKRcAlAZkb12DyiAnFIEX6eft7dChmS7VK6HW0YDHrx2DHe5Vi"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>
