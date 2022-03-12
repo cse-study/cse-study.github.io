@@ -6,10 +6,59 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2019 Notepadium.</copyright>
-    <lastBuildDate>Thu, 10 Mar 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sat, 12 Mar 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://cse-study.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>DopNet</title>
+      <link>https://cse-study.github.io/ai/2022-03/20220312-dopnet/</link>
+      <pubDate>Sat, 12 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/ai/2022-03/20220312-dopnet/</guid>
+      <description>&lt;p&gt;한국화학연구원에서 2021년 7월에 nature computational materials에 발표한 “Predicting thermoelectric properties from chemical formula with explicitly identifying dopant effects”를 읽고 내용을 공유합니다.&lt;/p&gt;
+&lt;p&gt;이전 포스팅도 참고 하시면 좋습니다.&lt;/p&gt;
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;머신 러닝은 소재 분야에서 많이 쓰이고 있습니다. 만들고자 하는 소재의 물성을 예측하고 어떻게 해야 원하는 특징을 가진 소재를 개발할 수 있을지 도움을 얻을 수 있기 때문입니다.&lt;/li&gt;
+&lt;li&gt;하지만 기존 방법들은 도핑된 물질에 대해선 정확한 특성 예측이 힘들어 전문가의 직관에 의존해 개발이 이루어졌습니다. 한국화학연구원은 이 문제를 해결하기 위한 알고리즘을 개발했고 DopNet이라 이름지었습니다.&lt;/li&gt;
+&lt;li&gt;기존 알고리즘의 문제는 크게 다음과 같습니다.
+&lt;ul&gt;
+&lt;li&gt;도핑된 재료의 결정 구조를 찾는데 너무 많은 계산이 필요하다.&lt;/li&gt;
+&lt;li&gt;Dopants는 전체에서 낮은 비율을 차지하기 때문에 화학식을 기반으로 한 물질 표현은 해당 효과를 잘 나타내지 못한다(수치적 변화가 크지 않음).&lt;/li&gt;
+&lt;li&gt;Dopants가 극적으로 host material의 성질을 바꿀 때 비선형이 크게 나타난다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;이를 해결하기 위해 DopNet은 결정 구조 계산 없이 재료 특성을 예측할 수 있도록 만들었습니다. 그리고 host material과 dopant를 명시적으로 나누어 임베딩하였습니다(기존 방법에서는 dopant 식별 여부와 관계 없이 재료 원자들에 대한 원소 통계 정보만 이용한 것으로 보입니다).&lt;/li&gt;
+&lt;li&gt;DopNet은 세 부분으로 구성되어 있습니다.
+&lt;ul&gt;
+&lt;li&gt;Host material 잠재 임베딩을 추출하는 호스트 임베딩 네트워크&lt;/li&gt;
+&lt;li&gt;Dopants 잠재 임베딩을 생성하는 dopants 임베딩 네트워크&lt;/li&gt;
+&lt;li&gt;Host material과 dopants의 임베딩을 통해 재료 특성을 예측하는 dense 네트워크&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;DopNet이 작동하는 단계는 다음과 같습니다.&lt;/li&gt;
+&lt;li&gt;화학식이 입력되면 이는 host material과 dopants로 분해됩니다. 재료의 각 원자는 비율이 γ보다 작거나 같을 때 dopants로 분류되며, γ≥0은 DopNet에 미리 정의되어 있는 hyperparameter입니다.&lt;/li&gt;
+&lt;li&gt;Host material는 원소 통계 정보를 기반으로 $\mathbf{x}_h$ 벡터로 표현됩니다. 호스트 특징 벡터에 인코더가 적용되고 호스트 임베딩 네트워크를 통과해 호스트 임베딩이 계산됩니다.&lt;/li&gt;
+&lt;li&gt;Dopants의 특징 벡터는 최대 K개의 dopants를 포함할 수 있는 집합 $S_d$에 저장됩니다. 여기서 K는 hyperparameter입니다. Dopants는 dopant 임베딩 네트워크를 통해 임베딩되고 생성된 dopant 임베딩은 단일 벡터 $\mathbf{z}_d$로 표현됩니다.&lt;/li&gt;
+&lt;li&gt;마지막으로 dense network를 통해 물성 $\mathbf{y}$ 를 예측합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img  src=&#34;https://cse-study.github.io/assets/img/DopNet_architecture.png&#34;
+        alt=&#34;DopNet_architecture&#34;/&gt;&lt;/p&gt;
+&lt;h3 id=&#34;comments&#34;&gt;Comments&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;이론 분야를 공부하고 있지만 실제 세상의 문제를 해결하기 위해 어떤 노력들과 아이디어도 흥미롭습니다. 특히 학부 전공과 관련된 내용들이다 보니 더 재미있게 읽었습니다.&lt;/li&gt;
+&lt;li&gt;내가 하는 연구나 공부가 실제로 어떻게 적용되어 어떤 문제를 해결하고 다른 이들의 연구와 인간의 삶에 어떤 영향을 미칠지 생각하거나 찾아 보는 것도 좋다고 생각합니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/ngs00/DopNet&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://github.com/ngs00/DopNet&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.nature.com/articles/s41524-021-00564-y&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://www.nature.com/articles/s41524-021-00564-y&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
     
     <item>
       <title>Matrix Encoding Networks for Neural Combinatorial Optimization</title>
@@ -442,44 +491,6 @@
 &lt;ul&gt;
 &lt;li&gt;프로필 이미지 업로드 방법은 다음과 같습니다. (아직 작성하지 않았습니다.)&lt;/li&gt;
 &lt;li&gt;게시글 이미지 업로드 방법은 다음과 같습니다. (아직 작성하지 않았습니다.)&lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>Hello 👋</title>
-      <link>https://cse-study.github.io/home/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://cse-study.github.io/home/</guid>
-      <description>&lt;p&gt;안녕하세요, 방문해주셔서 감사합니다. 저희는 이 곳에서 CS 관련 스터디를 진행하고 있습니다. 현재는 알고리즘/코테 스터디와, 간단한 AI 스터디를 진행하고 있습니다!&lt;/p&gt;
-&lt;h3 id=&#34;weekly-ai&#34;&gt;Weekly AI&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;AI 관련 소식, 기술 블로그 글, 유튜브 영상 등 관심있는 자료를 보고 &lt;mark&gt;간단히 요약&lt;/mark&gt;합니다. 느낀점, 한줄평을 추가해주셔도 좋습니다.&lt;/li&gt;
-&lt;li&gt;게시글은 &lt;mark&gt;매주 1인당 1개씩 작성&lt;/mark&gt;합니다. 최신 AI 기술을 파악하는 것이 목적이므로 2년 이내의 자료만 허용합니다.&lt;/li&gt;
-&lt;li&gt;어떤 자료를 참고하였는지 다른 사람들도 확인할 수 있도록 &lt;mark&gt;참고한 자료의 링크를 reference&lt;/mark&gt; 달아주시면 좋습니다.&lt;/li&gt;
-&lt;li&gt;유명하거나, 임팩트있는 기술이 아니어도 상관 없으며, 각자 관심있는 분야의 AI 소식을 매 주 받아들이면서 서로의 시야가 넓어지는 것이 스터디의 주요 목표입니다.&lt;/li&gt;
-&lt;li&gt;서로의 게시글에서 궁금한 점이 있다면 적극적으로 코멘트 해주세요!&lt;/li&gt;
-&lt;li&gt;항상 저작권 문제를 고려하며 게시글을 작성해주시면 감사하겠습니다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;algorithm&#34;&gt;Algorithm&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;알고리즘 스터디는 스터디 원 모두 같은 주제의 문제를 푸는 &lt;mark&gt;공동 목표&lt;/mark&gt;와 개별적으로 하고 싶은 공부를 진행하는 &lt;mark&gt;개인 목표&lt;/mark&gt;로 이루어 집니다.&lt;/li&gt;
-&lt;li&gt;공동 목표는 매주 1개의 주제에 대해서 알고리즘 사이트 문제 중에서 2문제를 푸는 것을 목적으로 하며 &lt;a href=&#34;https://github.com/cse-study/algorithm-code&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;&lt;code&gt;algorithm-code&lt;/code&gt;&lt;/a&gt;
- 저장소에 풀이 코드를 제출합니다.&lt;/li&gt;
-&lt;li&gt;개인 목표는 알고리즘/코딩 테스트 관련 주간 목표를 개별적으로 설정하고 수행합니다(e.g. 알고리즘 글 포스팅, 코딩 인터뷰 문/답, 추가 알고리즘 사이트 문제 풀이, 등). 개인 목표의 결과물이 글의 형태라면 블로그 Algorithm 카테고리에 포스팅 해주시면 좋습니다.&lt;/li&gt;
-&lt;li&gt;더욱 자세한 내용은 &lt;a href=&#34;https://github.com/cse-study/algorithm-code&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;링크&lt;/a&gt;
-를 참고해주세요.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;contributors&#34;&gt;Contributors&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;🚀 &lt;a href=&#34;https://github.com/yuhodots&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;yuhodots&lt;/a&gt;
-: 갓생을 꿈꾸는 대학원생입니다.&lt;/li&gt;
-&lt;li&gt;🐢 &lt;a href=&#34;https://github.com/jiun0&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;jiun0&lt;/a&gt;
-: Bandit 알고리즘과 추천 시스템을 연구하고 있는 대학원생입니다. 코딩조아.&lt;/li&gt;
-&lt;li&gt;🙂 &lt;a href=&#34;https://github.com/bwmelon97&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;bwmelon97&lt;/a&gt;
-: 졸업을 앞둔 복학생입니다. 원거리 딜러(AD carry)를 전문으로 하고 있습니다.&lt;/li&gt;
-&lt;li&gt;👻 &lt;a href=&#34;https://github.com/minjae-lulu&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;minjae-lulu&lt;/a&gt;
-: 동형암호를 공부하고 있는 학생입니다.&lt;/li&gt;
 &lt;/ul&gt;</description>
     </item>
     

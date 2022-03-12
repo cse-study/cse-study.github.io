@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.92.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>DopNet&nbsp;&ndash;&nbsp;CS Study Group</title><link rel="stylesheet" href="/css/core.min.8ea708522f75bfcc8135986b9fdcb802f298c946aff4776dc7b9f03a02ba7f8767f76ca0e6523502305c2790e06cfb8f.css" integrity="sha384-jqcIUi91v8yBNZhrn9y4AvKYyUav9Hdtx7nwOgK6f4dn92yg5lI1AjBcJ5DgbPuP"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="DopNet" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/home"><img class="site logo" src="/assets/img/logo.png" /><span class="site name">CS Study Group</span></a>
+        </span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav"><a class="nav item-main" href="/ai/"><span class="iconfont icon-ai"></span>Weekly AI</a>
+        <a class="nav item-main" href="/algorithm/"><span class="iconfont icon-algo"></span>Algorithm</a>
+        <a class="nav item-secondary" href="/help/"><span class="iconfont icon-algo"></span>Help</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">DopNet</h1><p class="article date">Saturday, March 12, 2022</p></section><section class="article author">
+    <div class='author-wrapper'>
+        <div class='author-left'><img class="avatar" src="/assets/img/jiun.jpeg" alt></div>
+        <div class='author-right'><p class="name">Jiun Jeong</p><a class="item-email" href="mailto:jiun@unist.ac.kr" target="_blank" rel="noopener noreferrer">jiun@unist.ac.kr</a></div>
+    </div>
+</section><article class="article markdown-body"><p>한국화학연구원에서 2021년 7월에 nature computational materials에 발표한 “Predicting thermoelectric properties from chemical formula with explicitly identifying dopant effects”를 읽고 내용을 공유합니다.</p>
+<p>이전 포스팅도 참고 하시면 좋습니다.</p>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>머신 러닝은 소재 분야에서 많이 쓰이고 있습니다. 만들고자 하는 소재의 물성을 예측하고 어떻게 해야 원하는 특징을 가진 소재를 개발할 수 있을지 도움을 얻을 수 있기 때문입니다.</li>
+<li>하지만 기존 방법들은 도핑된 물질에 대해선 정확한 특성 예측이 힘들어 전문가의 직관에 의존해 개발이 이루어졌습니다. 한국화학연구원은 이 문제를 해결하기 위한 알고리즘을 개발했고 DopNet이라 이름지었습니다.</li>
+<li>기존 알고리즘의 문제는 크게 다음과 같습니다.
+<ul>
+<li>도핑된 재료의 결정 구조를 찾는데 너무 많은 계산이 필요하다.</li>
+<li>Dopants는 전체에서 낮은 비율을 차지하기 때문에 화학식을 기반으로 한 물질 표현은 해당 효과를 잘 나타내지 못한다(수치적 변화가 크지 않음).</li>
+<li>Dopants가 극적으로 host material의 성질을 바꿀 때 비선형이 크게 나타난다.</li>
+</ul>
+</li>
+<li>이를 해결하기 위해 DopNet은 결정 구조 계산 없이 재료 특성을 예측할 수 있도록 만들었습니다. 그리고 host material과 dopant를 명시적으로 나누어 임베딩하였습니다(기존 방법에서는 dopant 식별 여부와 관계 없이 재료 원자들에 대한 원소 통계 정보만 이용한 것으로 보입니다).</li>
+<li>DopNet은 세 부분으로 구성되어 있습니다.
+<ul>
+<li>Host material 잠재 임베딩을 추출하는 호스트 임베딩 네트워크</li>
+<li>Dopants 잠재 임베딩을 생성하는 dopants 임베딩 네트워크</li>
+<li>Host material과 dopants의 임베딩을 통해 재료 특성을 예측하는 dense 네트워크</li>
+</ul>
+</li>
+<li>DopNet이 작동하는 단계는 다음과 같습니다.</li>
+<li>화학식이 입력되면 이는 host material과 dopants로 분해됩니다. 재료의 각 원자는 비율이 γ보다 작거나 같을 때 dopants로 분류되며, γ≥0은 DopNet에 미리 정의되어 있는 hyperparameter입니다.</li>
+<li>Host material는 원소 통계 정보를 기반으로 $\mathbf{x}_h$ 벡터로 표현됩니다. 호스트 특징 벡터에 인코더가 적용되고 호스트 임베딩 네트워크를 통과해 호스트 임베딩이 계산됩니다.</li>
+<li>Dopants의 특징 벡터는 최대 K개의 dopants를 포함할 수 있는 집합 $S_d$에 저장됩니다. 여기서 K는 hyperparameter입니다. Dopants는 dopant 임베딩 네트워크를 통해 임베딩되고 생성된 dopant 임베딩은 단일 벡터 $\mathbf{z}_d$로 표현됩니다.</li>
+<li>마지막으로 dense network를 통해 물성 $\mathbf{y}$ 를 예측합니다.</li>
+</ul>
+<p><img  src="/assets/img/DopNet_architecture.png"
+        alt="DopNet_architecture"/></p>
+<h3 id="comments">Comments</h3>
+<ul>
+<li>이론 분야를 공부하고 있지만 실제 세상의 문제를 해결하기 위해 어떤 노력들과 아이디어도 흥미롭습니다. 특히 학부 전공과 관련된 내용들이다 보니 더 재미있게 읽었습니다.</li>
+<li>내가 하는 연구나 공부가 실제로 어떻게 적용되어 어떤 문제를 해결하고 다른 이들의 연구와 인간의 삶에 어떤 영향을 미칠지 생각하거나 찾아 보는 것도 좋다고 생각합니다.</li>
+</ul>
+<h3 id="references">References</h3>
+<ul>
+<li><a href="https://github.com/ngs00/DopNet"target="_blank" rel="noopener noreferrer">https://github.com/ngs00/DopNet</a>
+</li>
+<li><a href="https://www.nature.com/articles/s41524-021-00564-y"target="_blank" rel="noopener noreferrer">https://www.nature.com/articles/s41524-021-00564-y</a>
+</li>
+</ul></article>
+<section class="article discussion">
+    <script src="https://utteranc.es/client.js" repo="cse-study/cse-study.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async>
+    </script>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/ai/2022-03/220310-matnet/"><span class="iconfont icon-article"></span>Matrix Encoding Networks for Neural Combinatorial Optimization</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Notepadium.</p>
+    <p class="powerby"><span>Powered&nbsp;by&nbsp;</span><a href="https://gohugo.io" 
+        target="_blank" rel="noopener noreferrer">Hugo</a><span>&nbsp;&amp;&nbsp;</span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank" rel="noopener noreferrer">Notepadium</a></p></div>
+</section><script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-e/4/LvThKH1gwzXhdbY2AsjR3rm7LHWyhIG5C0jiRfn8AN2eTN5ILeztWw0H9jmN" crossorigin="anonymous"></script>
+        <script
+            type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script><script src="/js/hljs.min.72e76ccf211868d08e31d7ca45c02501991bd760f28809c52045fa79fb7b7428664bb54ae875b46031ebc760c77b9562.js" integrity="sha384-cudszyEYaNCOMdfKRcAlAZkb12DyiAnFIEX6eft7dChmS7VK6HW0YDHrx2DHe5Vi"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>
