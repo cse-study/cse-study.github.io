@@ -450,9 +450,8 @@
       <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
       
       <guid>https://cse-study.github.io/help/</guid>
-      <description>&lt;h3 id=&#34;shortcuts&#34;&gt;Shortcuts&lt;/h3&gt;
-&lt;blockquote&gt;
-&lt;p&gt;스터디에 도움이되는 자료들을 모아두는 공간입니다. 좋은 자료가 있다면 아래에 계속 추가해주세요 🙌&lt;/p&gt;
+      <description>&lt;blockquote&gt;
+&lt;p&gt;스터디에 도움이되는 자료들을 모아둡니다. 좋은 자료가 있다면 아래에 계속 추가해주세요 🙌&lt;/p&gt;
 &lt;/blockquote&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://papers.labml.ai/papers/daily/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;DAILY PAPERS&lt;/a&gt;
@@ -481,16 +480,23 @@
 &amp;lt;!--more--&amp;gt;
 
 &amp;lt;mark&amp;gt;본문입니다.&amp;lt;/mark&amp;gt;
+!&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;img&lt;span class=&#34;o&#34;&gt;](&lt;/span&gt;/assets/img/posting_image.png&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
 &lt;li&gt;마크다운 파일의 제목은 &lt;code&gt;작성날짜-제목.md&lt;/code&gt;의 형태로 설정해주시면 좋습니다.&lt;/li&gt;
 &lt;li&gt;각 스터디의 github repository에 마크다운 파일을 push하여 블로그에 포스팅을 업로드 할 수 있습니다.&lt;/li&gt;
-&lt;li&gt;💡 &lt;code&gt;Notice&lt;/code&gt;: 자동화가 아직 적용되지 않았습니다. 배포까지의 자세한 과정은 관리자에게 문의해주세요!&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;(Notice)&lt;/strong&gt; 자동화가 아직 적용되지 않았습니다. 배포까지의 자세한 과정은 관리자에게 문의해주세요!&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;image-upload&#34;&gt;Image upload&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;프로필 이미지 업로드 방법은 다음과 같습니다. (아직 작성하지 않았습니다.)&lt;/li&gt;
-&lt;li&gt;게시글 이미지 업로드 방법은 다음과 같습니다. (아직 작성하지 않았습니다.)&lt;/li&gt;
-&lt;/ul&gt;</description>
+&lt;p&gt;프로필 이미지 사용 방법은 다음과 같습니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;static/assets/img/&lt;/code&gt; 디렉토리에 프로필 이미지를 업로드 합니다.&lt;/li&gt;
+&lt;li&gt;포스팅 정보 입력란의 avartar 항목에 &lt;code&gt;/assets/img/이미지이름&lt;/code&gt; 을 기입합니다.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;게시글 이미지 업로드 방법도 동일합니다. &amp;lsquo;How to post&amp;rsquo; 마크다운 예시의 제일 마지막 줄을 참고하시면 좋습니다.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;code&gt;static/assets/img/&lt;/code&gt; 디렉토리에 이미지를 업로드 합니다.&lt;/li&gt;
+&lt;li&gt;마크다운의 이미지 경로에 &lt;code&gt;/assets/img/이미지이름&lt;/code&gt; 을 기입합니다.&lt;/li&gt;
+&lt;/ol&gt;</description>
     </item>
     
   </channel>
