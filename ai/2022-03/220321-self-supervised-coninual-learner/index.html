@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.92.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Self-supervised continual learners&nbsp;&ndash;&nbsp;CS Study Group</title><link rel="stylesheet" href="/css/core.min.8ea708522f75bfcc8135986b9fdcb802f298c946aff4776dc7b9f03a02ba7f8767f76ca0e6523502305c2790e06cfb8f.css" integrity="sha384-jqcIUi91v8yBNZhrn9y4AvKYyUav9Hdtx7nwOgK6f4dn92yg5lI1AjBcJ5DgbPuP"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Self-supervised continual learners" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/home"><img class="site logo" src="/assets/img/logo.png" /><span class="site name">CS Study Group</span></a>
+        </span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav"><a class="nav item-main" href="/ai/"><span class="iconfont icon-ai"></span>Weekly AI</a>
+        <a class="nav item-main" href="/algorithm/"><span class="iconfont icon-algo"></span>Algorithm</a>
+        <a class="nav item-secondary" href="/help/"><span class="iconfont icon-algo"></span>Help</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Self-supervised continual learners</h1><p class="article date">Monday, March 21, 2022</p></section><section class="article author">
+    <div class='author-wrapper'>
+        <div class='author-left'><img class="avatar" src="/assets/img/yuho.jpg" alt></div>
+        <div class='author-right'><p class="name">Yuho Jeong</p><a class="item-email" href="mailto:yuho8437@unist.ac.kr" target="_blank" rel="noopener noreferrer">yuho8437@unist.ac.kr</a></div>
+    </div>
+</section><article class="article markdown-body"><p>최근 1년간 진행된 continual learning 연구 중에서 self-supervised approach를 사용한 논문들에 대해서 간단히 정리합니다.</p>
+<ul>
+<li><strong>&ldquo;Co2l: Contrastive continual learning.&rdquo; ICCV 2021</strong>
+<ul>
+<li>Asymmetric SupCon loss로 새로운 지식을 학습(novel learning)하고, self-supervised instance-wise relation distill(IRD)로 과거의 지식을 보존(prevent forgetting)</li>
+<li>Asymmetric SupCon: contrastive learning에 current task examples와 memory buffer examples를 둘 다 사용하지만, anchor로는 current task examples만 사용. 이렇게 하면 단순히 contrastive learning 하는 것 보다 효과 좋음</li>
+<li>IRD: reference(previous) model output과 동일해지도록 현재 모델 regulate (2N개 examples에 대해 전부)</li>
+</ul>
+</li>
+<li><strong>&ldquo;How Well Does Self-Supervised Pre-Training Perform with Streaming ImageNet?.&rdquo; NeruIPS 2021</strong>
+<ul>
+<li>Self-supervised learning 방식으로 pre-training하면, streaming data에 대해서 joint training(non-streaming) 만큼의 성능이 나온다는 것을 주장</li>
+<li>Pre-training은 MoCo-v2 protocol을 따르고, OpenSelfSup 라는 prior works의 구현을 기반으로 하였음</li>
+<li>Streaming data의 distribution shift가 조금인 경우에는 joint training과 self-supervised pre-training의 성능이 거의 비슷하고, large distribution shift인 경우에는 MAS(memory aware synapse)와 data replay 방법을 사용하면 비슷해짐</li>
+</ul>
+</li>
+<li><strong>&ldquo;Rethinking the Representational Continuity: Towards Unsupervised Continual Learning.&rdquo; ICLR 2022</strong>
+<ul>
+<li>Label unannotated인 unsupervised continual learning(CURL)을 SimSiam과 Barlow Twining라는 prior works 알고리즘 사용하여 해결해보았더니 신기하게도 supervised continual learning보다 catastrophic forgetting에 강건함</li>
+<li>Lifelong Unsupervised Mixup(LUMP)는 previous task(in memory buffer)와 current task 사이의 interpolate를 활용하는 방법이며, LUMP를 안 써도 잘하지만 LUMP를 사용하면 더 잘함</li>
+<li>Unsupervised continual learning과 supervised continual learning이 low layer에서는 similar하고 high layer에서는 dissimilar함. Unsupervised continual learning의 loss landscape이 더 smooth 함</li>
+<li>Test 단계에서 classifying은 KNN을 사용한다고 하는데, 어떻게 사용한건지 아직 제대로 살펴보진 않았음</li>
+</ul>
+</li>
+</ul>
+<h3 id="comments">Comments</h3>
+<ul>
+<li>Self-supervised learning이 좋은 representation을 학습한다는 점, 그리고 새로운 지식을 추가적으로 배우는 경우 중에서 특히 해당 데이터의 양이 적을 때 더 효과적이라는 것이 이미 실험적으로 알려져 있었음. 이 장점은 continual learning이 풀고자 하는 문제와 일치하므로 self-supervised learning 방식이 continual learning task에서 효과적일 것이라는 점은 어느정도 예상된 일이었음</li>
+<li>따라서 매우 많은 연구자들이 동시에 해당 문제를 거의 비슷한 방식으로 접근했다는 것이 인상적임</li>
+</ul>
+<h3 id="references">References</h3>
+<ul>
+<li><a href="https://openaccess.thecvf.com/content/ICCV2021/html/Cha_Co2L_Contrastive_Continual_Learning_ICCV_2021_paper.html"target="_blank" rel="noopener noreferrer">Cha, Hyuntak, Jaeho Lee, and Jinwoo Shin. &ldquo;Co2l: Contrastive continual learning.&rdquo; ICCV 2021.</a>
+</li>
+<li><a href="https://openreview.net/pdf?id=gYgMSlZznS"target="_blank" rel="noopener noreferrer">Hu, Dapeng, et al. &ldquo;How Well Does Self-Supervised Pre-Training Perform with Streaming ImageNet?.&rdquo; NeruIPS 2021.</a>
+</li>
+<li><a href="https://openreview.net/pdf?id=9Hrka5PA7LW"target="_blank" rel="noopener noreferrer">Madaan, Divyam, et al. &ldquo;Rethinking the Representational Continuity: Towards Unsupervised Continual Learning.&rdquo; ICLR 2022.</a>
+</li>
+</ul></article>
+<section class="article discussion">
+    <script src="https://utteranc.es/client.js" repo="cse-study/cse-study.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async>
+    </script>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/ai/2022-03/20220312-dopnet/"><span class="iconfont icon-article"></span>DopNet</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Notepadium.</p>
+    <p class="powerby"><span>Powered&nbsp;by&nbsp;</span><a href="https://gohugo.io" 
+        target="_blank" rel="noopener noreferrer">Hugo</a><span>&nbsp;&amp;&nbsp;</span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank" rel="noopener noreferrer">Notepadium</a></p></div>
+</section><script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-e/4/LvThKH1gwzXhdbY2AsjR3rm7LHWyhIG5C0jiRfn8AN2eTN5ILeztWw0H9jmN" crossorigin="anonymous"></script>
+        <script
+            type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script><script src="/js/hljs.min.72e76ccf211868d08e31d7ca45c02501991bd760f28809c52045fa79fb7b7428664bb54ae875b46031ebc760c77b9562.js" integrity="sha384-cudszyEYaNCOMdfKRcAlAZkb12DyiAnFIEX6eft7dChmS7VK6HW0YDHrx2DHe5Vi"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

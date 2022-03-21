@@ -6,10 +6,57 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2019 Notepadium.</copyright>
-    <lastBuildDate>Sat, 12 Mar 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Mon, 21 Mar 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://cse-study.github.io/ai/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Self-supervised continual learners</title>
+      <link>https://cse-study.github.io/ai/2022-03/220321-self-supervised-coninual-learner/</link>
+      <pubDate>Mon, 21 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/ai/2022-03/220321-self-supervised-coninual-learner/</guid>
+      <description>&lt;p&gt;최근 1년간 진행된 continual learning 연구 중에서 self-supervised approach를 사용한 논문들에 대해서 간단히 정리합니다.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ldquo;Co2l: Contrastive continual learning.&amp;rdquo; ICCV 2021&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Asymmetric SupCon loss로 새로운 지식을 학습(novel learning)하고, self-supervised instance-wise relation distill(IRD)로 과거의 지식을 보존(prevent forgetting)&lt;/li&gt;
+&lt;li&gt;Asymmetric SupCon: contrastive learning에 current task examples와 memory buffer examples를 둘 다 사용하지만, anchor로는 current task examples만 사용. 이렇게 하면 단순히 contrastive learning 하는 것 보다 효과 좋음&lt;/li&gt;
+&lt;li&gt;IRD: reference(previous) model output과 동일해지도록 현재 모델 regulate (2N개 examples에 대해 전부)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ldquo;How Well Does Self-Supervised Pre-Training Perform with Streaming ImageNet?.&amp;rdquo; NeruIPS 2021&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Self-supervised learning 방식으로 pre-training하면, streaming data에 대해서 joint training(non-streaming) 만큼의 성능이 나온다는 것을 주장&lt;/li&gt;
+&lt;li&gt;Pre-training은 MoCo-v2 protocol을 따르고, OpenSelfSup 라는 prior works의 구현을 기반으로 하였음&lt;/li&gt;
+&lt;li&gt;Streaming data의 distribution shift가 조금인 경우에는 joint training과 self-supervised pre-training의 성능이 거의 비슷하고, large distribution shift인 경우에는 MAS(memory aware synapse)와 data replay 방법을 사용하면 비슷해짐&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;&amp;ldquo;Rethinking the Representational Continuity: Towards Unsupervised Continual Learning.&amp;rdquo; ICLR 2022&lt;/strong&gt;
+&lt;ul&gt;
+&lt;li&gt;Label unannotated인 unsupervised continual learning(CURL)을 SimSiam과 Barlow Twining라는 prior works 알고리즘 사용하여 해결해보았더니 신기하게도 supervised continual learning보다 catastrophic forgetting에 강건함&lt;/li&gt;
+&lt;li&gt;Lifelong Unsupervised Mixup(LUMP)는 previous task(in memory buffer)와 current task 사이의 interpolate를 활용하는 방법이며, LUMP를 안 써도 잘하지만 LUMP를 사용하면 더 잘함&lt;/li&gt;
+&lt;li&gt;Unsupervised continual learning과 supervised continual learning이 low layer에서는 similar하고 high layer에서는 dissimilar함. Unsupervised continual learning의 loss landscape이 더 smooth 함&lt;/li&gt;
+&lt;li&gt;Test 단계에서 classifying은 KNN을 사용한다고 하는데, 어떻게 사용한건지 아직 제대로 살펴보진 않았음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;comments&#34;&gt;Comments&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Self-supervised learning이 좋은 representation을 학습한다는 점, 그리고 새로운 지식을 추가적으로 배우는 경우 중에서 특히 해당 데이터의 양이 적을 때 더 효과적이라는 것이 이미 실험적으로 알려져 있었음. 이 장점은 continual learning이 풀고자 하는 문제와 일치하므로 self-supervised learning 방식이 continual learning task에서 효과적일 것이라는 점은 어느정도 예상된 일이었음&lt;/li&gt;
+&lt;li&gt;따라서 매우 많은 연구자들이 동시에 해당 문제를 거의 비슷한 방식으로 접근했다는 것이 인상적임&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://openaccess.thecvf.com/content/ICCV2021/html/Cha_Co2L_Contrastive_Continual_Learning_ICCV_2021_paper.html&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Cha, Hyuntak, Jaeho Lee, and Jinwoo Shin. &amp;ldquo;Co2l: Contrastive continual learning.&amp;rdquo; ICCV 2021.&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://openreview.net/pdf?id=gYgMSlZznS&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Hu, Dapeng, et al. &amp;ldquo;How Well Does Self-Supervised Pre-Training Perform with Streaming ImageNet?.&amp;rdquo; NeruIPS 2021.&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://openreview.net/pdf?id=9Hrka5PA7LW&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Madaan, Divyam, et al. &amp;ldquo;Rethinking the Representational Continuity: Towards Unsupervised Continual Learning.&amp;rdquo; ICLR 2022.&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
     
     <item>
       <title>DopNet</title>
@@ -358,42 +405,6 @@
 &lt;li&gt;&lt;code&gt;static/assets/img/&lt;/code&gt; 디렉토리에 이미지를 업로드 합니다.&lt;/li&gt;
 &lt;li&gt;마크다운의 이미지 경로에 &lt;code&gt;/assets/img/이미지이름&lt;/code&gt; 을 기입합니다.&lt;/li&gt;
 &lt;/ol&gt;</description>
-    </item>
-    
-    <item>
-      <title>Hello 👋</title>
-      <link>https://cse-study.github.io/home/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://cse-study.github.io/home/</guid>
-      <description>&lt;p&gt;안녕하세요, 방문해주셔서 감사합니다. 저희는 이 곳에서 CS 관련 스터디를 진행하고 있습니다. 현재는 알고리즘/코테 스터디와, 간단한 AI 스터디를 진행하고 있습니다!&lt;/p&gt;
-&lt;h3 id=&#34;weekly-ai&#34;&gt;Weekly AI&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;AI 관련 관심있는 자료를 링크하고 간단히 공유합니다. 느낀점, 한줄평으로 적어주셔도 좋습니다.&lt;/li&gt;
-&lt;li&gt;게시글은 &lt;mark&gt;매주 1인당 1개씩 작성&lt;/mark&gt;합니다. 최신 AI 기술을 파악하는 것이 목적이므로 2년 이내의 자료만 허용합니다.&lt;/li&gt;
-&lt;li&gt;유명하거나, 임팩트있는 기술이 아니어도 상관 없으며, 각자 관심있는 분야의 AI 소식을 매 주 받아들이면서 서로의 시야가 넓어지는 것이 스터디의 주요 목표입니다.&lt;/li&gt;
-&lt;li&gt;서로의 게시글에서 궁금한 점이 있다면 적극적으로 코멘트 해주세요!&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;algorithm&#34;&gt;Algorithm&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;알고리즘 스터디는 스터디 원 모두 같은 주제의 문제를 푸는 &lt;mark&gt;공동 목표&lt;/mark&gt;와 개별적으로 하고 싶은 공부를 진행하는 &lt;mark&gt;개인 목표&lt;/mark&gt;로 이루어 집니다.&lt;/li&gt;
-&lt;li&gt;공동 목표는 매주 1개의 주제에 대해서 알고리즘 사이트 문제 중에서 2문제를 푸는 것을 목적으로 하며 &lt;a href=&#34;https://github.com/cse-study/algorithm-code&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;&lt;code&gt;algorithm-code&lt;/code&gt;&lt;/a&gt;
- 저장소에 풀이 코드를 제출합니다.&lt;/li&gt;
-&lt;li&gt;개인 목표는 알고리즘/코딩 테스트 관련 주간 목표를 개별적으로 설정하고 수행합니다(e.g. 알고리즘 글 포스팅, 코딩 인터뷰 문/답, 추가 알고리즘 사이트 문제 풀이, 등). 개인 목표의 결과물이 글의 형태라면 블로그 Algorithm 카테고리에 포스팅 해주시면 좋습니다.&lt;/li&gt;
-&lt;li&gt;더욱 자세한 내용은 &lt;a href=&#34;https://github.com/cse-study/algorithm-code&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;링크&lt;/a&gt;
-를 참고해주세요.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;contributors&#34;&gt;Contributors&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;🚀 &lt;a href=&#34;https://github.com/yuhodots&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;yuhodots&lt;/a&gt;
-: 갓생을 꿈꾸는 대학원생입니다.&lt;/li&gt;
-&lt;li&gt;🐢 &lt;a href=&#34;https://github.com/jiun0&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;jiun0&lt;/a&gt;
-: Bandit 알고리즘과 추천 시스템을 연구하고 있는 대학원생입니다. 코딩조아.&lt;/li&gt;
-&lt;li&gt;🙂 &lt;a href=&#34;https://github.com/bwmelon97&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;bwmelon97&lt;/a&gt;
-: 졸업을 앞둔 복학생입니다. 원거리 딜러(AD carry)를 전문으로 하고 있습니다.&lt;/li&gt;
-&lt;li&gt;👻 &lt;a href=&#34;https://github.com/minjae-lulu&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;minjae-lulu&lt;/a&gt;
-: 동형암호를 공부하고 있는 학생입니다.&lt;/li&gt;
-&lt;/ul&gt;</description>
     </item>
     
   </channel>
