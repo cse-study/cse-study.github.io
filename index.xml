@@ -6,10 +6,34 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2019 Notepadium.</copyright>
-    <lastBuildDate>Mon, 21 Mar 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 22 Mar 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://cse-study.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>면접 준비 과정</title>
+      <link>https://cse-study.github.io/algorithm/2022-03/220322-%E1%84%86%E1%85%A7%E1%86%AB%E1%84%8C%E1%85%A5%E1%86%B8-%E1%84%8C%E1%85%AE%E1%86%AB%E1%84%87%E1%85%B5-%E1%84%80%E1%85%AA%E1%84%8C%E1%85%A5%E1%86%BC/</link>
+      <pubDate>Tue, 22 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/algorithm/2022-03/220322-%E1%84%86%E1%85%A7%E1%86%AB%E1%84%8C%E1%85%A5%E1%86%B8-%E1%84%8C%E1%85%AE%E1%86%AB%E1%84%87%E1%85%B5-%E1%84%80%E1%85%AA%E1%84%8C%E1%85%A5%E1%86%BC/</guid>
+      <description>&lt;p&gt;Cracking the coding interview 58p까지 읽고 유용했던 내용을 공유합니다. &amp;lt;해외 기업의 채용 절차&amp;gt;와 &amp;lt;지원 전에 준비할 점&amp;gt;에 대한 내용 위주로 느낀점을 공유합니다.&lt;/p&gt;
+&lt;p&gt;아무래도 대기업이다보니 중요한 역량은 대부분 일치한다는 것을 알 수 있었는데, 회사마다의 조금씩 다른 특징도 엿볼 수 있었음.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;면접은 보통 전화 통화와 같은 사전 면접 이후에, 3~6번 정도의 대면 면접으로 이루어짐&lt;/li&gt;
+&lt;li&gt;마이크로소프트: 괴짜로 불리는 사람들을 원한다(?)고 함. 면접관들이 일하는 곳에서 면접을 본다는 점이 신선했음. 팀 마다 방향이 달라서 어느 팀에 가게 되느냐에 따라 경험이 크게 달라진다고 함&lt;/li&gt;
+&lt;li&gt;아마존: 규모 확장성(scalability)에 신경을 많이 쓰며, 객체 지향 디자인에 대해 질문을 많이 하는 경향이 있다고 함.&lt;/li&gt;
+&lt;li&gt;구글: 마소, 아마존과 크게 다르지 않으며, 웹 기반으로 시작했기 때문에 구글 또한 규모 확장성에 관심이 많다고 함. 특히 과거 경력에 관계 없이 알고리즘 능력에 큰 비중을 두기 때문에 이 점을 잘 준비해야 함&lt;/li&gt;
+&lt;li&gt;페이스북: 개발자 또한 기업가 정신을 갖기를 원하니, 무엇이든 빠르게 결과 내는 사람이라면 좋다고 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;면접 전에 갖춰야 할 역량이나 경험에 대해서 다음과 같은 조언도 얻을 수 있었음&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;아직 학생이라면, 큰 규모의 프로젝트 수업을 듣거나 / 인턴 자리를 알아보거나 / 뭔가(프로젝트)를 하라고 함&lt;/li&gt;
+&lt;li&gt;이력서는 짧을수록 인상에 남으며, 미국에서는 경력이 십 년 미만인 경우 한 페이지의 이력서를 권장한다고 함&lt;/li&gt;
+&lt;li&gt;특정 언어를 사용하는게 낙인이 될 수도 있고, 한 두가지 언어만 알고 있는 경우 구인 담당자가 지원자에 대해 아직 많은 문제를 경험해 보지 못한 사람으로 간주할 수 있다고 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;나의 경우엔 현재 모든 작업을 python으로 하고 있는데, 실제 서비스에서는 아무래도 속도가 중요하다보니 C/C++도 가까이 해야겠다는 생각이 들었음&lt;/p&gt;</description>
+    </item>
     
     <item>
       <title>Self-supervised continual learners</title>
@@ -350,61 +374,6 @@
 &lt;li&gt;Alphacode dataset: &lt;a href=&#34;https://github.com/deepmind/code_contests&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://github.com/deepmind/code_contests&lt;/a&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://cse-study.github.io/help/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      
-      <guid>https://cse-study.github.io/help/</guid>
-      <description>&lt;blockquote&gt;
-&lt;p&gt;스터디에 도움이되는 자료들을 모아둡니다. 좋은 자료가 있다면 아래에 계속 추가해주세요 🙌&lt;/p&gt;
-&lt;/blockquote&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://papers.labml.ai/papers/daily/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;DAILY PAPERS&lt;/a&gt;
-: 최신 인기있는 AI 논문을 찾아주는 웹 사이트입니다.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/c/YannicKilcher/videos&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;YannicKilcher youtube&lt;/a&gt;
-: 최신 AI 기술을 요약하여 설명해주는 유튜브 채널입니다.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.reddit.com/r/MachineLearning/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Reddit, ML 카테고리&lt;/a&gt;
-: AI 관련 소식을 공유하는 커뮤니티입니다.&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://paperswithcode.com/newsletter&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Papers with Code, 뉴스레터&lt;/a&gt;
-: 최신 인기있는 AI 자료들을 공유해주는 뉴스레터입니다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;how-to-post&#34;&gt;How to post&lt;/h3&gt;
-&lt;p&gt;&lt;img  src=&#34;https://cse-study.github.io/assets/img/notice1.png&#34;
-        alt=&#34;img&#34;/&gt;&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-sh&#34; data-lang=&#34;sh&#34;&gt;+++
-&lt;span class=&#34;nv&#34;&gt;title&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;제목을 입력하세요.&amp;#34;&lt;/span&gt;
-&lt;span class=&#34;nv&#34;&gt;date&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;2022-01-01&amp;#34;&lt;/span&gt;
-&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;profile&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;
-	&lt;span class=&#34;nb&#34;&gt;enable&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;true&lt;/span&gt;
-	&lt;span class=&#34;nv&#34;&gt;avatar&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;/assets/img/profile.jpg&amp;#34;&lt;/span&gt;
-	&lt;span class=&#34;nv&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;홍길동&amp;#34;&lt;/span&gt;
-	&lt;span class=&#34;nv&#34;&gt;email&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;s2&#34;&gt;&amp;#34;hong-gildong@gmail.com&amp;#34;&lt;/span&gt;
-+++
-
-포스팅의 미리보기 입니다.
-&amp;lt;!--more--&amp;gt;
-
-&amp;lt;mark&amp;gt;본문입니다.&amp;lt;/mark&amp;gt;
-!&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;img&lt;span class=&#34;o&#34;&gt;](&lt;/span&gt;/assets/img/posting_image.png&lt;span class=&#34;o&#34;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;ul&gt;
-&lt;li&gt;마크다운 파일의 제목은 &lt;code&gt;작성날짜-제목.md&lt;/code&gt;의 형태로 설정해주시면 좋습니다.&lt;/li&gt;
-&lt;li&gt;각 스터디의 github repository에 마크다운 파일을 push하여 블로그에 포스팅을 업로드 할 수 있습니다.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;(Notice)&lt;/strong&gt; 자동화가 아직 적용되지 않았습니다. 배포까지의 자세한 과정은 관리자에게 문의해주세요!&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;image-upload&#34;&gt;Image upload&lt;/h3&gt;
-&lt;p&gt;프로필 이미지 사용 방법은 다음과 같습니다.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;static/assets/img/&lt;/code&gt; 디렉토리에 프로필 이미지를 업로드 합니다.&lt;/li&gt;
-&lt;li&gt;포스팅 정보 입력란의 avartar 항목에 &lt;code&gt;/assets/img/이미지이름&lt;/code&gt; 을 기입합니다.&lt;/li&gt;
-&lt;/ol&gt;
-&lt;p&gt;게시글 이미지 업로드 방법도 동일합니다. &amp;lsquo;How to post&amp;rsquo; 마크다운 예시의 제일 마지막 줄을 참고하시면 좋습니다.&lt;/p&gt;
-&lt;ol&gt;
-&lt;li&gt;&lt;code&gt;static/assets/img/&lt;/code&gt; 디렉토리에 이미지를 업로드 합니다.&lt;/li&gt;
-&lt;li&gt;마크다운의 이미지 경로에 &lt;code&gt;/assets/img/이미지이름&lt;/code&gt; 을 기입합니다.&lt;/li&gt;
-&lt;/ol&gt;</description>
     </item>
     
   </channel>
