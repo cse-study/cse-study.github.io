@@ -12,6 +12,22 @@
     
     
     <item>
+      <title>Big-O notation</title>
+      <link>https://cse-study.github.io/algorithm/2022-03/220322-big-o-notation/</link>
+      <pubDate>Tue, 22 Mar 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/algorithm/2022-03/220322-big-o-notation/</guid>
+      <description>&lt;p&gt;2022년 03월 2주차 개인 목표 수행합니다.&lt;/p&gt;
+&lt;p&gt;학계와 산업계에서 말하는 big-O notation에는 약간의 차이가 존재한다는 것을 알게 되었음. 이전부터, 수업에서 배우는 big-O와 일반적으로 널리 쓰이는 big-O의 의미가 다르다는 점이 헷갈렸는데, 해당 챕터를 읽고 이해할 수 있게 되었음&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(시간복잡도의 경우) 학계에서 big-O는 시간의 상한, big-$\Omega$(omega)는 등가 혹은 하한, big-$\Theta$(theta)는 O와 $\Theta$ 둘 다를 의미함&lt;/li&gt;
+&lt;li&gt;따라서 O($N$)으로 표현되는 알고리즘을 O($N^2$), O($N^3$), O($2^N$)으로도 표현하는 것이, 학계에서는 옳은 표현임&lt;/li&gt;
+&lt;li&gt;하지만 산업계에서(면접에서) 말하는 big-O의 의미는 학계에서의 $\Theta$의 의미와 가깝다고 생각하면 된다고 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;추가적으로, 공간복잡도는 시간이 아닌 메모리(혹은 공간)을 big-O로 표현한 것임&lt;/p&gt;</description>
+    </item>
+    
+    <item>
       <title>면접 준비 과정</title>
       <link>https://cse-study.github.io/algorithm/2022-03/220322-%E1%84%86%E1%85%A7%E1%86%AB%E1%84%8C%E1%85%A5%E1%86%B8-%E1%84%8C%E1%85%AE%E1%86%AB%E1%84%87%E1%85%B5-%E1%84%80%E1%85%AA%E1%84%8C%E1%85%A5%E1%86%BC/</link>
       <pubDate>Tue, 22 Mar 2022 00:00:00 +0000</pubDate>
@@ -343,37 +359,6 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>AlphaCode</title>
-      <link>https://cse-study.github.io/ai/2022-02/220205-alphacode/</link>
-      <pubDate>Sat, 05 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://cse-study.github.io/ai/2022-02/220205-alphacode/</guid>
-      <description>&lt;p&gt;2022년 2월에 딥마인드에서 발표한 &lt;strong&gt;AlphaCode&lt;/strong&gt; 블로그 포스팅을 읽고 내용을 공유합니다.&lt;/p&gt;
-&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;AlphaCode란?: competitive programming task를 human-level로 풀 수 있는 시스템. Codeforces의 10개 대회에 대해 테스트 했을 때, 참가자들의 평균 수준의 성능 달성 (상위 54%)&lt;/li&gt;
-&lt;li&gt;Model: Transformer-based langauge model 이라고 포스팅에 언급되어 있음. Language generation(code generation)이 주요 역할인 것으로 보아 decoder-centric langauge model 중 하나를 사용했을 것으로 생각됨. 그 뒤에 promising program으로 결과를 필터링했다고 하는데, rule-based로 결과를 필터링 했다는 의미로 대충 이해했음 (promising program의 정확한 의미를 아는 분 있으면 코멘트 부탁드립니다)&lt;/li&gt;
-&lt;li&gt;Training: Github code로 pre-training하고, competitive programming task에 대해 fine-tuning 진행하였음 (일반적인 language model 학습하는 방식과 동일하게)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;comments&#34;&gt;Comments&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Attention 기반 시각화가 너무 아름다움🥺 기회가 되면 나중에 한번 만들어보고 싶음&lt;/li&gt;
-&lt;li&gt;포스팅 원문에서 방법론 추가에 따른 모델의 발전과정을 볼 수 있음&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Alphacode 블로그 포스팅: &lt;a href=&#34;https://deepmind.com/blog/article/Competitive-programming-with-AlphaCode&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Competitive programming with AlphaCode&lt;/a&gt;
-&lt;/li&gt;
-&lt;li&gt;Alphacode 시각화: &lt;a href=&#34;https://alphacode.deepmind.com/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;AlphaCode Attention Visualization&lt;/a&gt;
-&lt;/li&gt;
-&lt;li&gt;Alphacode paper: &lt;a href=&#34;https://storage.googleapis.com/deepmind-media/AlphaCode/competition_level_code_generation_with_alphacode.pdf&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://storage.googleapis.com/deepmind-media/AlphaCode/competition_level_code_generation_with_alphacode.pdf&lt;/a&gt;
-&lt;/li&gt;
-&lt;li&gt;Alphacode dataset: &lt;a href=&#34;https://github.com/deepmind/code_contests&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://github.com/deepmind/code_contests&lt;/a&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</description>
     </item>
     
   </channel>
