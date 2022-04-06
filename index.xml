@@ -6,10 +6,47 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2019 Notepadium.</copyright>
-    <lastBuildDate>Tue, 22 Mar 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Tue, 05 Apr 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://cse-study.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>DGMR</title>
+      <link>https://cse-study.github.io/ai/2022-04/20220405-dgmr/</link>
+      <pubDate>Tue, 05 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/ai/2022-04/20220405-dgmr/</guid>
+      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;딥마인드가 영국 기상청과 협력을 통해 좋은 nowcasting(실시간 기상 예측) 성능을 보이는 DGMR (Deep Generative Model of Rain)을 개발하였습니다. 이름에 드러나 있듯 90분 후까지의 강우, 그 중에서도 사람과 경제에 큰 영향을 미치는 medium to heavy rain 예측에 중점을 둔 것으로 보입니다.&lt;/li&gt;
+&lt;li&gt;기존 날씨 예측은 Ensemble numerical weather prediction(NWP) 라는 수치적 계산 방법을 이용했다고 합니다. 대기학에 대해서는 잘 모르지만 다양한 변수를 이용해 복잡한 유체 방정식을 풀며 시뮬레이션하는 방식이 아닐까 합니다(이 부분에 대해 잘 아시는 분들은 댓글 남겨주시면 감사하겠습니다). 이 방법은 단-중기 예보에서는 괜찮은 성능을 보이지만 nowcasting이라 불리는 초단기예보 정확성이 떨어지는 문제가 있습니다. 딥러닝을 이용해 예측을 개선하려는 시도도 있었으나 드물게 일어나는 일인 medium to heavy rain에 대해 좋지 않은 성능을 보였습니다.&lt;/li&gt;
+&lt;li&gt;딥마인드는 이를 해결하기 위해 deep generative model을 이용했습니다. 레이더 자료를 입력하면 다음에 이어질 것으로 예상되는 이미지를 만들어 내고 이를 실제 관측된 값과 비교하며 학습하는 방식입니다. 다음은 모델에 대한 간략한 설명입니다.
+&lt;ul&gt;
+&lt;li&gt;5분 간격으로 촬영한 레이더 관측값 4개(즉 20분간 관찰한 정보)가 generator에 context로 들어갑니다. 학습은 두 loss function과 하나의 regularization을 통해 이루어집니다.&lt;/li&gt;
+&lt;li&gt;제너레이터에 context가 들어가면 이미지가 생성됩니다. 이 중 8개 프레임이 랜덤으로 선택되어 spatial discriminator에 들어가고 실제 데이터와 비교해 loss 값을 얻습니다. Spatial discriminator은 CNN 구조를 가지는 모델입니다. 관측된 레이더 필드와 생성된 필드를 구별해서 spatial consistency를 확보하고 blurry prediction을 방지하는데 초점을 맞췄다고 합니다(첫 번째 loss).&lt;/li&gt;
+&lt;li&gt;Temporal discriminator에는 생성된 이미지가 랜덤으로 크롭되어 입력됩니다. 이는 관측된 레이더 시퀀스와 생성된 레이더 시퀀스를 구별해서 temporal consistency를 확보하고 jumpy prediction을 penalize하는 목적을 가집니다(두 번째 loss).&lt;/li&gt;
+&lt;li&gt;정확도를 향상시키기 위해  관측값들의 grid cell regularization과 모델이 생성한 평균값의 grid cell regularization간 차이에 패널티를 주는 항을 도입했습니다. 이 항은 모델이 위치에 따른 정확한 예측을 하고 성능 향상에 있어 중요하다고 합니다(하나의 regularization).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;모델 구조와 objective function에 대한 더 자세한 설명은 Methods에서 찾을 수 있으므로 관심이 있다면 읽어보시길 바랍니다!&lt;/li&gt;
+&lt;li&gt;DGMR은 기존 시스템과 비교한 성능 평가가 이루어졌습니다. 전문인단중 89%가 DGMR이 더 우수하다고 판단했습니다.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;comments&#34;&gt;Comments&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;도메인에 대한 지식이 없다 보니 기존의 문제점이 잘 와닿지는 않았고 문제에 대한 직관적인 이해도 많이 부족하게 느껴졌습니다. 이전에 다뤘던 화학 관련 내용이랑은 느낌이 또 다르네요.&lt;/li&gt;
+&lt;li&gt;해당 모델을 개발한 연구원 수만 라부리 또한 영국 기상청의 조언 덕에 문제 해결에 대한 아이디어를 얻을 수 있었던 것 같습니다. 조언이 없었다면 좋지 않은 모델을 개발했을지도 모른다고 언급했다고 합니다(&lt;a href=&#34;https://www.technologyreview.com/2021/09/29/1036331/deepminds-ai-predicts-almost-exactly-when-and-where-its-going-to-rain/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;출처&lt;/a&gt;
+).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;DGMR paper: &lt;a href=&#34;https://www.nature.com/articles/s41586-021-03854-z&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Skilful precipitation nowcasting using deep generative models of radar&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;MIT Technology Review: &lt;a href=&#34;https://www.technologyreview.com/2021/09/29/1036331/deepminds-ai-predicts-almost-exactly-when-and-where-its-going-to-rain/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;DeepMind’s AI predicts almost exactly when and where it’s going to rain&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
     
     <item>
       <title>Big-O notation</title>
@@ -311,54 +348,6 @@
 &lt;li&gt;Data2vec code: &lt;a href=&#34;https://github.com/pytorch/fairseq/tree/main/examples/data2vec&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://github.com/pytorch/fairseq/tree/main/examples/data2vec&lt;/a&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>GT Sophy</title>
-      <link>https://cse-study.github.io/ai/2022-02/20220214-gt-sophy/</link>
-      <pubDate>Mon, 14 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://cse-study.github.io/ai/2022-02/20220214-gt-sophy/</guid>
-      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
-&lt;img src=&#34;https://media.springernature.com/w200/springer-static/cover-hires/journal/41586/602/7896&#34; alt=&#34;Volume 602 Issue 7896&#34; style=&#34;zoom:100%; display: block; margin-left: auto; margin-right: auto;&#34; /&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;2022년 2월 소니 AI가 개발한 자동차 경주 AI가 네이처 표지를 장식했음. 게임 이름은 그란 투스리모 스포츠임.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;인공지능 이름은 GT Sophy. Model free, off-policy deepRL을 이용했음. Distributional SAC과 비슷하지만 value backup 과 target functions가 다른 QR-SAC을 이용했다고 함.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;게임의 리얼리즘 때문에 생각보다 어려웠다고 함. 또한 규정화되어 있지 않은 스포츠맨십을 지키며 너무 공격적이지도 소극적이지도 않게 플레이 하기 위한 보상 체계를 만드는 것이 힘들었다고 함.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;학습 방법: PS4에서 실행되는 GT인스턴스를 제어하는 rollout worker에게 트레이닝 시나리오를 배포하면 각 agent는 가장 최근 policy의 사본을 실행시키고 action을 전송함. 비동기적으로 다음 프레임을 계산해 새로운 상태를 알아냄. State, action, reward 튜플을 ERB에 저장함. 트레이너는 policy를 업데이트하기 위해 ERB를 샘플링함.&lt;/p&gt;
-&lt;img src=&#34;https://cse-study.github.io/assets/img/image-20220214181447986.png&#34; alt=&#34;image-20220214181447986&#34; style=&#34;zoom:30%; display: block; margin-left: auto; margin-right: auto;&#34; /&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;comments&#34;&gt;Comments&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;강화학습을 이용해 게임에 적용시키는 경우가 점점 늘어나는 것 같음. 적용시키기 좋고, 흥미로우며 이슈도 되기 때문이라 생각함. 개인적으로도 해 보고 싶다는 생각이 들었음.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;AI vs 사람 구도의 실험에서는 AI와 사람 간 공평성을 위한 적절한 방법들이 고려되어야 함. 예를 들어 알파스타의 경우 평균 APM에 제한을 두었지만 중요한 교전 상황에 압도적인 순간 APM을 보이며 승리했음. 사람의 경우 APM이 모두 의미 있는 동작을 뜻하지 않으므로 실제 차이는 더 컸었다 해석할 수 있음. 해당 실험에서도 여러 사항을 고려하여 제약을 두었음. 논문의 Fairness versus humans에서 찾아볼 수 있음.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;개발진들이 이런 연구를 하는 이유는 사람과 싸워 이기는 AI를 만들기 위함이 아니라 사람을 더 잘 이해하고, 더 재미있으며 흥미로운 탐험과 새로운 경험을 사용자에게 제공하기 위함이라 함.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;연구의 의미를 항상 생각하는 것이 중요함을 다시 한 번 느꼈음. 새로운 방법과 좋은 성능 자체도 의미있지만 이들이 앞으로의 연구와 우리의 삶에 어떤 긍정적인 역할을 할지 깊게 생각한다면 더 좋을 것 같다는 생각을 했음.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.nature.com/articles/s41586-021-04357-7&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://www.nature.com/articles/s41586-021-04357-7&lt;/a&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://youtu.be/l948hMaTPuo&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://youtu.be/l948hMaTPuo&lt;/a&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</description>
     </item>
     
   </channel>
