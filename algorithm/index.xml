@@ -12,6 +12,86 @@
     
     
     <item>
+      <title>Generative Modeling by Estimating Gradients of the Data Distribution</title>
+      <link>https://cse-study.github.io/ai/2022-04/220410-diffusion-model/</link>
+      <pubDate>Sun, 10 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/ai/2022-04/220410-diffusion-model/</guid>
+      <description>&lt;p&gt;Diffusion model이라는 generative model의 새로운 방향성을 제시한 Yang Song 저자의 Generative Modeling by Estimating Gradients of the Data Distribution에 대해서 리뷰합니다.&lt;/p&gt;
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;h4 id=&#34;backgrounds&#34;&gt;Backgrounds&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;
+&lt;p&gt;기존 generative modeling 방법&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Likelihood-based models: autoregressive models / normalizing flow models / energy-based models (EBMs) / variational auto-encoders (VAEs) 등과 같이, PDF를 정의하고 해당 PDF의 likelihood를 maximize 하는 방법&lt;/li&gt;
+&lt;li&gt;Implicit generative models: generative adversarial network과 같이, 직접적으로 PDF를 모델링하지는 않는 방법&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;기존 방법의 한계점&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Likelihood-based models: tractable normalizing constant를 보장하기 위해 모델 구조에 제약이 있고, true data distribution을 모르기 떄문에 surrogate objectives사용 (e.g. ELBO)&lt;/li&gt;
+&lt;li&gt;Implicit generative models: mode collapse가 발생하기도 하는 불안정한 adversarial training에 의존&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;저자가 새로 제안하는 방법&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Score-based model: PDF를 모델링하는 것이 아닌, score function이라고 불리는 &amp;ldquo;log-PDF의 gradient&amp;rdquo; $
+\nabla_\mathbf{x} \log p(\mathbf{x}) \approx \mathbf{s}_\theta(\mathbf{x})$를 모델링하는 방법&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;
+&lt;p&gt;Score-based model은 tractable normalizing constant가 필요하지 않고 성능도 매우 좋으며 likelihood 계산도 가능&lt;/p&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h4 id=&#34;score-based-model&#34;&gt;Score-based model&lt;/h4&gt;
+&lt;ul&gt;
+&lt;li&gt;모델 학습 방법
+&lt;ul&gt;
+&lt;li&gt;모델 $\mathbf{s}(\mathbf{x})$와 데이터의 $\nabla \log p(\mathbf{x})$ 사이의 squared L2를 최소화. 즉, Fisher divergence $\mathbb{E}_{p(\mathbf{x})}[|| \nabla\log p(\mathbf{x})-\mathbf{s}(\mathbf{x})||_2^2]$ 식을 최소화&lt;/li&gt;
+&lt;li&gt;하지만 우리는 $p(\mathbf x)$에 대한 특정 포인트(소유하고있는 데이터) 정보만 알고있기 때문에 위의 식을 그대로 사용할 수 없음&lt;/li&gt;
+&lt;li&gt;다행히도, true $ \nabla_\mathbf{x} \log p(\mathbf{x})$를 알지 못할 때 사용할 수 있는 score-matching이라는 방법이 존재&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;데이터 샘플링 방법 (테스트)
+&lt;ul&gt;
+&lt;li&gt;임의의 prior $\mathbf x_0$에서 시작하여, 아래의 Langevin dynamics을 따라 $\mathbf x$를 계속해서 업데이트하면 됨 (Langevin dynamics 식 제작에 score function 필요)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img  src=&#34;https://cse-study.github.io/assets/img/lagevin.png&#34;
+        alt=&#34;img&#34;/&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Naive score-based generative modeling
+&lt;ul&gt;
+&lt;li&gt;전체적으로는, score-mathcing을 통해 score function을 먼저 모델링한 뒤에, 해당 score function을 가지고 정의된 Langevin dynamics을 따라 $\mathbf x$를 업데이트하여 최종 샘플링 포인트를 찾는 것 (Naive score-based generative modeling)&lt;/li&gt;
+&lt;li&gt;하지만 Naive score-based generative modeling 방법은 low density regions에서는 정확하지 않다는 점 때문에, prior $\mathbf x_0$에서 시작하여 초기에 $\mathbf x$ 업데이트 과정에서 좋은 업데이트가 수행되지 않는다는 단점이 있음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;개선 방법
+&lt;ul&gt;
+&lt;li&gt;Naive score-based generative modeling의 문제점을 개선하기 위해서, 데이터에 noise perturbation을 기반으로한 &amp;lsquo;Noise Conditional Score-Based Model&amp;rsquo;와 &amp;lsquo;annealed Langevin dynamics&amp;rsquo; 방법을 적용하였음&lt;/li&gt;
+&lt;li&gt;자세한 내용은 &lt;a href=&#34;https://yang-song.github.io/blog/2021/score/#score-based-generative-modeling-with-multiple-noise-perturbations&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;이 곳&lt;/a&gt;
+ 참고&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;comments&#34;&gt;Comments&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;해당 논문은 generative modeling 분야에 새로운 방향성을 제시한 논문으로, 후속 연구들이 계속해서 쏟아지고 있어서 기여가 큰 논문임&lt;/li&gt;
+&lt;li&gt;Gradient of log PDF라는 새로운 관점을 제시한 점도 좋았지만, 개인적으로는 naive score-based generative modeling을 적용하였을 때 잘 되지 않았다는 것에서 멈추지 않고, 계속해서 개선점을 찾아내 결국엔 좋은 성능의 모델을 얻어냈다는 점이 좋았음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://yang-song.github.io/blog/2021/score/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Yang Song, Generative Modeling by Estimating Gradients of the Data Distribution&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;Song, Yang, and Stefano Ermon. &amp;ldquo;Generative modeling by estimating gradients of the data distribution.&amp;rdquo; &lt;em&gt;Advances in Neural Information Processing Systems&lt;/em&gt; 32 (2019).&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
       <title>DGMR</title>
       <link>https://cse-study.github.io/ai/2022-04/20220405-dgmr/</link>
       <pubDate>Tue, 05 Apr 2022 00:00:00 +0000</pubDate>
@@ -309,43 +389,6 @@
 &lt;li&gt;OpenAI Embeddings API: &lt;a href=&#34;https://beta.openai.com/docs/guides/embeddings&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://beta.openai.com/docs/guides/embeddings&lt;/a&gt;
 &lt;/li&gt;
 &lt;li&gt;Nils Reimers, &lt;a href=&#34;https://medium.com/@nils_reimers/openai-gpt-3-text-embeddings-really-a-new-state-of-the-art-in-dense-text-embeddings-6571fe3ec9d9&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;&amp;ldquo;OpenAI GPT-3 Text Embeddings - Really a new state-of-the-art in dense text embeddings?&amp;quot;&lt;/a&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>Data2Vec</title>
-      <link>https://cse-study.github.io/ai/2022-02/220218-data2vec/</link>
-      <pubDate>Fri, 18 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://cse-study.github.io/ai/2022-02/220218-data2vec/</guid>
-      <description>&lt;p&gt;2022년 1월에 Meta AI에서 발표한 &lt;strong&gt;Data2vec&lt;/strong&gt; 블로그 포스팅을 읽고 내용을 공유합니다.&lt;/p&gt;
-&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;현재의 self-supervised learning 연구들은 image, speech, text 등 각기 다른 modality마다 학습 방법에 차이가 크다.&lt;/li&gt;
-&lt;li&gt;따라서 Meta AI는 multiple modality(e.b. image, speech, text)에서 작동하는 data2vec을 개발하였으며, data2vec은 기존 computer vision, speech 분야의 알고리즘 성능을 넘었고, NLP 분야에서는 견줄만큼의 성능을 기록하였다.&lt;/li&gt;
-&lt;li&gt;Data2vec은 기존에 self-supervised learning에서 자주 사용되던 contrastive learning이나, reconstructing the input example 방식을 사용하지는 않는다.&lt;/li&gt;
-&lt;li&gt;Data2vec은 input data에 대한 own representation을 맞추도록 학습시킨다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;ol&gt;
-&lt;li&gt;Teacher network에 데이터를 넣어 출력된 representation을 target으로 설정한다.&lt;/li&gt;
-&lt;li&gt;Student network에는 데이터에 일부 masking을 가해서 넣어 representation을 얻어내고, 이 representation이 teacher의 target representation과 동일해지도록 모델을 학습시킨다.&lt;/li&gt;
-&lt;li&gt;Teacher와 student는 동일한 네트워크이지만 weight 값이 살짝 다르다. (&lt;a href=&#34;https://yuhodots.github.io/deeplearning/21-04-04/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;BYOL&lt;/a&gt;
- 처럼 exponentialmoving average 사용)&lt;/li&gt;
-&lt;/ol&gt;
-&lt;h3 id=&#34;comments&#34;&gt;Comments&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Self-supervised learning 중에서도 BYOL의 아이디어를 차용하여 multi-modal learning 알고리즘을 고안한 것이 재미있었음&lt;/li&gt;
-&lt;li&gt;하나의 backbone으로 image, speech, text 관련 task에 모두 적용 가능하다는 것이, 현재까지의 multi-modal 연구 중에 가장 자연스러운 방법이라는 생각이 들며 future work들이 기대됨&lt;/li&gt;
-&lt;li&gt;Label이 필요없고, multi-modality에서 작동하고, single-purpose algorithms보다 잘하는 AI 모델. 이것이 앞으로의 AI의 주요 방향성이 되지 않을까 싶음&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Data2vec블로그 포스팅: &lt;a href=&#34;https://ai.facebook.com/blog/the-first-high-performance-self-supervised-algorithm-that-works-for-speech-vision-and-text/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;The first high-performance self-supervised algorithm that works for speech, vision, and text&lt;/a&gt;
-&lt;/li&gt;
-&lt;li&gt;Data2vec paper: &lt;a href=&#34;https://ai.facebook.com/research/data2vec-a-general-framework-for-self-supervised-learning-in-speech-vision-and-language&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Data2vec: A General Framework for Self-supervised Learning in Speech, Vision and Language&lt;/a&gt;
-&lt;/li&gt;
-&lt;li&gt;Data2vec code: &lt;a href=&#34;https://github.com/pytorch/fairseq/tree/main/examples/data2vec&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://github.com/pytorch/fairseq/tree/main/examples/data2vec&lt;/a&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</description>
     </item>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.92.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Generative Modeling by Estimating Gradients of the Data Distribution&nbsp;&ndash;&nbsp;CS Study Group</title><link rel="stylesheet" href="/css/core.min.8ea708522f75bfcc8135986b9fdcb802f298c946aff4776dc7b9f03a02ba7f8767f76ca0e6523502305c2790e06cfb8f.css" integrity="sha384-jqcIUi91v8yBNZhrn9y4AvKYyUav9Hdtx7nwOgK6f4dn92yg5lI1AjBcJ5DgbPuP"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Generative Modeling by Estimating Gradients of the Data Distribution" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/home"><img class="site logo" src="/assets/img/logo.png" /><span class="site name">CS Study Group</span></a>
+        </span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav"><a class="nav item-main" href="/ai/"><span class="iconfont icon-ai"></span>Weekly AI</a>
+        <a class="nav item-main" href="/algorithm/"><span class="iconfont icon-algo"></span>Algorithm</a>
+        <a class="nav item-secondary" href="/help/"><span class="iconfont icon-algo"></span>Help</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Generative Modeling by Estimating Gradients of the Data Distribution</h1><p class="article date">Sunday, April 10, 2022</p></section><section class="article author">
+    <div class='author-wrapper'>
+        <div class='author-left'><img class="avatar" src="/assets/img/yuho.jpg" alt></div>
+        <div class='author-right'><p class="name">Yuho Jeong</p><a class="item-email" href="mailto:yuho8437@unist.ac.kr" target="_blank" rel="noopener noreferrer">yuho8437@unist.ac.kr</a></div>
+    </div>
+</section><article class="article markdown-body"><p>Diffusion model이라는 generative model의 새로운 방향성을 제시한 Yang Song 저자의 Generative Modeling by Estimating Gradients of the Data Distribution에 대해서 리뷰합니다.</p>
+<h3 id="summary">Summary</h3>
+<h4 id="backgrounds">Backgrounds</h4>
+<ul>
+<li>
+<p>기존 generative modeling 방법</p>
+<ul>
+<li>Likelihood-based models: autoregressive models / normalizing flow models / energy-based models (EBMs) / variational auto-encoders (VAEs) 등과 같이, PDF를 정의하고 해당 PDF의 likelihood를 maximize 하는 방법</li>
+<li>Implicit generative models: generative adversarial network과 같이, 직접적으로 PDF를 모델링하지는 않는 방법</li>
+</ul>
+</li>
+<li>
+<p>기존 방법의 한계점</p>
+<ul>
+<li>Likelihood-based models: tractable normalizing constant를 보장하기 위해 모델 구조에 제약이 있고, true data distribution을 모르기 떄문에 surrogate objectives사용 (e.g. ELBO)</li>
+<li>Implicit generative models: mode collapse가 발생하기도 하는 불안정한 adversarial training에 의존</li>
+</ul>
+</li>
+<li>
+<p>저자가 새로 제안하는 방법</p>
+<ul>
+<li>Score-based model: PDF를 모델링하는 것이 아닌, score function이라고 불리는 &ldquo;log-PDF의 gradient&rdquo; $
+\nabla_\mathbf{x} \log p(\mathbf{x}) \approx \mathbf{s}_\theta(\mathbf{x})$를 모델링하는 방법</li>
+</ul>
+</li>
+<li>
+<p>Score-based model은 tractable normalizing constant가 필요하지 않고 성능도 매우 좋으며 likelihood 계산도 가능</p>
+</li>
+</ul>
+<h4 id="score-based-model">Score-based model</h4>
+<ul>
+<li>모델 학습 방법
+<ul>
+<li>모델 $\mathbf{s}(\mathbf{x})$와 데이터의 $\nabla \log p(\mathbf{x})$ 사이의 squared L2를 최소화. 즉, Fisher divergence $\mathbb{E}_{p(\mathbf{x})}[|| \nabla\log p(\mathbf{x})-\mathbf{s}(\mathbf{x})||_2^2]$ 식을 최소화</li>
+<li>하지만 우리는 $p(\mathbf x)$에 대한 특정 포인트(소유하고있는 데이터) 정보만 알고있기 때문에 위의 식을 그대로 사용할 수 없음</li>
+<li>다행히도, true $ \nabla_\mathbf{x} \log p(\mathbf{x})$를 알지 못할 때 사용할 수 있는 score-matching이라는 방법이 존재</li>
+</ul>
+</li>
+<li>데이터 샘플링 방법 (테스트)
+<ul>
+<li>임의의 prior $\mathbf x_0$에서 시작하여, 아래의 Langevin dynamics을 따라 $\mathbf x$를 계속해서 업데이트하면 됨 (Langevin dynamics 식 제작에 score function 필요)</li>
+</ul>
+</li>
+</ul>
+<p><img  src="/assets/img/lagevin.png"
+        alt="img"/></p>
+<ul>
+<li>Naive score-based generative modeling
+<ul>
+<li>전체적으로는, score-mathcing을 통해 score function을 먼저 모델링한 뒤에, 해당 score function을 가지고 정의된 Langevin dynamics을 따라 $\mathbf x$를 업데이트하여 최종 샘플링 포인트를 찾는 것 (Naive score-based generative modeling)</li>
+<li>하지만 Naive score-based generative modeling 방법은 low density regions에서는 정확하지 않다는 점 때문에, prior $\mathbf x_0$에서 시작하여 초기에 $\mathbf x$ 업데이트 과정에서 좋은 업데이트가 수행되지 않는다는 단점이 있음</li>
+</ul>
+</li>
+<li>개선 방법
+<ul>
+<li>Naive score-based generative modeling의 문제점을 개선하기 위해서, 데이터에 noise perturbation을 기반으로한 &lsquo;Noise Conditional Score-Based Model&rsquo;와 &lsquo;annealed Langevin dynamics&rsquo; 방법을 적용하였음</li>
+<li>자세한 내용은 <a href="https://yang-song.github.io/blog/2021/score/#score-based-generative-modeling-with-multiple-noise-perturbations"target="_blank" rel="noopener noreferrer">이 곳</a>
+ 참고</li>
+</ul>
+</li>
+</ul>
+<h3 id="comments">Comments</h3>
+<ul>
+<li>해당 논문은 generative modeling 분야에 새로운 방향성을 제시한 논문으로, 후속 연구들이 계속해서 쏟아지고 있어서 기여가 큰 논문임</li>
+<li>Gradient of log PDF라는 새로운 관점을 제시한 점도 좋았지만, 개인적으로는 naive score-based generative modeling을 적용하였을 때 잘 되지 않았다는 것에서 멈추지 않고, 계속해서 개선점을 찾아내 결국엔 좋은 성능의 모델을 얻어냈다는 점이 좋았음</li>
+</ul>
+<h3 id="references">References</h3>
+<ul>
+<li><a href="https://yang-song.github.io/blog/2021/score/"target="_blank" rel="noopener noreferrer">Yang Song, Generative Modeling by Estimating Gradients of the Data Distribution</a>
+</li>
+<li>Song, Yang, and Stefano Ermon. &ldquo;Generative modeling by estimating gradients of the data distribution.&rdquo; <em>Advances in Neural Information Processing Systems</em> 32 (2019).</li>
+</ul></article>
+<section class="article discussion">
+    <script src="https://utteranc.es/client.js" repo="cse-study/cse-study.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async>
+    </script>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/ai/2022-04/20220405-dgmr/"><span class="iconfont icon-article"></span>DGMR</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Notepadium.</p>
+    <p class="powerby"><span>Powered&nbsp;by&nbsp;</span><a href="https://gohugo.io" 
+        target="_blank" rel="noopener noreferrer">Hugo</a><span>&nbsp;&amp;&nbsp;</span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank" rel="noopener noreferrer">Notepadium</a></p></div>
+</section><script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-e/4/LvThKH1gwzXhdbY2AsjR3rm7LHWyhIG5C0jiRfn8AN2eTN5ILeztWw0H9jmN" crossorigin="anonymous"></script>
+        <script
+            type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script><script src="/js/hljs.min.72e76ccf211868d08e31d7ca45c02501991bd760f28809c52045fa79fb7b7428664bb54ae875b46031ebc760c77b9562.js" integrity="sha384-cudszyEYaNCOMdfKRcAlAZkb12DyiAnFIEX6eft7dChmS7VK6HW0YDHrx2DHe5Vi"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>
