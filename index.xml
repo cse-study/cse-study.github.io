@@ -6,10 +6,36 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2019 Notepadium.</copyright>
-    <lastBuildDate>Sun, 10 Apr 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 21 Apr 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://cse-study.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Solving ImageNet</title>
+      <link>https://cse-study.github.io/ai/2022-04/220421-solving-imagenet/</link>
+      <pubDate>Thu, 21 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/ai/2022-04/220421-solving-imagenet/</guid>
+      <description>&lt;p&gt;이번 달에 알리바바 그룹에서 발표한 &amp;ldquo;Solving ImageNet: a Unified Scheme for Training any Backbone to Top Results&amp;rdquo; 논문을 읽고 리뷰합니다.&lt;/p&gt;
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;새로운 방법을 제안하는 논문은 아니고 technical report에 가까움&lt;/li&gt;
+&lt;li&gt;ImageNet dataset에 대해서, 어떤 모델 구조더라도 하이퍼파라미터 튜닝 없이 동일하게 적용할 수 있는 USI(Unified Scheme for ImageNet)을 제안. Knowledge distillation과 몇 가지 modern tricks를 사용하였고, 모든 모델에 대해서 previous SOTA를 넘었음&lt;/li&gt;
+&lt;li&gt;TResNet-L 구조의 teacher model과 더불어 논문에서 제안하는 하이퍼파라미터를 사용하면, CNN, Transformer, Mobile-oriented, MLP-only 형태의 student 모델에 대해서 모두 성능이 개선된다고 함&lt;/li&gt;
+&lt;li&gt;일반적인 knowledge distillation 형태(vanilla KD)와 동일하게, true label y에 대해서는 cross entropy loss를 사용하고, teacher label에 대해서는 temperature를 사용하여 soft label을 만든 뒤에 student prediction과 KLD를 계산함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;comments&#34;&gt;Comments&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Hyper-parameter tuning이 매우 time-consuming한 작업이지만 중요하기 때문에 모든 연구에서 어쩔 수 없이 수행해야했는데, 본 논문과 같은 연구 방향이 계속해서 발전하면 여러 연구자들의 시행착오 시간을 줄여줄 수 있어서 좋을 것 같다는 생각이 들었음&lt;/li&gt;
+&lt;li&gt;새로운 아이디어를 제안하여 하이퍼파라미터 튜닝의 수고를 덜어주는 내용일 줄 알았는데, 그게 아니라 좋은 teacher model을 만들었더니 모든 student model에 대해서 잘했다는 technical report 형식의 논문이어서 아쉬웠음&lt;/li&gt;
+&lt;li&gt;&amp;lsquo;No hyper-parameter tuning need&amp;rsquo;라고 하는데, ImageNet이 아닌 다른 데이터 셋에 적용할 때는 결국 teacher model을 하이퍼파라미터 튜닝을 통해 다시 찾아야하니 본질적인 &amp;lsquo;No hyper-parameter tuning need&amp;rsquo;는 아니라는 생각이 들었음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Ridnik, Tal, et al. &amp;ldquo;Solving ImageNet: a Unified Scheme for Training any Backbone to Top Results.&amp;rdquo; arXiv preprint arXiv:2204.03475 (2022).&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
     
     <item>
       <title>Generative Modeling by Estimating Gradients of the Data Distribution</title>
@@ -348,49 +374,6 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>OpenAI Embeddings API</title>
-      <link>https://cse-study.github.io/ai/2022-02/220227-openai-embeddings/</link>
-      <pubDate>Sun, 27 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://cse-study.github.io/ai/2022-02/220227-openai-embeddings/</guid>
-      <description>&lt;p&gt;2022년 1월에 OpenAI에서 발표한 &amp;ldquo;Text and Code Embeddings by Contrastive Pre-Training&amp;rdquo; 논문의 관련 자료들을 읽고 내용을 공유합니다.&lt;/p&gt;
-&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;OpenAI에서 GPT-3의 text (or code) embedding 결과를 쉽게 얻을 수 있도록 돕는 Embeddings API라는 툴을 공개함&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;입력 text(or code)와 엔진 이름을 입력하면, 해당 입력의 vector representation(embedding)을 얻을 수 있음&lt;/p&gt;
-&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;openai&lt;/span&gt;
-&lt;span class=&#34;n&#34;&gt;response&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;openai&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;Embedding&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;create&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;
-    &lt;span class=&#34;nb&#34;&gt;input&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;canine companions say&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;
-    &lt;span class=&#34;n&#34;&gt;engine&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;text-similarity-davinci-001&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
-&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;관련하여 3가지 대표적인 use-cases(: Text Similarity, Text Search, Code Search)를 제공함.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;편의를 위해 &lt;code&gt;delicious beans&lt;/code&gt;과 같이 N개의 단어 조합으로 이루어진 Embeddings API 입력 text를 &amp;lsquo;쿼리&amp;rsquo;라고 칭하겠음. Text similarity는 두 개의 쿼리에 대해 API를 사용하여 유사도를 구하는 작업이고, Text Search는 주어진 쿼리에 대해 가장 유사도가 높은 도큐먼트를 데이터 셋 내에서 찾아내는 (쿼리와 도큐먼트 사이의 유사도를 구하는) 작업이고, Code Search는 주어진 쿼리에 대해 가장 유사도가 높은 함수(혹은 코드)를 데이터 셋 내에서 찾아내는 작업이라고 생각하면 됨.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;&lt;a href=&#34;https://medium.com/@nils_reimers/openai-gpt-3-text-embeddings-really-a-new-state-of-the-art-in-dense-text-embeddings-6571fe3ec9d9&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;링크&lt;/a&gt;
-에 따르면, Embeddings API는 논문에서 말하는 것 처럼 성능이 현재 다른 모델들 대비 그렇게 좋은 것은 아니고, 모델과 feature dimension이 매우 커서 cost가 너무 높고, 토큰당 가격도 너무나 비싸다고 말하고 있음. (Davinci 모델의 경우 12288 dimensions을 사용하고 토큰당 0.6달러이기 때문에, 일반 유저가 사용하는 것은 거의 불가능하지 싶음)&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;OpenAI Blogs, &lt;a href=&#34;https://openai.com/blog/introducing-text-and-code-embeddings/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;&amp;ldquo;Introducing Text and Code Embeddings in the OpenAI API&amp;rdquo;.&lt;/a&gt;
-&lt;/li&gt;
-&lt;li&gt;Yannic Kilcher YouTube, &lt;a href=&#34;https://www.youtube.com/watch?v=5skIqoO3ku0&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;&amp;ldquo;OpenAI Embeddings (and Controversy?!)&amp;rdquo;.&lt;/a&gt;
-&lt;/li&gt;
-&lt;li&gt;OpenAI Embeddings API: &lt;a href=&#34;https://beta.openai.com/docs/guides/embeddings&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://beta.openai.com/docs/guides/embeddings&lt;/a&gt;
-&lt;/li&gt;
-&lt;li&gt;Nils Reimers, &lt;a href=&#34;https://medium.com/@nils_reimers/openai-gpt-3-text-embeddings-really-a-new-state-of-the-art-in-dense-text-embeddings-6571fe3ec9d9&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;&amp;ldquo;OpenAI GPT-3 Text Embeddings - Really a new state-of-the-art in dense text embeddings?&amp;quot;&lt;/a&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</description>
     </item>
     
   </channel>
