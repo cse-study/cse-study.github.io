@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.92.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>CLIP: Connecting Text and Images&nbsp;&ndash;&nbsp;CS Study Group</title><link rel="stylesheet" href="/css/core.min.8ea708522f75bfcc8135986b9fdcb802f298c946aff4776dc7b9f03a02ba7f8767f76ca0e6523502305c2790e06cfb8f.css" integrity="sha384-jqcIUi91v8yBNZhrn9y4AvKYyUav9Hdtx7nwOgK6f4dn92yg5lI1AjBcJ5DgbPuP"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="CLIP: Connecting Text and Images" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/home"><img class="site logo" src="/assets/img/logo.png" /><span class="site name">CS Study Group</span></a>
+        </span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav"><a class="nav item-main" href="/ai/"><span class="iconfont icon-ai"></span>Weekly AI</a>
+        <a class="nav item-main" href="/algorithm/"><span class="iconfont icon-algo"></span>Algorithm</a>
+        <a class="nav item-secondary" href="/help/"><span class="iconfont icon-algo"></span>Help</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">CLIP: Connecting Text and Images</h1><p class="article date">Thursday, April 28, 2022</p></section><section class="article author">
+    <div class='author-wrapper'>
+        <div class='author-left'><img class="avatar" src="/assets/img/yuho.jpg" alt></div>
+        <div class='author-right'><p class="name">Yuho Jeong</p><a class="item-email" href="mailto:yuho8437@unist.ac.kr" target="_blank" rel="noopener noreferrer">yuho8437@unist.ac.kr</a></div>
+    </div>
+</section><article class="article markdown-body"><p>OpenAI CLIP 관련 자료를 읽고 정리합니다.</p>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>이미지와 텍스트를 매우 잘 representation 하는 모델을 만들어, 이미지 데이터에 대한 높은 zero-shot 성능을 이끌어내고자 했음</li>
+<li>학습 방법
+<ol>
+<li>mini-batch N개 만큼의 이미지와 텍스트를 준비하여, N개씩 이미지 임베딩과 텍스트 임베딩을 제작</li>
+<li>그러면 이미지 임베딩과 텍스트 임베딩 대해서 N x N matrix 형태의 similarity를 계산할 수 있는데, 동일한 셋에서 나온 이미지와 텍스트의 similairty가 최대가 되도록 contrastive loss를 사용하여 모델을 학습</li>
+</ol>
+</li>
+<li>Zero-shot classification 방법 (테스트)
+<ol>
+<li>먼저 dataset 내의 label을 텍스트 인코더에 넣어줘서 텍스트 임베딩을 미리 다 뽑아 놓은 다음에,</li>
+<li>이미지 인코더에 이미지를 입력을 제공하여, 현재 존재하는 텍스트 임베딩 중에서 어떤 것과 가장 similarity가 높은지 확인</li>
+</ol>
+</li>
+</ul>
+<h3 id="comment">Comment</h3>
+<ul>
+<li>어떠한 모든 데이터셋에 대해서도 zero-shot으로 classification 할 수 있는 강력한 모델</li>
+<li>최근에 유명한 DALL-E 도 CLIP 임베딩을 활용했다고 함</li>
+<li>Fully supervised 방식과 견줄만 하다는 것이 매우 인상적임. 좋은 representation을 배웠기 때문에 타겟 데이터셋을 한 장도 보지 않더라도 해당 데이터 셋으로만 학습시킨 모델과 견줄 수 있다는 것이니, 그 어느 알고리즘보다도 generalization 성능이 높다는 생각이 들었음</li>
+</ul>
+<h3 id="references">References</h3>
+<ul>
+<li><a href="https://www.youtube.com/watch?v=T9XSU0pKX2E"target="_blank" rel="noopener noreferrer">https://www.youtube.com/watch?v=T9XSU0pKX2E</a>
+</li>
+<li><a href="https://openai.com/blog/clip/"target="_blank" rel="noopener noreferrer">OpenAI, CLIP: Connecting Text and Images</a>
+</li>
+<li>Radford, Alec, et al. &ldquo;Learning transferable visual models from natural language supervision.&rdquo; <em>International Conference on Machine Learning</em>. PMLR, 2021</li>
+</ul></article>
+<section class="article discussion">
+    <script src="https://utteranc.es/client.js" repo="cse-study/cse-study.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async>
+    </script>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/ai/2022-04/220421-solving-imagenet/"><span class="iconfont icon-article"></span>Solving ImageNet</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Notepadium.</p>
+    <p class="powerby"><span>Powered&nbsp;by&nbsp;</span><a href="https://gohugo.io" 
+        target="_blank" rel="noopener noreferrer">Hugo</a><span>&nbsp;&amp;&nbsp;</span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank" rel="noopener noreferrer">Notepadium</a></p></div>
+</section><script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-e/4/LvThKH1gwzXhdbY2AsjR3rm7LHWyhIG5C0jiRfn8AN2eTN5ILeztWw0H9jmN" crossorigin="anonymous"></script>
+        <script
+            type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script><script src="/js/hljs.min.72e76ccf211868d08e31d7ca45c02501991bd760f28809c52045fa79fb7b7428664bb54ae875b46031ebc760c77b9562.js" integrity="sha384-cudszyEYaNCOMdfKRcAlAZkb12DyiAnFIEX6eft7dChmS7VK6HW0YDHrx2DHe5Vi"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

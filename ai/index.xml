@@ -6,10 +6,49 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2019 Notepadium.</copyright>
-    <lastBuildDate>Thu, 21 Apr 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 28 Apr 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://cse-study.github.io/ai/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>CLIP: Connecting Text and Images</title>
+      <link>https://cse-study.github.io/ai/2022-04/220428-clip/</link>
+      <pubDate>Thu, 28 Apr 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/ai/2022-04/220428-clip/</guid>
+      <description>&lt;p&gt;OpenAI CLIP 관련 자료를 읽고 정리합니다.&lt;/p&gt;
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;이미지와 텍스트를 매우 잘 representation 하는 모델을 만들어, 이미지 데이터에 대한 높은 zero-shot 성능을 이끌어내고자 했음&lt;/li&gt;
+&lt;li&gt;학습 방법
+&lt;ol&gt;
+&lt;li&gt;mini-batch N개 만큼의 이미지와 텍스트를 준비하여, N개씩 이미지 임베딩과 텍스트 임베딩을 제작&lt;/li&gt;
+&lt;li&gt;그러면 이미지 임베딩과 텍스트 임베딩 대해서 N x N matrix 형태의 similarity를 계산할 수 있는데, 동일한 셋에서 나온 이미지와 텍스트의 similairty가 최대가 되도록 contrastive loss를 사용하여 모델을 학습&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;Zero-shot classification 방법 (테스트)
+&lt;ol&gt;
+&lt;li&gt;먼저 dataset 내의 label을 텍스트 인코더에 넣어줘서 텍스트 임베딩을 미리 다 뽑아 놓은 다음에,&lt;/li&gt;
+&lt;li&gt;이미지 인코더에 이미지를 입력을 제공하여, 현재 존재하는 텍스트 임베딩 중에서 어떤 것과 가장 similarity가 높은지 확인&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;comment&#34;&gt;Comment&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;어떠한 모든 데이터셋에 대해서도 zero-shot으로 classification 할 수 있는 강력한 모델&lt;/li&gt;
+&lt;li&gt;최근에 유명한 DALL-E 도 CLIP 임베딩을 활용했다고 함&lt;/li&gt;
+&lt;li&gt;Fully supervised 방식과 견줄만 하다는 것이 매우 인상적임. 좋은 representation을 배웠기 때문에 타겟 데이터셋을 한 장도 보지 않더라도 해당 데이터 셋으로만 학습시킨 모델과 견줄 수 있다는 것이니, 그 어느 알고리즘보다도 generalization 성능이 높다는 생각이 들었음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=T9XSU0pKX2E&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://www.youtube.com/watch?v=T9XSU0pKX2E&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://openai.com/blog/clip/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;OpenAI, CLIP: Connecting Text and Images&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;Radford, Alec, et al. &amp;ldquo;Learning transferable visual models from natural language supervision.&amp;rdquo; &lt;em&gt;International Conference on Machine Learning&lt;/em&gt;. PMLR, 2021&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
     
     <item>
       <title>Solving ImageNet</title>
@@ -345,35 +384,6 @@
 &lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
 &lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=Q7vL1rSG-pk&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://www.youtube.com/watch?v=Q7vL1rSG-pk&lt;/a&gt;
 &lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Magnetic control of tokamak plasmas</title>
-      <link>https://cse-study.github.io/ai/2022-02/20220227-magnetic-control-of-tokamak-plasmas/</link>
-      <pubDate>Sun, 27 Feb 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://cse-study.github.io/ai/2022-02/20220227-magnetic-control-of-tokamak-plasmas/</guid>
-      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;딥마인드와 스위스 로잔연방공대 플라즈마 센터가 심층 강화학습을 이용해 토카막에서의 플라즈마 제어를 성공적으로 수행했다. 이는 네이처 2022.2월 호에 게재되었다.&lt;/li&gt;
-&lt;li&gt;플라즈마 제어를 위한 코일 전류의 조절은 선형화된 모델을 기반으로 한다. 하지만 이는 복잡한 실시간 계산이 필요하며 목표 플라즈마 구성이 변경될 때마다 상당한 공학적, 설계적 노력을 기울여야 한다. 따라서 비선형 컨트롤러를 생성하고 제어를 용이하게 하기 위해 심층 강화학습을 도입하였다.&lt;/li&gt;
-&lt;li&gt;실험 목표는 시간 변화에 따른 원하는 제어 값 등으로 설정했다. Extended Table 4에서 찾아볼 수 있다. 학습은 토카막 시뮬레이터와의 상호 작용을 통해 이루어지며 제어 정책은 하드웨어에서 실시간으로 직접 실행된다(제로 샷).&lt;/li&gt;
-&lt;li&gt;하지만 지속적으로 변하는 플라즈마 상태를 계산해야 하기 때문에 시뮬레이터에서 공급되는 데이터 속도는 일반적인 강화학습 환경에 비해 매우 느리다. 이 문제는 maximum a posteriori policy optimization(MPO)를 적용하여 극복했다고 한다.&lt;/li&gt;
-&lt;li&gt;플라즈마 제어를 위한 모델에서 중요한 점은 정해진 시간 안에 빠르게 실행이 가능해야 한다는 것이다. 해당 실험에서 쓰인 TCV의 경우 50us라는 시간이 사용 가능했다. 이를 맞추기 위해 불필요한 것들을 제외하고, tfcompile 등을 이용한 바이너리 컴파일 등 여러 방면으로 최적화를 하였다.&lt;/li&gt;
-&lt;li&gt;결과적으로 19개 자기 코일로 이루어진 토카막을 한 번에 제어할 수 있는 간결한 제어 환경을 구축하였고 원하는 플라즈마 모양을 시간에 따라 잘 제어할 수 있었다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;comments&#34;&gt;Comments&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;단순히 시뮬레이팅이나 이론으로 끝나는 것이 아닌 실제 환경에 적용하여 좋은 결과를 냈다는 점이 유의미하다고 생각한다.&lt;/li&gt;
-&lt;li&gt;완전히 새로운 알고리즘을 제안했다기 보다는 실제 적용을 위해 많은 엔지니어링적 노력을 한 것 같다. 제한된 시간 안에 작동하도록 한 것과 제로 샷으로 좋은 성과를 얻은 것이 특히 더 대단해 보인다.&lt;/li&gt;
-&lt;li&gt;MPO에 대해 공부해 봐야겠다..&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.nature.com/articles/s41586-021-04301-9&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://www.nature.com/articles/s41586-021-04301-9&lt;/a&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</description>
     </item>
     
   </channel>
