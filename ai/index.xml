@@ -6,10 +6,38 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2019 Notepadium.</copyright>
-    <lastBuildDate>Thu, 28 Apr 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Sun, 08 May 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://cse-study.github.io/ai/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>PaLM: Pathway Language Model</title>
+      <link>https://cse-study.github.io/ai/2022-05/220508-palm/</link>
+      <pubDate>Sun, 08 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/ai/2022-05/220508-palm/</guid>
+      <description>&lt;p&gt;Google AI에서 올해 4월에 발표한 Pathway Language Model(PaLM)에 대해 관련 자료를 보고 리뷰합니다.&lt;/p&gt;
+&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Google AI에서 무려 540B 파라미터를 가진 언어 모델을 학습시켰음. 모델 구조는 decoder-only Transformer로 다른 언어 생성 모델들과 큰 차이 없음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;Pathway: 구글은 2021년에 &lt;a href=&#34;https://blog.google/technology/ai/introducing-pathways-next-generation-ai-architecture/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;pathway&lt;/a&gt;
+ 라는 비전을 발표하였고, 이를 이루기 위해서 &lt;a href=&#34;https://arxiv.org/abs/2203.12533&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;pathway system&lt;/a&gt;
+이라는 가속기 분산 계산 관리 시스템을 개발하였음. Pathway system을 통해 학습된 PaLM은 6144개의 TPU와 1500여 개의 컴퓨터를 통해 학습되었음&lt;/li&gt;
+&lt;li&gt;Chain-of-thought Prompting:  &lt;a href=&#34;https://arxiv.org/abs/2201.11903.pdf&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;chain-of-thought prompting&lt;/a&gt;
+ 방법과 PaLM 모델을 엮어 reasoning 성능을 확연히 높이 수 있었다고 함. Chain-of-thought Prompting은 기존 데이터셋에 대해서 output에 단답이 아닌, 왜 이런 정답이 나왔는지에 대한 intermediate steps을 추가하는 방법임.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Chowdhery, Aakanksha, et al. &amp;ldquo;Palm: Scaling language modeling with pathways.&amp;rdquo; arXiv preprint arXiv:2204.02311 (2022).&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;http://ai.googleblog.com/2022/04/pathways-language-model-palm-scaling-to.html&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Pathways Language Model (PaLM): Scaling to 540 Billion Parameters for Breakthrough Performance&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=RJwPN4qNi_Y&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Google&amp;rsquo;s 540B PaLM Language Model &amp;amp; OpenAI&amp;rsquo;s DALL-E 2 Text-to-Image Revolution&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
     
     <item>
       <title>CLIP: Connecting Text and Images</title>
@@ -350,40 +378,6 @@
 &lt;li&gt;&lt;a href=&#34;https://proceedings.neurips.cc/paper/2020/hash/f231f2107df69eab0a3862d50018a9b2-Abstract.html&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;POMO: Policy Optimization with Multiple Optima for Reinforcement Learning&lt;/a&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>ChemAI</title>
-      <link>https://cse-study.github.io/ai/2022-03/20220305-chemai/</link>
-      <pubDate>Sat, 05 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://cse-study.github.io/ai/2022-03/20220305-chemai/</guid>
-      <description>&lt;p&gt;2021년 8월 한국화학연구원에서 발표한 ChemAI와 관련된 자료들을 읽고 내용을 공유합니다.&lt;/p&gt;
-&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;화학, 소재 분야에서도 최근 머신 러닝을 이용한 연구들이 많이 진행되고 있습니다. 분자가 어떤 특성을 가질지, 원하는 성질을 갖는 분자 구조를 어떻게 디자인 할 것인지, 어떻게 합성 과정을 최적화할지 등 여러 방면으로 머신 러닝을 활용할 수 있습니다. 벌써 네이처 퍼블리싱 그룹의 10% 정도가 머신 러닝과 관련된 연구라고 합니다.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;하지만 화학 분야에서 이를 적용하기에는 어려움 또한 따릅니다. 연구 환경을 세팅하는 것이 복잡하게 느껴질 수 있으며 SMILES 등 구조적인 관계를 나타내는 데이터를 수치적으로 바꿔야 해서 데이터 전처리가 쉽지만은 않습니다. 또한 화학 분야 전문가들이 생소한 머신러닝 알고리즘에 대해 공부하고 하이퍼 파라미터 최적화와 evaluation까지 진행하려면 많은 시간과 노력이 필요할 것입니다.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;한국화학연구원은 이를 해결하기 위해 ChemAI를 만들었습니다. ChemAI는 웹 베이스이기 때문에 누구나 쉽게 접근이 가능합니다. 자동으로 데이터를 수치 데이터로 변환하고 적합한 알고리즘을 선택해 줍니다(연구 목적이나 물질에 따라 알고리즘을 선택하는 것은 매우 중요합니다. 머신 러닝이 아닌 기존 DFT(density functional theory) 시뮬레이션에서도 물질이 crystal인지, 금속인지, 반도체인지, 단백질인지 등에 따라 다른 프로그램과 방법을 사용합니다). 이후 자동으로 hyperparameter 최적화와 evaluation, visualization까지 진행해 줍니다.&lt;/p&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;알고리즘은 crystal GNN(소재 분야 SOTA), symbolic regression, 화학연구원에서 자체 개발한 DopNet 등 총 16가지가 제공됩니다. SMILES 구조의 성질을 예측하는 데는 GNN을 사용했고 crystal structure의 경우 mendeleev, pytorch geometric 등을 이용했다고 합니다.&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;comments&#34;&gt;Comments&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;머신 러닝은 여러 분야에서 문제를 더 쉽고 빠르게 해결할 수 있는 방법이 될 수 있습니다. 하지만 이를 활용하는 것이 쉽지는 않기 때문에 문제 해결의 선택지에서 고려되지 않는 경우도 많습니다.&lt;/li&gt;
-&lt;li&gt;따라서 ChemAI와 같이 누구든지 쉽게 이용 가능하도록 만든 머신 러닝 툴의 역할과 의미가 매우 크다고 생각합니다. 이는 화학 분야에 종사하는 사람들의 시간과 노력을 아껴주고 새로운 발견을 해 낼 가능성을 높여줄 것입니다.&lt;/li&gt;
-&lt;li&gt;화학공학과 컴퓨터 공학을 전공하다가 처음 머신 러닝에 관심을 가지게 된 이유도 이러한 맥락이었습니다. 지금은 여러 이유로 조금은 다른 길을 가고 있기는 하지만 언젠가 이런 프로그램을 만들어 보고 싶네요.&lt;/li&gt;
-&lt;li&gt;DopNet에 대해서도 다루려고 했는데 글이 길어져서 다음 주에 다룰 예정입니다. 관심이 있으시면 “Predicting thermoelectric properties from chemical formula with explicitly identifying dopant effects” 를 읽어 보시길 바랍니다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
-&lt;p&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=Q7vL1rSG-pk&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://www.youtube.com/watch?v=Q7vL1rSG-pk&lt;/a&gt;
-&lt;/p&gt;</description>
     </item>
     
   </channel>
