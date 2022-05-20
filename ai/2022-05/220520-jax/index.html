@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.92.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>JAX Ecosystem&nbsp;&ndash;&nbsp;CS Study Group</title><link rel="stylesheet" href="/css/core.min.8ea708522f75bfcc8135986b9fdcb802f298c946aff4776dc7b9f03a02ba7f8767f76ca0e6523502305c2790e06cfb8f.css" integrity="sha384-jqcIUi91v8yBNZhrn9y4AvKYyUav9Hdtx7nwOgK6f4dn92yg5lI1AjBcJ5DgbPuP"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="JAX Ecosystem" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/home"><img class="site logo" src="/assets/img/logo.png" /><span class="site name">CS Study Group</span></a>
+        </span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav"><a class="nav item-main" href="/ai/"><span class="iconfont icon-ai"></span>Weekly AI</a>
+        <a class="nav item-main" href="/algorithm/"><span class="iconfont icon-algo"></span>Algorithm</a>
+        <a class="nav item-secondary" href="/help/"><span class="iconfont icon-algo"></span>Help</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">JAX Ecosystem</h1><p class="article date">Friday, May 20, 2022</p></section><section class="article author">
+    <div class='author-wrapper'>
+        <div class='author-left'><img class="avatar" src="/assets/img/yuho.jpg" alt></div>
+        <div class='author-right'><p class="name">Yuho Jeong</p><a class="item-email" href="mailto:yuho8437@unist.ac.kr" target="_blank" rel="noopener noreferrer">yuho8437@unist.ac.kr</a></div>
+    </div>
+</section><article class="article markdown-body"><p>JAX 라이브러리 관련 자료들을 읽고 정리합니다.</p>
+<h3 id="summary">Summary</h3>
+<ul>
+<li>JAX: PyTorch, Tensor, MXNet보다 빠르고, NumPy 같은 array based 계산과 여러 파이썬 수학 기능들을 편리하게, 병렬 처리 가능하도록 사용할 수 있도록 구현한 라이브러리. Google Research가 개발하였음.</li>
+</ul>
+<ol>
+<li><strong>Differentiation</strong>: Python 함수가 주어지면 grad 기능을 통해 자동으로 미분식을 알아내고,</li>
+<li><strong>Vectorisation</strong>: vamp, pmap등의 기능을 통해 병렬화가 가능하며,</li>
+<li><strong>JIT-compilation</strong>: CPU, GPU, TPU 등, 사용 가능한 accelerators를 쉽게 조절 할 수 있도록, 그리고 빠른 컴퓨팅 속도를 위해 just-in-time compile (C++ 처럼 컴파일 후 실행하는게 아닌, 실제 실행하는 시점에 컴파일)할 수 있도록 <a href="https://www.tensorflow.org/xla"target="_blank" rel="noopener noreferrer">XLA</a>
+를 사용</li>
+</ol>
+<ul>
+<li>Haiku: JAX의 함수형 패러다임을 활용하면서도 OOP 기반 neural network 모델을 편리하게 사용할 수 있도록 구현한 라이브러리</li>
+<li>이 외에도 JAX 관련 라이브러리로는 <a href="">Optax</a>
+ (gradient 변환, optimizer 관련), <a href="https://github.com/deepmind/rlax"target="_blank" rel="noopener noreferrer">RLax</a>
+ (RL 관련), <a href="https://github.com/deepmind/chex"target="_blank" rel="noopener noreferrer">Chex</a>
+ (실험 테스팅 관련), <a href="https://github.com/deepmind/jraph"target="_blank" rel="noopener noreferrer">Jraph</a>
+ (GNN 관련) 등이 있음</li>
+</ul>
+<h3 id="comments">Comments</h3>
+<ul>
+<li>정리해보자면, 기존엔 cpu만 사용할 수 있었던 numpy계산을 gpu 위에서도 가능하도록 구현했고(물론 cupy가 있기는 했지만), torch나 tensorflow라는 프레임워크 위에서 한정된 실험을 하는 것이 아니라 단순 파이썬 코드 혹은 numpy 코드를 가지고도 ML 실험이 가능하도록 구현된 라이브러리라고 할 수 있음</li>
+<li>파이썬, Numpy 기본 기능들만 가지고도 ML 실험이 매우 빠르게 가능하도록 한 것이 의미가 있다고 생각하고, JAX를 사용해보지는 않았지만 최근에 Google, DeepMind 코드에서 JAX와 Haiku가 매우매우 자주 보이는 데에는 이유가 있을 것이라는 생각이 듦</li>
+</ul>
+<h3 id="references">References</h3>
+<ul>
+<li><a href="https://www.deepmind.com/blog/using-jax-to-accelerate-our-research"target="_blank" rel="noopener noreferrer">Deepmind, &ldquo;Using JAX to accelerate our research&rdquo;</a>
+</li>
+<li><a href="https://www.youtube.com/watch?v=WdTeDXsOSj4"target="_blank" rel="noopener noreferrer">TensorFlow, &ldquo;Intro to JAX: Accelerating Machine Learning research&rdquo;</a>
+</li>
+<li><a href="https://www.youtube.com/watch?v=0mVmRHMaOJ4"target="_blank" rel="noopener noreferrer">Google Cloud Tech, &ldquo;Introduction to JAX&rdquo;</a>
+</li>
+</ul></article>
+<section class="article discussion">
+    <script src="https://utteranc.es/client.js" repo="cse-study/cse-study.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async>
+    </script>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/ai/2022-05/220508-palm/"><span class="iconfont icon-article"></span>PaLM: Pathway Language Model</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Notepadium.</p>
+    <p class="powerby"><span>Powered&nbsp;by&nbsp;</span><a href="https://gohugo.io" 
+        target="_blank" rel="noopener noreferrer">Hugo</a><span>&nbsp;&amp;&nbsp;</span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank" rel="noopener noreferrer">Notepadium</a></p></div>
+</section><script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-e/4/LvThKH1gwzXhdbY2AsjR3rm7LHWyhIG5C0jiRfn8AN2eTN5ILeztWw0H9jmN" crossorigin="anonymous"></script>
+        <script
+            type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script><script src="/js/hljs.min.72e76ccf211868d08e31d7ca45c02501991bd760f28809c52045fa79fb7b7428664bb54ae875b46031ebc760c77b9562.js" integrity="sha384-cudszyEYaNCOMdfKRcAlAZkb12DyiAnFIEX6eft7dChmS7VK6HW0YDHrx2DHe5Vi"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>
