@@ -6,10 +6,50 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2019 Notepadium.</copyright>
-    <lastBuildDate>Fri, 20 May 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 27 May 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://cse-study.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Data Augmentation for Deep Learning</title>
+      <link>https://cse-study.github.io/ai/2022-05/220527-data-augmentation/</link>
+      <pubDate>Fri, 27 May 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/ai/2022-05/220527-data-augmentation/</guid>
+      <description>&lt;p&gt;Deep Learning 모델 성능 개선을 위한 Data Augmentation 방법들과 효과를 정리합니다.&lt;/p&gt;
+&lt;h3 id=&#34;mixup-iclr-2018&#34;&gt;Mixup (ICLR 2018)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/pdf/1710.09412.pdf&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://arxiv.org/pdf/1710.09412.pdf&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;한 줄 요약: 두 개의 샘플에 대해서, input space와 output space를 각각 동일한 비율로 linear interpolate한 샘플 생성&lt;/li&gt;
+&lt;li&gt;장점/효과: Decision boundarie가 클래스에서 클래스로 선형적으로 변하기 때문에 더 smoother한 uncertainty estimation 제공&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;manifold-mixup-icml-2019&#34;&gt;Manifold Mixup (ICML 2019)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/abs/1806.05236&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://arxiv.org/abs/1806.05236&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;한 줄 요약: Itermediate layer의 representation을 mixup하는 방법&lt;/li&gt;
+&lt;li&gt;장점/효과: class-specific representations을 flatten하는 효과를 가짐. 그리고 이 flat representation에 대해서 학습때 보지 못했거나 data manifold를 벗어난 샘플은 low-confidence로 예측. 즉, 헷갈리는 샘플을 어떻게든 하나의 class로 할당하기 보다는, uncertainty 높은(어느 하나로 확신하지 않는) 예측을 뱉음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;augmix-iclr-2020&#34;&gt;AugMix (ICLR 2020)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/pdf/1912.02781.pdf&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://arxiv.org/pdf/1912.02781.pdf&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;한 줄 요약: 두 개의 샘플을 합치는 방법이 아닌, 하나의 샘플에 여러 복합적인 augmentation 방법 적용한 뒤에도 동일한 예측을 하도록 KLD 형태의 ConsistencyLoss를 regularizer로 사용하는 방법&lt;/li&gt;
+&lt;li&gt;장점/효과: Robustness 관점에서 좋은 성능 (Noise에 강건함)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;autoaugment-cvpr-2019&#34;&gt;AutoAugment (CVPR 2019)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://arxiv.org/pdf/1805.09501.pdf&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://arxiv.org/pdf/1805.09501.pdf&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;한 줄 요약: 최적의 augmentation policy를 찾도록 RL 기반 학습&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Shorten, Connor, and Taghi M. Khoshgoftaar. &amp;ldquo;A survey on image data augmentation for deep learning.&amp;rdquo; Journal of big data 6.1 (2019): 1-48&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
     
     <item>
       <title>JAX Ecosystem</title>
@@ -345,55 +385,6 @@
 &lt;li&gt;&lt;a href=&#34;https://openreview.net/pdf?id=gYgMSlZznS&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Hu, Dapeng, et al. &amp;ldquo;How Well Does Self-Supervised Pre-Training Perform with Streaming ImageNet?.&amp;rdquo; NeruIPS 2021.&lt;/a&gt;
 &lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://openreview.net/pdf?id=9Hrka5PA7LW&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Madaan, Divyam, et al. &amp;ldquo;Rethinking the Representational Continuity: Towards Unsupervised Continual Learning.&amp;rdquo; ICLR 2022.&lt;/a&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>DopNet</title>
-      <link>https://cse-study.github.io/ai/2022-03/20220312-dopnet/</link>
-      <pubDate>Sat, 12 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://cse-study.github.io/ai/2022-03/20220312-dopnet/</guid>
-      <description>&lt;p&gt;한국화학연구원에서 2021년 7월에 nature computational materials에 발표한 “Predicting thermoelectric properties from chemical formula with explicitly identifying dopant effects”를 읽고 내용을 공유합니다.&lt;/p&gt;
-&lt;p&gt;이전 포스팅도 참고 하시면 좋습니다.&lt;/p&gt;
-&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;머신 러닝은 소재 분야에서 많이 쓰이고 있습니다. 만들고자 하는 소재의 물성을 예측하고 어떻게 해야 원하는 특징을 가진 소재를 개발할 수 있을지 도움을 얻을 수 있기 때문입니다.&lt;/li&gt;
-&lt;li&gt;하지만 기존 방법들은 도핑된 물질에 대해선 정확한 특성 예측이 힘들어 전문가의 직관에 의존해 개발이 이루어졌습니다. 한국화학연구원은 이 문제를 해결하기 위한 알고리즘을 개발했고 DopNet이라 이름지었습니다.&lt;/li&gt;
-&lt;li&gt;기존 알고리즘의 문제는 크게 다음과 같습니다.
-&lt;ul&gt;
-&lt;li&gt;도핑된 재료의 결정 구조를 찾는데 너무 많은 계산이 필요하다.&lt;/li&gt;
-&lt;li&gt;Dopants는 전체에서 낮은 비율을 차지하기 때문에 화학식을 기반으로 한 물질 표현은 해당 효과를 잘 나타내지 못한다(수치적 변화가 크지 않음).&lt;/li&gt;
-&lt;li&gt;Dopants가 극적으로 host material의 성질을 바꿀 때 비선형이 크게 나타난다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;이를 해결하기 위해 DopNet은 결정 구조 계산 없이 재료 특성을 예측할 수 있도록 만들었습니다. 그리고 host material과 dopant를 명시적으로 나누어 임베딩하였습니다(기존 방법에서는 dopant 식별 여부와 관계 없이 재료 원자들에 대한 원소 통계 정보만 이용한 것으로 보입니다).&lt;/li&gt;
-&lt;li&gt;DopNet은 세 부분으로 구성되어 있습니다.
-&lt;ul&gt;
-&lt;li&gt;Host material 잠재 임베딩을 추출하는 호스트 임베딩 네트워크&lt;/li&gt;
-&lt;li&gt;Dopants 잠재 임베딩을 생성하는 dopants 임베딩 네트워크&lt;/li&gt;
-&lt;li&gt;Host material과 dopants의 임베딩을 통해 재료 특성을 예측하는 dense 네트워크&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;DopNet이 작동하는 단계는 다음과 같습니다.&lt;/li&gt;
-&lt;li&gt;화학식이 입력되면 이는 host material과 dopants로 분해됩니다. 재료의 각 원자는 비율이 γ보다 작거나 같을 때 dopants로 분류되며, γ≥0은 DopNet에 미리 정의되어 있는 hyperparameter입니다.&lt;/li&gt;
-&lt;li&gt;Host material는 원소 통계 정보를 기반으로 $\mathbf{x}_h$ 벡터로 표현됩니다. 호스트 특징 벡터에 인코더가 적용되고 호스트 임베딩 네트워크를 통과해 호스트 임베딩이 계산됩니다.&lt;/li&gt;
-&lt;li&gt;Dopants의 특징 벡터는 최대 K개의 dopants를 포함할 수 있는 집합 $S_d$에 저장됩니다. 여기서 K는 hyperparameter입니다. Dopants는 dopant 임베딩 네트워크를 통해 임베딩되고 생성된 dopant 임베딩은 단일 벡터 $\mathbf{z}_d$로 표현됩니다.&lt;/li&gt;
-&lt;li&gt;마지막으로 dense network를 통해 물성 $\mathbf{y}$ 를 예측합니다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img  src=&#34;https://cse-study.github.io/assets/img/DopNet_architecture.png&#34;
-        alt=&#34;DopNet_architecture&#34;/&gt;&lt;/p&gt;
-&lt;h3 id=&#34;comments&#34;&gt;Comments&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;이론 분야를 공부하고 있지만 실제 세상의 문제를 해결하기 위해 어떤 노력들과 아이디어도 흥미롭습니다. 특히 학부 전공과 관련된 내용들이다 보니 더 재미있게 읽었습니다.&lt;/li&gt;
-&lt;li&gt;내가 하는 연구나 공부가 실제로 어떻게 적용되어 어떤 문제를 해결하고 다른 이들의 연구와 인간의 삶에 어떤 영향을 미칠지 생각하거나 찾아 보는 것도 좋다고 생각합니다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://github.com/ngs00/DopNet&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://github.com/ngs00/DopNet&lt;/a&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://www.nature.com/articles/s41524-021-00564-y&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://www.nature.com/articles/s41524-021-00564-y&lt;/a&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</description>
     </item>
