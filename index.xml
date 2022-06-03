@@ -6,10 +6,44 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2019 Notepadium.</copyright>
-    <lastBuildDate>Fri, 27 May 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 03 Jun 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://cse-study.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Open-world Learning</title>
+      <link>https://cse-study.github.io/ai/2022-06/220603-open-world-learning/</link>
+      <pubDate>Fri, 03 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/ai/2022-06/220603-open-world-learning/</guid>
+      <description>&lt;p&gt;Chen, Zhiyuan, and Bing Liu의 &amp;ldquo;Lifelong machine learning.&amp;rdquo; chapeter 5, Open-world Learning을 읽고 간단하게 정리합니다.&lt;/p&gt;
+&lt;h3 id=&#34;problem-definition&#34;&gt;Problem Definition&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Closed-world assumption: 모든 테스트 클래스가 이미 학습 과정에서 본 것들로 이루어짐&lt;/li&gt;
+&lt;li&gt;Open-world learning: 모델 테스트 단계에서 이전에 본 적 없는 클래스가 입력되는 경우에, scratch부터 재학습 시키지 않더라도 모델이 대응할 수 있어야 함. 관련된 용어로는 cumulative learning 혹은 open-world recognition 등이 존재&lt;/li&gt;
+&lt;/ul&gt;
+&lt;ol&gt;
+&lt;li&gt;$N$개의 class에 대해 학습한 모델이 테스트에서 해당 $N$개에 속하지 않는 unseen class를 발견한 경우, 이를 rejected $R$ set에 보관&lt;/li&gt;
+&lt;li&gt;$R$ set에서 $k$개의 unseen class를 인식하고, 각 class에 알맞게 학습 데이터 (자동으로) 수집&lt;/li&gt;
+&lt;li&gt;충분한 데이터가 쌓였다면 $k$개 class에 대한 incremental learning을 통해 $N+k$ class의 지식을 지닌 모델로 업데이트&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;how-to-solve-cbs-learning&#34;&gt;How to Solve?: CBS Learning&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;CBS Learning: center-based similarity space learning&lt;/li&gt;
+&lt;li&gt;Classification 하려는 target class의 center feature $c$와 sample feature의, feature space 상에서의 similarity가 높도록 학습&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;deep-open-classification-doc&#34;&gt;Deep Open Classification (DOC)&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;1-vs.-rest layer: Softmax를 사용하는 대신 $N$개의 sigmoid layer를 last layer로 사용함. 모든 sigmoid output에 대해서 threshold $t$ (default=0.5)를 넘지 못하면 reject(unseen class로 취급)함. 그리고 reject되지 않은 경우에는 제일 높은 sigmoid output을 가진 class를 선택함.&lt;/li&gt;
+&lt;li&gt;Basic DOC는 1-vs.-rest layer를 사용하며, 당시(2017) SOTA 성능을 보였음&lt;/li&gt;
+&lt;li&gt;근데 생각보다 0.5 threshold를 넘어가는 unseen class가 많았음. 따라서 threshold를 통계 기반으로 정밀하게 조절할 수 있는 방법을 고안했더니 더 성능이 올랐음 (자세한 내용 책 직접 참고)&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Chen, Zhiyuan, and Bing Liu. &amp;ldquo;Lifelong machine learning.&amp;rdquo; &lt;em&gt;Synthesis Lectures on Artificial Intelligence and Machine Learning&lt;/em&gt; 12.3 (2018): 1-207&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
     
     <item>
       <title>Data Augmentation for Deep Learning</title>
@@ -23,7 +57,7 @@
 &lt;li&gt;&lt;a href=&#34;https://arxiv.org/pdf/1710.09412.pdf&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://arxiv.org/pdf/1710.09412.pdf&lt;/a&gt;
 &lt;/li&gt;
 &lt;li&gt;한 줄 요약: 두 개의 샘플에 대해서, input space와 output space를 각각 동일한 비율로 linear interpolate한 샘플 생성&lt;/li&gt;
-&lt;li&gt;장점/효과: Decision boundarie가 클래스에서 클래스로 선형적으로 변하기 때문에 더 smoother한 uncertainty estimation 제공&lt;/li&gt;
+&lt;li&gt;장점/효과: Decision boundary가 클래스에서 클래스로 선형적으로 변하기 때문에 더 smooth한 uncertainty estimation 제공&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;manifold-mixup-icml-2019&#34;&gt;Manifold Mixup (ICML 2019)&lt;/h3&gt;
 &lt;ul&gt;
@@ -36,7 +70,7 @@
 &lt;ul&gt;
 &lt;li&gt;&lt;a href=&#34;https://arxiv.org/pdf/1912.02781.pdf&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://arxiv.org/pdf/1912.02781.pdf&lt;/a&gt;
 &lt;/li&gt;
-&lt;li&gt;한 줄 요약: 두 개의 샘플을 합치는 방법이 아닌, 하나의 샘플에 여러 복합적인 augmentation 방법 적용한 뒤에도 동일한 예측을 하도록 KLD 형태의 ConsistencyLoss를 regularizer로 사용하는 방법&lt;/li&gt;
+&lt;li&gt;한 줄 요약: 두 개의 샘플을 합치는 방법이 아닌, 하나의 샘플에 여러 복합적인 augmentation 방법 적용한 뒤에도 동일한 예측을 하도록 KLD 형태의 consistency loss를 regularizer로 사용하는 방법&lt;/li&gt;
 &lt;li&gt;장점/효과: Robustness 관점에서 좋은 성능 (Noise에 강건함)&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h3 id=&#34;autoaugment-cvpr-2019&#34;&gt;AutoAugment (CVPR 2019)&lt;/h3&gt;
@@ -340,53 +374,6 @@
 &lt;li&gt;특정 언어를 사용하는게 낙인이 될 수도 있고, 한 두가지 언어만 알고 있는 경우 구인 담당자가 지원자에 대해 아직 많은 문제를 경험해 보지 못한 사람으로 간주할 수 있다고 함&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;나의 경우엔 현재 모든 작업을 python으로 하고 있는데, 실제 서비스에서는 아무래도 속도가 중요하다보니 C/C++도 가까이 해야겠다는 생각이 들었음&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>Self-supervised continual learners</title>
-      <link>https://cse-study.github.io/ai/2022-03/220321-self-supervised-coninual-learner/</link>
-      <pubDate>Mon, 21 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://cse-study.github.io/ai/2022-03/220321-self-supervised-coninual-learner/</guid>
-      <description>&lt;p&gt;최근 1년간 진행된 continual learning 연구 중에서 self-supervised approach를 사용한 논문들에 대해서 간단히 정리합니다.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;&amp;ldquo;Co2l: Contrastive continual learning.&amp;rdquo; ICCV 2021&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;Asymmetric SupCon loss로 새로운 지식을 학습(novel learning)하고, self-supervised instance-wise relation distill(IRD)로 과거의 지식을 보존(prevent forgetting)&lt;/li&gt;
-&lt;li&gt;Asymmetric SupCon: contrastive learning에 current task examples와 memory buffer examples를 둘 다 사용하지만, anchor로는 current task examples만 사용. 이렇게 하면 단순히 contrastive learning 하는 것 보다 효과 좋음&lt;/li&gt;
-&lt;li&gt;IRD: reference(previous) model output과 동일해지도록 현재 모델 regulate (2N개 examples에 대해 전부)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&amp;ldquo;How Well Does Self-Supervised Pre-Training Perform with Streaming ImageNet?.&amp;rdquo; NeruIPS 2021&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;Self-supervised learning 방식으로 pre-training하면, streaming data에 대해서 joint training(non-streaming) 만큼의 성능이 나온다는 것을 주장&lt;/li&gt;
-&lt;li&gt;Pre-training은 MoCo-v2 protocol을 따르고, OpenSelfSup 라는 prior works의 구현을 기반으로 하였음&lt;/li&gt;
-&lt;li&gt;Streaming data의 distribution shift가 조금인 경우에는 joint training과 self-supervised pre-training의 성능이 거의 비슷하고, large distribution shift인 경우에는 MAS(memory aware synapse)와 data replay 방법을 사용하면 비슷해짐&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;&amp;ldquo;Rethinking the Representational Continuity: Towards Unsupervised Continual Learning.&amp;rdquo; ICLR 2022&lt;/strong&gt;
-&lt;ul&gt;
-&lt;li&gt;Label unannotated인 unsupervised continual learning(CURL)을 SimSiam과 Barlow Twining라는 prior works 알고리즘 사용하여 해결해보았더니 신기하게도 supervised continual learning보다 catastrophic forgetting에 강건함&lt;/li&gt;
-&lt;li&gt;Lifelong Unsupervised Mixup(LUMP)는 previous task(in memory buffer)와 current task 사이의 interpolate를 활용하는 방법이며, LUMP를 안 써도 잘하지만 LUMP를 사용하면 더 잘함&lt;/li&gt;
-&lt;li&gt;Unsupervised continual learning과 supervised continual learning이 low layer에서는 similar하고 high layer에서는 dissimilar함. Unsupervised continual learning의 loss landscape이 더 smooth 함&lt;/li&gt;
-&lt;li&gt;Test 단계에서 classifying은 KNN을 사용한다고 하는데, 어떻게 사용한건지 아직 제대로 살펴보진 않았음&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;comments&#34;&gt;Comments&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;Self-supervised learning이 좋은 representation을 학습한다는 점, 그리고 새로운 지식을 추가적으로 배우는 경우 중에서 특히 해당 데이터의 양이 적을 때 더 효과적이라는 것이 이미 실험적으로 알려져 있었음. 이 장점은 continual learning이 풀고자 하는 문제와 일치하므로 self-supervised learning 방식이 continual learning task에서 효과적일 것이라는 점은 어느정도 예상된 일이었음&lt;/li&gt;
-&lt;li&gt;따라서 매우 많은 연구자들이 동시에 해당 문제를 거의 비슷한 방식으로 접근했다는 것이 인상적임&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://openaccess.thecvf.com/content/ICCV2021/html/Cha_Co2L_Contrastive_Continual_Learning_ICCV_2021_paper.html&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Cha, Hyuntak, Jaeho Lee, and Jinwoo Shin. &amp;ldquo;Co2l: Contrastive continual learning.&amp;rdquo; ICCV 2021.&lt;/a&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://openreview.net/pdf?id=gYgMSlZznS&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Hu, Dapeng, et al. &amp;ldquo;How Well Does Self-Supervised Pre-Training Perform with Streaming ImageNet?.&amp;rdquo; NeruIPS 2021.&lt;/a&gt;
-&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;https://openreview.net/pdf?id=9Hrka5PA7LW&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Madaan, Divyam, et al. &amp;ldquo;Rethinking the Representational Continuity: Towards Unsupervised Continual Learning.&amp;rdquo; ICLR 2022.&lt;/a&gt;
-&lt;/li&gt;
-&lt;/ul&gt;</description>
     </item>
     
   </channel>
