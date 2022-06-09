@@ -6,10 +6,59 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2019 Notepadium.</copyright>
-    <lastBuildDate>Fri, 03 Jun 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Thu, 09 Jun 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://cse-study.github.io/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>Vision Transformer</title>
+      <link>https://cse-study.github.io/ai/2022-06/220609-vision-transformer/</link>
+      <pubDate>Thu, 09 Jun 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/ai/2022-06/220609-vision-transformer/</guid>
+      <description>&lt;p&gt;Vision transformer와 DINO 논문에 대해, 관련 자료를 읽고 내용을 공유합니다.&lt;/p&gt;
+&lt;h3 id=&#34;vision-transformer&#34;&gt;Vision Transformer&lt;/h3&gt;
+&lt;p&gt;&lt;img  src=&#34;https://cse-study.github.io/assets/img/ViT.png&#34;
+        alt=&#34;img&#34;/&gt;&lt;/p&gt;
+&lt;center&gt;&lt;p&gt;&lt;i&gt;Taken from Dosovitskiy, Alexey, et al.&lt;/i&gt;&lt;/p&gt;&lt;/center&gt;
+&lt;ol&gt;
+&lt;li&gt;전체 이미지를 16 x 16 size의 patch로 절단. 예를 들어 48 x 48 이미지라면 9개의 patch로 나뉨
+&lt;ul&gt;
+&lt;li&gt;&amp;ldquo;ViT-Base/16&amp;rdquo; model에서 16이 의미하는 것이 patch size임&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;각각의 patch를 평탄화(16 x 16 x 3 = 768) 한 뒤에, 워드 임베딩을 만드는 것 처럼 linear projection을 통해 embedding vector의 형태로 변환&lt;/li&gt;
+&lt;li&gt;해당 embedding vector에, BERT와 동일하게 CLS 토큰과 position embedding을 추가함. 이 둘은 learnable parameter 임
+&lt;ul&gt;
+&lt;li&gt;CLS 토큰은 patch embedding과 동일한 사이즈이며, 9개의 patch embedding들과 concat 함&lt;/li&gt;
+&lt;li&gt;position embedding은 총 9 + 1 = 10개로, patch embedding에 합(+)해주는 형태로 구성&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;각 embedding vector를 하나의 워드 토큰으로 여겨, transformer의 입력으로 전달&lt;/li&gt;
+&lt;li&gt;BERT와 동일하게, CLS 토큰의 최종 출력이 해당 이미지의 output class라고 가정. 따라서 transformer 출력 단에서 CLS의 embedding이 어떻게 변했는지 확인하여 inference 수행&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;dino-self-distillation-with-no-labels&#34;&gt;DINO (Self-&lt;strong&gt;di&lt;/strong&gt;stillation with &lt;strong&gt;no&lt;/strong&gt; labels)&lt;/h3&gt;
+&lt;p&gt;&lt;img  src=&#34;https://cse-study.github.io/assets/img/DINO.png&#34;
+        alt=&#34;img&#34;/&gt;&lt;/p&gt;
+&lt;center&gt;&lt;p&gt;&lt;i&gt;Taken from Caron, Mathilde, et al.&lt;/i&gt;&lt;/p&gt;&lt;/center&gt;
+&lt;ul&gt;
+&lt;li&gt;ViT를 &lt;a href=&#34;https://yuhodots.github.io/deeplearning/21-04-04/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;BYOL&lt;/a&gt;
+의 manner로 학습&lt;/li&gt;
+&lt;li&gt;BYOL과 달리 normalized embedding의 L2 distance를 사용하지는 않고, $p_2 \log p_1$ 형태의 cross entropy loss 사용&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://ai.facebook.com/blog/dino-paws-computer-vision-with-self-supervised-transformers-and-10x-more-efficient-training/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Advancing the state of the art in computer vision with self-supervised Transformers and 10x more efficient training&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;Dosovitskiy, Alexey, et al. &amp;ldquo;An Image is Worth 16x16 Words: Transformers for Image Recognition at Scale.&amp;rdquo; &lt;em&gt;International Conference on Learning Representations&lt;/em&gt;. 2021.&lt;/li&gt;
+&lt;li&gt;Caron, Mathilde, et al. &amp;ldquo;Emerging properties in self-supervised vision transformers.&amp;rdquo; &lt;em&gt;Proceedings of the IEEE/CVF International Conference on Computer Vision&lt;/em&gt;. 2021.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=h3ij3F3cPIk&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Yanick Kilcher, &amp;ldquo;DINO: Emerging Properties in Self-Supervised Vision Transformers (Facebook AI Research Explained)&amp;quot;&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/facebookresearch/dino&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;https://github.com/facebookresearch/dino&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
     
     <item>
       <title>Open-world Learning</title>
@@ -350,30 +399,6 @@
 &lt;li&gt;하지만 산업계에서(면접에서) 말하는 big-$O$의 의미는 학계에서의 $\Theta$의 의미와 가깝다고 생각하면 된다고 함&lt;/li&gt;
 &lt;/ul&gt;
 &lt;p&gt;추가적으로, 공간복잡도는 시간이 아닌 메모리(혹은 공간)을 big-$O$로 표현한 것임&lt;/p&gt;</description>
-    </item>
-    
-    <item>
-      <title>면접 준비 과정</title>
-      <link>https://cse-study.github.io/algorithm/2022-03/220322-coding-interview/</link>
-      <pubDate>Tue, 22 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://cse-study.github.io/algorithm/2022-03/220322-coding-interview/</guid>
-      <description>&lt;p&gt;Cracking the coding interview 58p까지 읽고 유용했던 내용을 공유합니다. &amp;lt;해외 기업의 채용 절차&amp;gt;와 &amp;lt;지원 전에 준비할 점&amp;gt;에 대한 내용 위주로 느낀점을 공유합니다.&lt;/p&gt;
-&lt;p&gt;아무래도 대기업이다보니 중요한 역량은 대부분 일치한다는 것을 알 수 있었는데, 회사마다의 조금씩 다른 특징도 엿볼 수 있었음.&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;면접은 보통 전화 통화와 같은 사전 면접 이후에, 3~6번 정도의 대면 면접으로 이루어짐&lt;/li&gt;
-&lt;li&gt;마이크로소프트: 괴짜로 불리는 사람들을 원한다(?)고 함. 면접관들이 일하는 곳에서 면접을 본다는 점이 신선했음. 팀 마다 방향이 달라서 어느 팀에 가게 되느냐에 따라 경험이 크게 달라진다고 함&lt;/li&gt;
-&lt;li&gt;아마존: 규모 확장성(scalability)에 신경을 많이 쓰며, 객체 지향 디자인에 대해 질문을 많이 하는 경향이 있다고 함.&lt;/li&gt;
-&lt;li&gt;구글: 마소, 아마존과 크게 다르지 않으며, 웹 기반으로 시작했기 때문에 구글 또한 규모 확장성에 관심이 많다고 함. 특히 과거 경력에 관계 없이 알고리즘 능력에 큰 비중을 두기 때문에 이 점을 잘 준비해야 함&lt;/li&gt;
-&lt;li&gt;페이스북: 개발자 또한 기업가 정신을 갖기를 원하니, 무엇이든 빠르게 결과 내는 사람이라면 좋다고 함&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;면접 전에 갖춰야 할 역량이나 경험에 대해서 다음과 같은 조언도 얻을 수 있었음&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;아직 학생이라면, 큰 규모의 프로젝트 수업을 듣거나 / 인턴 자리를 알아보거나 / 뭔가(프로젝트)를 하라고 함&lt;/li&gt;
-&lt;li&gt;이력서는 짧을수록 인상에 남으며, 미국에서는 경력이 십 년 미만인 경우 한 페이지의 이력서를 권장한다고 함&lt;/li&gt;
-&lt;li&gt;특정 언어를 사용하는게 낙인이 될 수도 있고, 한 두가지 언어만 알고 있는 경우 구인 담당자가 지원자에 대해 아직 많은 문제를 경험해 보지 못한 사람으로 간주할 수 있다고 함&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;나의 경우엔 현재 모든 작업을 python으로 하고 있는데, 실제 서비스에서는 아무래도 속도가 중요하다보니 C/C++도 가까이 해야겠다는 생각이 들었음&lt;/p&gt;</description>
     </item>
     
   </channel>
