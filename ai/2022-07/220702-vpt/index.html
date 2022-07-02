@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.92.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Video PreTraining (VPT)&nbsp;&ndash;&nbsp;CS Study Group</title><link rel="stylesheet" href="/css/core.min.8ea708522f75bfcc8135986b9fdcb802f298c946aff4776dc7b9f03a02ba7f8767f76ca0e6523502305c2790e06cfb8f.css" integrity="sha384-jqcIUi91v8yBNZhrn9y4AvKYyUav9Hdtx7nwOgK6f4dn92yg5lI1AjBcJ5DgbPuP"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Video PreTraining (VPT)" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/home"><img class="site logo" src="/assets/img/logo.png" /><span class="site name">CS Study Group</span></a>
+        </span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav"><a class="nav item-main" href="/ai/"><span class="iconfont icon-ai"></span>Weekly AI</a>
+        <a class="nav item-main" href="/algorithm/"><span class="iconfont icon-algo"></span>Algorithm</a>
+        <a class="nav item-secondary" href="/help/"><span class="iconfont icon-algo"></span>Help</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Video PreTraining (VPT)</h1><p class="article date">Saturday, July 2, 2022</p></section><section class="article author">
+    <div class='author-wrapper'>
+        <div class='author-left'><img class="avatar" src="/assets/img/yuho.jpg" alt></div>
+        <div class='author-right'><p class="name">Yuho Jeong</p><a class="item-email" href="mailto:yuho8437@unist.ac.kr" target="_blank" rel="noopener noreferrer">yuho8437@unist.ac.kr</a></div>
+    </div>
+</section><article class="article markdown-body"><p>OpenAI의 &ldquo;Learning to Play Minecraft with Video PreTraining (VPT)&rdquo; 글을 읽고 내용을 공유합니다.</p>
+<h3 id="video-pretraining">Video PreTraining</h3>
+<ul>
+<li>OpenAI에서 Minecraft를 플레이할 수 있는 computer-using agent를 학습시켰음</li>
+<li>최종적으로는 다이아 곡괭이를 만드는 것을 학습하였는데, 이 과정에서 20분(24000 action) 정도의 사람의 게임 플레이 내용을 unlabeled video dataset 형태로 사용하였고, 플레이어를 고용해서 만든 labeled contractor data가 일부 사용되었음</li>
+</ul>
+<p><img  src="https://cdn.openai.com/vpt/overview.svg"
+        alt="img"/></p>
+<center><p><i>Taken from https://openai.com/blog/vpt/</i></p></center>
+<ol>
+<li>인터넷 상에서 70K hour 가량의 unlabeled video 데이터 수집</li>
+<li>사람 전문가를 통해 마우스/키보드 액션이 label된 2K hour 가량의 데이터 수집. 이를 통해 비디오 프레임과 마우스/키보드 액션 사이의 관계를 뉴럴넷 모델(<strong>Inverse Dynamics Model, IDM</strong>) 사용하여 학습.</li>
+<li>IDM 사용하여 70K unlabeled video 데이터를 라벨링한 뒤에, 해당 데이터를 사용하여 <strong>past frame이 주어지면 future action을 예측하는 VPT Foundation 모델</strong> 학습 (Behavior Cloning, causal)
+<ul>
+<li><strong>Input이 past video frames이고, output이 action인 auto-regressive 모델!</strong></li>
+</ul>
+</li>
+<li>Foundation 모델을 획득하면 이 모델을 가지고 zero-shot으로 task를 수행할 수도 있고, fine-tuning하여 모델을 더 task-specific 해지도록 개선할 수도 있음
+<ul>
+<li>RL 기반 fine-tuning을 할 때는 아래의 sub-tasks를 순차적으로 잘 수행할 때 마다 reward를 제공했다고 함</li>
+</ul>
+</li>
+</ol>
+<p><img  src="https://cdn.openai.com/vpt/diamond-pickaxe-sequence.svg"
+        alt="img"/></p>
+<center><p><i>Taken from https://openai.com/blog/vpt/</i></p></center>
+<h3 id="references">References</h3>
+<ul>
+<li><a href="https://openai.com/blog/vpt/"target="_blank" rel="noopener noreferrer">OpenAI, &ldquo;Learning to Play Minecraft with Video PreTraining (VPT)&quot;</a>
+</li>
+<li><a href="https://www.youtube.com/watch?v=oz5yZc9ULAc"target="_blank" rel="noopener noreferrer">Yannic Kilcher YouTube, &ldquo;Video PreTraining (VPT): Learning to Act by Watching Unlabeled Online Videos (Paper Explained)&quot;</a>
+</li>
+</ul></article>
+<section class="article discussion">
+    <script src="https://utteranc.es/client.js" repo="cse-study/cse-study.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async>
+    </script>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/ai/2022-06/220609-vision-transformer/"><span class="iconfont icon-article"></span>Vision Transformer</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Notepadium.</p>
+    <p class="powerby"><span>Powered&nbsp;by&nbsp;</span><a href="https://gohugo.io" 
+        target="_blank" rel="noopener noreferrer">Hugo</a><span>&nbsp;&amp;&nbsp;</span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank" rel="noopener noreferrer">Notepadium</a></p></div>
+</section><script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-e/4/LvThKH1gwzXhdbY2AsjR3rm7LHWyhIG5C0jiRfn8AN2eTN5ILeztWw0H9jmN" crossorigin="anonymous"></script>
+        <script
+            type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script><script src="/js/hljs.min.72e76ccf211868d08e31d7ca45c02501991bd760f28809c52045fa79fb7b7428664bb54ae875b46031ebc760c77b9562.js" integrity="sha384-cudszyEYaNCOMdfKRcAlAZkb12DyiAnFIEX6eft7dChmS7VK6HW0YDHrx2DHe5Vi"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>

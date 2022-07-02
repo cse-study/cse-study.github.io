@@ -11,6 +11,47 @@
     
     
     <item>
+      <title>Video PreTraining (VPT)</title>
+      <link>https://cse-study.github.io/ai/2022-07/220702-vpt/</link>
+      <pubDate>Sat, 02 Jul 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/ai/2022-07/220702-vpt/</guid>
+      <description>&lt;p&gt;OpenAI의 &amp;ldquo;Learning to Play Minecraft with Video PreTraining (VPT)&amp;rdquo; 글을 읽고 내용을 공유합니다.&lt;/p&gt;
+&lt;h3 id=&#34;video-pretraining&#34;&gt;Video PreTraining&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;OpenAI에서 Minecraft를 플레이할 수 있는 computer-using agent를 학습시켰음&lt;/li&gt;
+&lt;li&gt;최종적으로는 다이아 곡괭이를 만드는 것을 학습하였는데, 이 과정에서 20분(24000 action) 정도의 사람의 게임 플레이 내용을 unlabeled video dataset 형태로 사용하였고, 플레이어를 고용해서 만든 labeled contractor data가 일부 사용되었음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img  src=&#34;https://cdn.openai.com/vpt/overview.svg&#34;
+        alt=&#34;img&#34;/&gt;&lt;/p&gt;
+&lt;center&gt;&lt;p&gt;&lt;i&gt;Taken from https://openai.com/blog/vpt/&lt;/i&gt;&lt;/p&gt;&lt;/center&gt;
+&lt;ol&gt;
+&lt;li&gt;인터넷 상에서 70K hour 가량의 unlabeled video 데이터 수집&lt;/li&gt;
+&lt;li&gt;사람 전문가를 통해 마우스/키보드 액션이 label된 2K hour 가량의 데이터 수집. 이를 통해 비디오 프레임과 마우스/키보드 액션 사이의 관계를 뉴럴넷 모델(&lt;strong&gt;Inverse Dynamics Model, IDM&lt;/strong&gt;) 사용하여 학습.&lt;/li&gt;
+&lt;li&gt;IDM 사용하여 70K unlabeled video 데이터를 라벨링한 뒤에, 해당 데이터를 사용하여 &lt;strong&gt;past frame이 주어지면 future action을 예측하는 VPT Foundation 모델&lt;/strong&gt; 학습 (Behavior Cloning, causal)
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Input이 past video frames이고, output이 action인 auto-regressive 모델!&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Foundation 모델을 획득하면 이 모델을 가지고 zero-shot으로 task를 수행할 수도 있고, fine-tuning하여 모델을 더 task-specific 해지도록 개선할 수도 있음
+&lt;ul&gt;
+&lt;li&gt;RL 기반 fine-tuning을 할 때는 아래의 sub-tasks를 순차적으로 잘 수행할 때 마다 reward를 제공했다고 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;img  src=&#34;https://cdn.openai.com/vpt/diamond-pickaxe-sequence.svg&#34;
+        alt=&#34;img&#34;/&gt;&lt;/p&gt;
+&lt;center&gt;&lt;p&gt;&lt;i&gt;Taken from https://openai.com/blog/vpt/&lt;/i&gt;&lt;/p&gt;&lt;/center&gt;
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://openai.com/blog/vpt/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;OpenAI, &amp;ldquo;Learning to Play Minecraft with Video PreTraining (VPT)&amp;quot;&lt;/a&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://www.youtube.com/watch?v=oz5yZc9ULAc&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Yannic Kilcher YouTube, &amp;ldquo;Video PreTraining (VPT): Learning to Act by Watching Unlabeled Online Videos (Paper Explained)&amp;quot;&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
       <title>Vision Transformer</title>
       <link>https://cse-study.github.io/ai/2022-06/220609-vision-transformer/</link>
       <pubDate>Thu, 09 Jun 2022 00:00:00 +0000</pubDate>
@@ -382,22 +423,6 @@
 &lt;/li&gt;
 &lt;/ul&gt;
 </description>
-    </item>
-    
-    <item>
-      <title>Big-O notation</title>
-      <link>https://cse-study.github.io/algorithm/2022-03/220322-big-o-notation/</link>
-      <pubDate>Tue, 22 Mar 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://cse-study.github.io/algorithm/2022-03/220322-big-o-notation/</guid>
-      <description>&lt;p&gt;2022년 03월 2주차 개인 목표 수행합니다.&lt;/p&gt;
-&lt;p&gt;학계와 산업계에서 말하는 big-$O$ notation에는 약간의 차이가 존재한다는 것을 알게 되었음. 이전부터, 수업에서 배우는 big-$O$와 일반적으로 널리 쓰이는 big-$O$의 의미가 다르다는 점이 헷갈렸는데, 해당 챕터를 읽고 이해할 수 있게 되었음&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;(시간복잡도의 경우) 학계에서 big-$O$는 시간의 상한, big-$\Omega$(omega)는 등가 혹은 하한, big-$\Theta$(theta)는 $O$와 $\Omega$ 둘 다를 의미함&lt;/li&gt;
-&lt;li&gt;따라서 $O(N)$으로 표현되는 알고리즘을 $O(N^2), O(N^3), O(2^N)$으로도 표현하는 것이, 학계에서는 옳은 표현임&lt;/li&gt;
-&lt;li&gt;하지만 산업계에서(면접에서) 말하는 big-$O$의 의미는 학계에서의 $\Theta$의 의미와 가깝다고 생각하면 된다고 함&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;추가적으로, 공간복잡도는 시간이 아닌 메모리(혹은 공간)을 big-$O$로 표현한 것임&lt;/p&gt;</description>
     </item>
     
   </channel>
