@@ -11,6 +11,48 @@
     
     
     <item>
+      <title>DARTS: Differentiable Architecture Search</title>
+      <link>https://cse-study.github.io/ai/2022-08/220827-darts/</link>
+      <pubDate>Tue, 23 Aug 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/ai/2022-08/220827-darts/</guid>
+      <description>&lt;p&gt;ICLR 2019에서 발표된 &amp;ldquo;DARTS: Differentiable Architecture Search&amp;rdquo; 논문을 읽고 내용을 공유합니다.&lt;/p&gt;
+&lt;h3 id=&#34;darts-differentiable-architecture-search&#34;&gt;DARTS: Differentiable Architecture Search&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Neural Architecture Search (NAS) 연구에 대해, 기존에는 search space가 미분 불가능하다는 문제점 때문에 RL 기반으로만 연구가 진행었는데,&lt;/li&gt;
+&lt;li&gt;DARTS는 search space를 미분 가능하게 정의하고 여기에 MAML의 최적화 방식과 동일한 bilevel optimization을 도입하여 gradient descent 기반의 NAS를 가능하도록 만들었음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;algorithm&#34;&gt;Algorithm&lt;/h3&gt;
+&lt;ol&gt;
+&lt;li&gt;Differentiable archtecture search: 논문에서 정의한 bilevel optimization 식을 통한 가중치 $\alpha$ 최적화 수행&lt;/li&gt;
+&lt;li&gt;Discretization step: $\alpha$와 $k$ 기반으로 필요 없는 operation edge 제거&lt;/li&gt;
+&lt;li&gt;Retraining for the top-$k$ strongest operations: 남은 operation edge에 대해 처음부터 다시 학습 수행&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h3 id=&#34;methodology&#34;&gt;Methodology&lt;/h3&gt;
+&lt;p&gt;&lt;img  src=&#34;https://cse-study.github.io/assets/img/darts.png&#34;
+        alt=&#34;img&#34;/&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;(a)의 형태면 candidate operations가 discrete한 set 형태로 정의되기 때문에 미분이 불가능한데, (b)의 형태로 수정 후에 각 operation edege에 $\alpha$라는 가중치를 달고 다음 node에 전달되기 전에 softmax function을 거치도록 형태를 변형하면 모든 candidate operations가 continuous한 형태로 연결되어 있기 때문에 미분이 가능해짐&lt;/li&gt;
+&lt;li&gt;여기서 우리의 목표는 $\alpha$를 최적화하는 것이며, objective는 아래와 같이 설정이 가능함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img  src=&#34;https://cse-study.github.io/assets/img/darts_obj.png&#34;
+        alt=&#34;img&#34;/&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;$\alpha$를 validation loss 기반으로 최적화하기 위해서는 $w$가 결정되어있어야 하며, $w$를 train loss 기반으로 최적화하기 위해서는 $\alpha$가 결정되어있어야 함. 본 논문은 이러한 nested formulation을 bilevel optimization을 통해서 최적화 함&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;img  src=&#34;https://cse-study.github.io/assets/img/darts_algo.png&#34;
+        alt=&#34;img&#34;/&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Bilevel optimization 뿐만 아니라, traning set + validation set을 합친 데이터 셋을 가지고 $\alpha, w$에 대한 coordinate descent와 SGD도 각각 수행하였는데, 성능은 bilevel optimization이 제일 좋았다고 함. 이에 대해 저자들은, 아마 $\alpha$를 training set이 포함된 데이터를 가지고 직접 최적화하였기 때문에 overfitting이 발생했을 것이라고 가정하였음&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://openreview.net/pdf?id=S1eYHoC5FX&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;DARTS: DIFFERENTIABLE ARCHITECTURE SEARCH&lt;/a&gt;
+&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
       <title>Video PreTraining (VPT)</title>
       <link>https://cse-study.github.io/ai/2022-07/220702-vpt/</link>
       <pubDate>Sat, 02 Jul 2022 00:00:00 +0000</pubDate>
@@ -386,43 +428,6 @@
 &lt;/li&gt;
 &lt;li&gt;Song, Yang, and Stefano Ermon. &amp;ldquo;Generative modeling by estimating gradients of the data distribution.&amp;rdquo; &lt;em&gt;Advances in Neural Information Processing Systems&lt;/em&gt; 32 (2019).&lt;/li&gt;
 &lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>DGMR</title>
-      <link>https://cse-study.github.io/ai/2022-04/20220405-dgmr/</link>
-      <pubDate>Tue, 05 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://cse-study.github.io/ai/2022-04/20220405-dgmr/</guid>
-      <description>&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;딥마인드가 영국 기상청과 협력을 통해 좋은 nowcasting(실시간 기상 예측) 성능을 보이는 DGMR (Deep Generative Model of Rain)을 개발하였습니다. 이름에 드러나 있듯 90분 후까지의 강우, 그 중에서도 사람과 경제에 큰 영향을 미치는 medium to heavy rain 예측에 중점을 둔 것으로 보입니다.&lt;/li&gt;
-&lt;li&gt;기존 날씨 예측은 Ensemble numerical weather prediction(NWP) 라는 수치적 계산 방법을 이용했다고 합니다. 대기학에 대해서는 잘 모르지만 다양한 변수를 이용해 복잡한 유체 방정식을 풀며 시뮬레이션하는 방식이 아닐까 합니다(이 부분에 대해 잘 아시는 분들은 댓글 남겨주시면 감사하겠습니다). 이 방법은 단-중기 예보에서는 괜찮은 성능을 보이지만 nowcasting이라 불리는 초단기예보 정확성이 떨어지는 문제가 있습니다. 딥러닝을 이용해 예측을 개선하려는 시도도 있었으나 드물게 일어나는 일인 medium to heavy rain에 대해 좋지 않은 성능을 보였습니다.&lt;/li&gt;
-&lt;li&gt;딥마인드는 이를 해결하기 위해 deep generative model을 이용했습니다. 레이더 자료를 입력하면 다음에 이어질 것으로 예상되는 이미지를 만들어 내고 이를 실제 관측된 값과 비교하며 학습하는 방식입니다. 다음은 모델에 대한 간략한 설명입니다.
-&lt;ul&gt;
-&lt;li&gt;5분 간격으로 촬영한 레이더 관측값 4개(즉 20분간 관찰한 정보)가 generator에 context로 들어갑니다. 학습은 두 loss function과 하나의 regularization을 통해 이루어집니다.&lt;/li&gt;
-&lt;li&gt;제너레이터에 context가 들어가면 이미지가 생성됩니다. 이 중 8개 프레임이 랜덤으로 선택되어 spatial discriminator에 들어가고 실제 데이터와 비교해 loss 값을 얻습니다. Spatial discriminator은 CNN 구조를 가지는 모델입니다. 관측된 레이더 필드와 생성된 필드를 구별해서 spatial consistency를 확보하고 blurry prediction을 방지하는데 초점을 맞췄다고 합니다(첫 번째 loss).&lt;/li&gt;
-&lt;li&gt;Temporal discriminator에는 생성된 이미지가 랜덤으로 크롭되어 입력됩니다. 이는 관측된 레이더 시퀀스와 생성된 레이더 시퀀스를 구별해서 temporal consistency를 확보하고 jumpy prediction을 penalize하는 목적을 가집니다(두 번째 loss).&lt;/li&gt;
-&lt;li&gt;정확도를 향상시키기 위해  관측값들의 grid cell regularization과 모델이 생성한 평균값의 grid cell regularization간 차이에 패널티를 주는 항을 도입했습니다. 이 항은 모델이 위치에 따른 정확한 예측을 하고 성능 향상에 있어 중요하다고 합니다(하나의 regularization).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;모델 구조와 objective function에 대한 더 자세한 설명은 Methods에서 찾을 수 있으므로 관심이 있다면 읽어보시길 바랍니다!&lt;/li&gt;
-&lt;li&gt;DGMR은 기존 시스템과 비교한 성능 평가가 이루어졌습니다. 전문인단중 89%가 DGMR이 더 우수하다고 판단했습니다.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;comments&#34;&gt;Comments&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;도메인에 대한 지식이 없다 보니 기존의 문제점이 잘 와닿지는 않았고 문제에 대한 직관적인 이해도 많이 부족하게 느껴졌습니다. 이전에 다뤘던 화학 관련 내용이랑은 느낌이 또 다르네요.&lt;/li&gt;
-&lt;li&gt;해당 모델을 개발한 연구원 수만 라부리 또한 영국 기상청의 조언 덕에 문제 해결에 대한 아이디어를 얻을 수 있었던 것 같습니다. 조언이 없었다면 좋지 않은 모델을 개발했을지도 모른다고 언급했다고 합니다(&lt;a href=&#34;https://www.technologyreview.com/2021/09/29/1036331/deepminds-ai-predicts-almost-exactly-when-and-where-its-going-to-rain/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;출처&lt;/a&gt;
-).&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;DGMR paper: &lt;a href=&#34;https://www.nature.com/articles/s41586-021-03854-z&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Skilful precipitation nowcasting using deep generative models of radar&lt;/a&gt;
-&lt;/li&gt;
-&lt;li&gt;MIT Technology Review: &lt;a href=&#34;https://www.technologyreview.com/2021/09/29/1036331/deepminds-ai-predicts-almost-exactly-when-and-where-its-going-to-rain/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;DeepMind’s AI predicts almost exactly when and where it’s going to rain&lt;/a&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-</description>
     </item>
     
   </channel>
