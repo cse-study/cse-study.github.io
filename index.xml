@@ -6,17 +6,35 @@
     <generator>Hugo -- gohugo.io</generator>
     <language>zh-cn</language>
     <copyright>©2019 Notepadium.</copyright>
-    <lastBuildDate>Tue, 23 Aug 2022 00:00:00 +0000</lastBuildDate>
+    <lastBuildDate>Fri, 23 Sep 2022 00:00:00 +0000</lastBuildDate>
     
         <atom:link href="https://cse-study.github.io/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
+      <title>Whisper: Robust Speech Recognition via Large-Scale Weak Supervision</title>
+      <link>https://cse-study.github.io/ai/2022-09/220923-whisper/</link>
+      <pubDate>Fri, 23 Sep 2022 00:00:00 +0000</pubDate>
+      
+      <guid>https://cse-study.github.io/ai/2022-09/220923-whisper/</guid>
+      <description>&lt;p&gt;OpenAI에서 공개한 Speech Recognition 모델 Whisper에 대해서 세 줄 요약 합니다.&lt;/p&gt;
+&lt;p&gt;[&lt;a href=&#34;https://cdn.openai.com/papers/whisper.pdf&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;paper&lt;/a&gt;
+] [&lt;a href=&#34;https://openai.com/blog/whisper/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;blog&lt;/a&gt;
+]&lt;/p&gt;
+&lt;h3 id=&#34;whisper&#34;&gt;Whisper&lt;/h3&gt;
+&lt;ul&gt;
+&lt;li&gt;Web에서 수집된 68만 시간 분량의 multilingual, multitask data를 학습한 automatic speech recognition (ASR) 시스템: 당연하게도 &lt;strong&gt;Encoder-Decoder Transformer&lt;/strong&gt; 구조&lt;/li&gt;
+&lt;li&gt;Multilingual, multitask data를 학습한 모델이므로, decoder에 주어지는 special token에 따라 &amp;lsquo;영어 음성을 영어 문서로 작성&amp;rsquo;, &amp;lsquo;비영어 음성을 영어 문서로 기술&amp;rsquo;, &amp;lsquo;비영어 음성을 비영어 문서로 기술&amp;rsquo;등의 다양한 task를 모두 수행할 수 있는 매우 general한 end-to-end 모델임&lt;/li&gt;
+&lt;li&gt;Overall process는 논문의 figure로 제공하고 있음: (1) 처음에는 Voice activity를 감지하여 실제로 음성이 존재하는 데이터인지 감지. (2) 실제로 음성이 존재하는 데이터라면, 해당 음성이 어떤 언어인지 인식하는 langauge identification 과정 거침. (3) Special token에 따라 transcription 혹은 to-English translation을 학습하는데 (4) 이 과정에서 timestamp token에 따라 time-aliged transcription 혹은 text-only transcription을 수행하도록 학습&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
       <title>DARTS: Differentiable Architecture Search</title>
-      <link>https://cse-study.github.io/ai/2022-08/220827-darts/</link>
+      <link>https://cse-study.github.io/ai/2022-08/220823-darts/</link>
       <pubDate>Tue, 23 Aug 2022 00:00:00 +0000</pubDate>
       
-      <guid>https://cse-study.github.io/ai/2022-08/220827-darts/</guid>
+      <guid>https://cse-study.github.io/ai/2022-08/220823-darts/</guid>
       <description>&lt;p&gt;ICLR 2019에서 발표된 &amp;ldquo;DARTS: Differentiable Architecture Search&amp;rdquo; 논문을 읽고 내용을 공유합니다.&lt;/p&gt;
 &lt;h3 id=&#34;darts-differentiable-architecture-search&#34;&gt;DARTS: Differentiable Architecture Search&lt;/h3&gt;
 &lt;ul&gt;
@@ -48,7 +66,7 @@
 &lt;/ul&gt;
 &lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://openreview.net/pdf?id=S1eYHoC5FX&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;DARTS: DIFFERENTIABLE ARCHITECTURE SEARCH&lt;/a&gt;
+&lt;li&gt;&lt;a href=&#34;https://openreview.net/pdf?id=S1eYHoC5FX&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Liu, Hanxiao, Karen Simonyan, and Yiming Yang. &amp;ldquo;DARTS: Differentiable Architecture Search.&amp;rdquo; &lt;em&gt;International Conference on Learning Representations&lt;/em&gt;. 2019.&lt;/a&gt;
 &lt;/li&gt;
 &lt;/ul&gt;</description>
     </item>
@@ -348,86 +366,6 @@
 &lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
 &lt;ul&gt;
 &lt;li&gt;Ridnik, Tal, et al. &amp;ldquo;Solving ImageNet: a Unified Scheme for Training any Backbone to Top Results.&amp;rdquo; arXiv preprint arXiv:2204.03475 (2022).&lt;/li&gt;
-&lt;/ul&gt;</description>
-    </item>
-    
-    <item>
-      <title>Generative Modeling by Estimating Gradients of the Data Distribution</title>
-      <link>https://cse-study.github.io/ai/2022-04/220410-diffusion-model/</link>
-      <pubDate>Sun, 10 Apr 2022 00:00:00 +0000</pubDate>
-      
-      <guid>https://cse-study.github.io/ai/2022-04/220410-diffusion-model/</guid>
-      <description>&lt;p&gt;Diffusion model이라는 generative model의 새로운 방향성을 제시한 Yang Song 저자의 Generative Modeling by Estimating Gradients of the Data Distribution에 대해서 리뷰합니다.&lt;/p&gt;
-&lt;h3 id=&#34;summary&#34;&gt;Summary&lt;/h3&gt;
-&lt;h4 id=&#34;backgrounds&#34;&gt;Backgrounds&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;
-&lt;p&gt;기존 generative modeling 방법&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Likelihood-based models: autoregressive models / normalizing flow models / energy-based models (EBMs) / variational auto-encoders (VAEs) 등과 같이, PDF를 정의하고 해당 PDF의 likelihood를 maximize 하는 방법&lt;/li&gt;
-&lt;li&gt;Implicit generative models: generative adversarial network과 같이, 직접적으로 PDF를 모델링하지는 않는 방법&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;기존 방법의 한계점&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Likelihood-based models: tractable normalizing constant를 보장하기 위해 모델 구조에 제약이 있고, true data distribution을 모르기 떄문에 surrogate objectives사용 (e.g. ELBO)&lt;/li&gt;
-&lt;li&gt;Implicit generative models: mode collapse가 발생하기도 하는 불안정한 adversarial training에 의존&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;저자가 새로 제안하는 방법&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Score-based model: PDF를 모델링하는 것이 아닌, score function이라고 불리는 &amp;ldquo;log-PDF의 gradient&amp;rdquo; $
-\nabla_\mathbf{x} \log p(\mathbf{x}) \approx \mathbf{s}_\theta(\mathbf{x})$를 모델링하는 방법&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;
-&lt;p&gt;Score-based model은 tractable normalizing constant가 필요하지 않고 성능도 매우 좋으며 likelihood 계산도 가능&lt;/p&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h4 id=&#34;score-based-model&#34;&gt;Score-based model&lt;/h4&gt;
-&lt;ul&gt;
-&lt;li&gt;모델 학습 방법
-&lt;ul&gt;
-&lt;li&gt;모델 $\mathbf{s}(\mathbf{x})$와 데이터의 $\nabla \log p(\mathbf{x})$ 사이의 squared L2를 최소화. 즉, Fisher divergence $\mathbb{E}_{p(\mathbf{x})}[|| \nabla\log p(\mathbf{x})-\mathbf{s}(\mathbf{x})||_2^2]$ 식을 최소화&lt;/li&gt;
-&lt;li&gt;하지만 우리는 $p(\mathbf x)$에 대한 특정 포인트(소유하고있는 데이터) 정보만 알고있기 때문에 위의 식을 그대로 사용할 수 없음&lt;/li&gt;
-&lt;li&gt;다행히도, true $ \nabla_\mathbf{x} \log p(\mathbf{x})$를 알지 못할 때 사용할 수 있는 score-matching이라는 방법이 존재&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;데이터 샘플링 방법 (테스트)
-&lt;ul&gt;
-&lt;li&gt;임의의 prior $\mathbf x_0$에서 시작하여, 아래의 Langevin dynamics을 따라 $\mathbf x$를 계속해서 업데이트하면 됨 (Langevin dynamics 식 제작에 score function 필요)&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;p&gt;&lt;img  src=&#34;https://cse-study.github.io/assets/img/lagevin.png&#34;
-        alt=&#34;img&#34;/&gt;&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;Naive score-based generative modeling
-&lt;ul&gt;
-&lt;li&gt;전체적으로는, score-mathcing을 통해 score function을 먼저 모델링한 뒤에, 해당 score function을 가지고 정의된 Langevin dynamics을 따라 $\mathbf x$를 업데이트하여 최종 샘플링 포인트를 찾는 것 (Naive score-based generative modeling)&lt;/li&gt;
-&lt;li&gt;하지만 Naive score-based generative modeling 방법은 low density regions에서는 정확하지 않다는 점 때문에, prior $\mathbf x_0$에서 시작하여 초기에 $\mathbf x$ 업데이트 과정에서 좋은 업데이트가 수행되지 않는다는 단점이 있음&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;li&gt;개선 방법
-&lt;ul&gt;
-&lt;li&gt;Naive score-based generative modeling의 문제점을 개선하기 위해서, 데이터에 noise perturbation을 기반으로한 &amp;lsquo;Noise Conditional Score-Based Model&amp;rsquo;와 &amp;lsquo;annealed Langevin dynamics&amp;rsquo; 방법을 적용하였음&lt;/li&gt;
-&lt;li&gt;자세한 내용은 &lt;a href=&#34;https://yang-song.github.io/blog/2021/score/#score-based-generative-modeling-with-multiple-noise-perturbations&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;이 곳&lt;/a&gt;
- 참고&lt;/li&gt;
-&lt;/ul&gt;
-&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;comments&#34;&gt;Comments&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;해당 논문은 generative modeling 분야에 새로운 방향성을 제시한 논문으로, 후속 연구들이 계속해서 쏟아지고 있어서 기여가 큰 논문임&lt;/li&gt;
-&lt;li&gt;Gradient of log PDF라는 새로운 관점을 제시한 점도 좋았지만, 개인적으로는 naive score-based generative modeling을 적용하였을 때 잘 되지 않았다는 것에서 멈추지 않고, 계속해서 개선점을 찾아내 결국엔 좋은 성능의 모델을 얻어냈다는 점이 좋았음&lt;/li&gt;
-&lt;/ul&gt;
-&lt;h3 id=&#34;references&#34;&gt;References&lt;/h3&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;a href=&#34;https://yang-song.github.io/blog/2021/score/&#34;target=&#34;_blank&#34; rel=&#34;noopener noreferrer&#34;&gt;Yang Song, Generative Modeling by Estimating Gradients of the Data Distribution&lt;/a&gt;
-&lt;/li&gt;
-&lt;li&gt;Song, Yang, and Stefano Ermon. &amp;ldquo;Generative modeling by estimating gradients of the data distribution.&amp;rdquo; &lt;em&gt;Advances in Neural Information Processing Systems&lt;/em&gt; 32 (2019).&lt;/li&gt;
 &lt;/ul&gt;</description>
     </item>
     

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en"><meta charset="utf-8"><meta name="generator" content="Hugo 0.92.1" /><meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="color-scheme" content="light dark">
+<meta name="supported-color-schemes" content="light dark"><title>Whisper: Robust Speech Recognition via Large-Scale Weak Supervision&nbsp;&ndash;&nbsp;CS Study Group</title><link rel="stylesheet" href="/css/core.min.8ea708522f75bfcc8135986b9fdcb802f298c946aff4776dc7b9f03a02ba7f8767f76ca0e6523502305c2790e06cfb8f.css" integrity="sha384-jqcIUi91v8yBNZhrn9y4AvKYyUav9Hdtx7nwOgK6f4dn92yg5lI1AjBcJ5DgbPuP"><meta name="twitter:card" content="summary" />
+<meta name="twitter:title" content="Whisper: Robust Speech Recognition via Large-Scale Weak Supervision" /><body><section id="header">
+    <div class="header wrap"><span class="header left-side"><a class="site home" href="/home"><img class="site logo" src="/assets/img/logo.png" /><span class="site name">CS Study Group</span></a>
+        </span>
+        <span class="header right-side"><div class="nav wrap">
+    <nav class="nav"><a class="nav item-main" href="/ai/"><span class="iconfont icon-ai"></span>Weekly AI</a>
+        <a class="nav item-main" href="/algorithm/"><span class="iconfont icon-algo"></span>Algorithm</a>
+        <a class="nav item-secondary" href="/help/"><span class="iconfont icon-algo"></span>Help</a>
+    </nav>
+</div></span></div></section><section id="content"><div class="article-container"><section class="article header">
+    <h1 class="article title">Whisper: Robust Speech Recognition via Large-Scale Weak Supervision</h1><p class="article date">Friday, September 23, 2022</p></section><section class="article author">
+    <div class='author-wrapper'>
+        <div class='author-left'><img class="avatar" src="/assets/img/yuho.jpg" alt></div>
+        <div class='author-right'><p class="name">Yuho Jeong</p><a class="item-email" href="mailto:yuho8437@unist.ac.kr" target="_blank" rel="noopener noreferrer">yuho8437@unist.ac.kr</a></div>
+    </div>
+</section><article class="article markdown-body"><p>OpenAI에서 공개한 Speech Recognition 모델 Whisper에 대해서 세 줄 요약 합니다.</p>
+<p>[<a href="https://cdn.openai.com/papers/whisper.pdf"target="_blank" rel="noopener noreferrer">paper</a>
+] [<a href="https://openai.com/blog/whisper/"target="_blank" rel="noopener noreferrer">blog</a>
+]</p>
+<h3 id="whisper">Whisper</h3>
+<ul>
+<li>Web에서 수집된 68만 시간 분량의 multilingual, multitask data를 학습한 automatic speech recognition (ASR) 시스템: 당연하게도 <strong>Encoder-Decoder Transformer</strong> 구조</li>
+<li>Multilingual, multitask data를 학습한 모델이므로, decoder에 주어지는 special token에 따라 &lsquo;영어 음성을 영어 문서로 작성&rsquo;, &lsquo;비영어 음성을 영어 문서로 기술&rsquo;, &lsquo;비영어 음성을 비영어 문서로 기술&rsquo;등의 다양한 task를 모두 수행할 수 있는 매우 general한 end-to-end 모델임</li>
+<li>Overall process는 논문의 figure로 제공하고 있음: (1) 처음에는 Voice activity를 감지하여 실제로 음성이 존재하는 데이터인지 감지. (2) 실제로 음성이 존재하는 데이터라면, 해당 음성이 어떤 언어인지 인식하는 langauge identification 과정 거침. (3) Special token에 따라 transcription 혹은 to-English translation을 학습하는데 (4) 이 과정에서 timestamp token에 따라 time-aliged transcription 혹은 text-only transcription을 수행하도록 학습</li>
+</ul></article>
+<section class="article discussion">
+    <script src="https://utteranc.es/client.js" repo="cse-study/cse-study.github.io" issue-term="pathname" theme="github-light" crossorigin="anonymous" async>
+    </script>
+</section></div>
+<div class="article bottom"><section class="article navigation"><p><a class="link" href="/ai/2022-08/220823-darts/"><span class="iconfont icon-article"></span>DARTS: Differentiable Architecture Search</a></p></section></div></section><section id="footer"><div class="footer-wrap">
+    <p class="copyright">©2019 Notepadium.</p>
+    <p class="powerby"><span>Powered&nbsp;by&nbsp;</span><a href="https://gohugo.io" 
+        target="_blank" rel="noopener noreferrer">Hugo</a><span>&nbsp;&amp;&nbsp;</span><a href="https://themes.gohugo.io/hugo-notepadium/" 
+        target="_blank" rel="noopener noreferrer">Notepadium</a></p></div>
+</section><script defer type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.7/MathJax.js?config=TeX-AMS-MML_HTMLorMML" integrity="sha384-e/4/LvThKH1gwzXhdbY2AsjR3rm7LHWyhIG5C0jiRfn8AN2eTN5ILeztWw0H9jmN" crossorigin="anonymous"></script>
+        <script
+            type="text/x-mathjax-config">MathJax.Hub.Config({ tex2jax: { inlineMath: [['$','$'], ['\\(','\\)']] } });</script><script src="/js/hljs.min.72e76ccf211868d08e31d7ca45c02501991bd760f28809c52045fa79fb7b7428664bb54ae875b46031ebc760c77b9562.js" integrity="sha384-cudszyEYaNCOMdfKRcAlAZkb12DyiAnFIEX6eft7dChmS7VK6HW0YDHrx2DHe5Vi"></script><script>hljs.initHighlightingOnLoad();</script></body>
+
+</html>
